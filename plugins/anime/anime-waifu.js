@@ -3,9 +3,9 @@ import fetch from 'node-fetch'
 
 async function getWaifuIm(tag) {
   const t = tag || 'waifu'
-  const res = await fetch(`https://api.waifu.im/search?included_tags=${t}&is_nsfw=false`)
+  const res = await fetch(`https://api.waifu.im/images?IncludedTags=${t}&IsNsfw=False`)
   const json = await res.json()
-  return json.images?.[0]?.url
+  return json.items?.[0]?.url
 }
 
 async function getWaifuPics(type) {

@@ -14,9 +14,9 @@ const WAIFUPICS_NSFW = ['waifu', 'neko', 'trap', 'blowjob']
 async function getNsfwImg(tag) {
   // Try waifu.im first
   if (WAIFUIM_NSFW.includes(tag)) {
-    const res = await fetch(`https://api.waifu.im/search?included_tags=${tag}&is_nsfw=true`)
+    const res = await fetch(`https://api.waifu.im/images?IncludedTags=${tag}&IsNsfw=True`)
     const json = await res.json()
-    return json.images?.[0]?.url
+    return json.items?.[0]?.url
   }
   // Fallback waifu.pics
   const wpTag = WAIFUPICS_NSFW.includes(tag) ? tag : 'waifu'

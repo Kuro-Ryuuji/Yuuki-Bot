@@ -71,9 +71,19 @@ _⏳ Mengunduh audio, harap tunggu..._`
 
     const audio = await getAudioUrl(video.url)
 
-    // Download audio buffer
-    const res = await axios.get(audio.url, { responseType: 'arraybuffer', timeout: 60000 })
-    const audioBuffer = Buffer.from(res.data)
+    // Download audio buffer with retry
+    let audioBuffer, lastErr
+    for (let i = 0; i < 3; i++) {
+        try {
+            const res = await axios.get(audio.url, { responseType: 'arraybuffer', timeout: 60000 })
+            audioBuffer = Buffer.from(res.data)
+            break
+        } catch (e) {
+            lastErr = e
+            if (i < 2) await new Promise(r => setTimeout(r, 2000))
+        }
+    }
+    if (!audioBuffer) throw `Gagal mengunduh audio (${lastErr?.code || lastErr?.message}). Coba lagi nanti.`
 
     await conn.sendMessage(m.chat, {
         audio: audioBuffer,

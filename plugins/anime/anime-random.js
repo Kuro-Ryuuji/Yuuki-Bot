@@ -60,8 +60,8 @@ const ANIME_MAP = {
 
 async function getAnimeImg(src, tag) {
   if (src === 'waifuim') {
-    const res = await axios.get(`https://api.waifu.im/search?included_tags=${tag}&is_nsfw=false`, { timeout: 10000 })
-    return res.data?.images?.[0]?.url
+    const res = await axios.get(`https://api.waifu.im/images?IncludedTags=${tag}&IsNsfw=False`, { timeout: 10000 })
+    return res.data?.items?.[0]?.url
   }
   const res = await axios.get(`https://nekos.best/api/v2/${tag}`, { timeout: 10000 })
   return res.data?.results?.[0]?.url

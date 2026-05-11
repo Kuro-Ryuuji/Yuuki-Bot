@@ -7,10 +7,20 @@ import axios from 'axios'
 // ─── Cecan (random cewek cantik by region) ─────────────────
 async function sendCecan(m, conn, apiUrl, label) {
   conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
-  const res = await axios.get(apiUrl, { timeout: 15000 })
-  const url = res.data?.result?.url || res.data?.url || res.data?.data?.url || (typeof res.data === 'string' ? res.data : null)
-  if (!url) throw `❌ Gagal ambil foto ${label}`
-  await conn.sendMessage(m.chat, { image: { url }, caption: `📸 *${label}*` }, { quoted: m })
+  const res = await axios.get(apiUrl, { timeout: 15000, responseType: 'arraybuffer' })
+  const ct = res.headers['content-type'] || ''
+  let imageBuffer
+  if (ct.includes('image/')) {
+    imageBuffer = Buffer.from(res.data)
+  } else {
+    // try parse as JSON
+    const json = JSON.parse(Buffer.from(res.data).toString())
+    const url = json?.result?.url || json?.url || json?.data?.url || (typeof json === 'string' ? json : null)
+    if (!url) throw `❌ Gagal ambil foto ${label}`
+    const imgRes = await axios.get(url, { responseType: 'arraybuffer', timeout: 15000 })
+    imageBuffer = Buffer.from(imgRes.data)
+  }
+  await conn.sendMessage(m.chat, { image: imageBuffer, caption: `📸 *${label}*` }, { quoted: m })
   conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 
