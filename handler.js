@@ -34,7 +34,7 @@ export async function handler(chatUpdate) {
     if (!chatUpdate)
         return
     const _m0 = chatUpdate.messages?.[chatUpdate.messages.length - 1]
-    console.log(`\x1b[35m[MSG]\x1b[0m type=${chatUpdate.type} count=${chatUpdate.messages?.length} | from=${_m0?.key?.remoteJid || '?'} | fromMe=${_m0?.key?.fromMe} | id=${_m0?.key?.id || '?'} | hasMsg=${!!_m0?.message}`)
+
     this.pushMessage(chatUpdate.messages).catch(console.error)
 
     // Only process new incoming messages, skip history sync (append)

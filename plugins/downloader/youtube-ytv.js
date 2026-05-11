@@ -32,6 +32,6 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
 handler.help = ['ytv <url>']
 handler.tags = ['downloader']
-handler.command = /^(ytv|ytvideo|ytmp4)$/i
+handler.command = /^(ytv|ytvdl)$/i
 handler.limit = true
 export default handler

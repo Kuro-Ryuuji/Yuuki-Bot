@@ -39,12 +39,20 @@ say(`${botName} - Multi Device`, {
   align: 'center', 
   gradient: ['blue', 'green'] 
 })
-console.log(chalk.cyan.bold('╔═══════════════════════════════════════════════════╗'))
-console.log(chalk.cyan('║') + chalk.white(`  📦 Project  : ${chalk.yellow(name.toUpperCase())}`.padEnd(58)) + chalk.cyan('║'))
-console.log(chalk.cyan('║') + chalk.white(`  👤 Author   : ${chalk.yellow(author.name || author)}`.padEnd(58)) + chalk.cyan('║'))
-console.log(chalk.cyan('║') + chalk.white(`  🤖 Bot Name : ${chalk.yellow(botName)}`.padEnd(58)) + chalk.cyan('║'))
-console.log(chalk.cyan('║') + chalk.white(`  📝 Desc     : ${chalk.gray((description || 'WhatsApp Bot').slice(0, 33))}`.padEnd(58)) + chalk.cyan('║'))
-console.log(chalk.cyan.bold('╚═══════════════════════════════════════════════════╝'))
+const BOX_INNER = 49 // lebar isi antara ║ dan ║ (karakter visible)
+const boxLine = (label, coloredValue, plainValue) => {
+  const plain = `  ${label}${plainValue}`
+  const pad = ' '.repeat(Math.max(0, BOX_INNER - [...plain].length))
+  return chalk.cyan('║') + chalk.white(`  ${label}`) + coloredValue + pad + chalk.cyan('║')
+}
+const border = chalk.cyan.bold('╔' + '═'.repeat(BOX_INNER) + '╗')
+const borderB = chalk.cyan.bold('╚' + '═'.repeat(BOX_INNER) + '╝')
+console.log(border)
+console.log(boxLine('📦 Project  : ', chalk.yellow(name.toUpperCase()), name.toUpperCase()))
+console.log(boxLine('👤 Author   : ', chalk.yellow(author.name || author), author.name || author))
+console.log(boxLine('🤖 Bot Name : ', chalk.yellow(botName), botName))
+console.log(boxLine('📝 Desc     : ', chalk.gray((description || 'WhatsApp Bot').slice(0, 28)), (description || 'WhatsApp Bot').slice(0, 28)))
+console.log(borderB)
 console.log()
 
 var isRunning = false

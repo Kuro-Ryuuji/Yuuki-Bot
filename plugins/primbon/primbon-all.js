@@ -77,3 +77,57 @@ export const nomerhoki = async (m, { conn, text, usedPrefix, command }) => {
 nomerhoki.help = ['nomerhoki <nama>']
 nomerhoki.tags = ['primbon']
 nomerhoki.command = /^nomerhoki$/i
+
+// ─── Kecocokan Nama Pasangan ──────────────────────────────────
+export const kecocokannamapasangan = async (m, { conn, args }) => {
+  if (args.length < 2) throw `💕 *ᴋᴇᴄᴏᴄᴏᴋᴀɴ ɴᴀᴍᴀ*\n\n> Format: nama1 nama2\n\n\`Contoh: ${m.prefix}kecocokannamapasangan putu keyla\``
+  const [nama1, nama2] = args
+  conn.sendMessage(m.chat, { react: { text: '💕', key: m.key } })
+  const { data } = await (await import('axios')).default.get(
+    `https://api.siputzx.my.id/api/primbon/kecocokan_nama_pasangan?nama1=${encodeURIComponent(nama1)}&nama2=${encodeURIComponent(nama2)}`,
+    { timeout: 30000 }
+  ).catch(() => ({ data: null }))
+  if (!data?.status || !data?.data) throw '❌ Gagal menganalisa'
+  const r = data.data
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
+  await m.reply(`💕 *ᴋᴇᴄᴏᴄᴏᴋᴀɴ ɴᴀᴍᴀ ᴘᴀsᴀɴɢᴀɴ*\n\n> 👤 ${r.nama_anda}\n> 💑 ${r.nama_pasangan}\n\n✅ *Positif:*\n${r.sisi_positif}\n\n❌ *Negatif:*\n${r.sisi_negatif}\n\n> _${r.catatan}_`)
+}
+kecocokannamapasangan.help = ['kecocokannamapasangan nama1 nama2']
+kecocokannamapasangan.tags = ['primbon']
+kecocokannamapasangan.command = /^(kecocokannamapasangan|kecocokannama|namacouple)$/i
+
+// ─── Potensi Penyakit ─────────────────────────────────────────
+export const potensipenyakit = async (m, { conn, args }) => {
+  if (args.length < 3) throw `🏥 *ᴘᴏᴛᴇɴsɪ ᴘᴇɴʏᴀᴋɪᴛ*\n\n> Format: tgl bln thn\n\n\`Contoh: ${m.prefix}potensipenyakit 12 05 1998\``
+  const [tgl, bln, thn] = args
+  conn.sendMessage(m.chat, { react: { text: '🏥', key: m.key } })
+  const { data } = await (await import('axios')).default.get(
+    `https://api.siputzx.my.id/api/primbon/cek_potensi_penyakit?tgl=${tgl}&bln=${bln}&thn=${thn}`,
+    { timeout: 30000 }
+  ).catch(() => ({ data: null }))
+  if (!data?.status || !data?.data) throw '❌ Gagal menganalisa'
+  const r = data.data
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
+  await m.reply(`🏥 *ᴘᴏᴛᴇɴsɪ ᴘᴇɴʏᴀᴋɪᴛ*\n\n> Lahir: *${tgl}-${bln}-${thn}*\n\n📊 *Elemen:*\n${r.sektor}\n\n⚠️ *Potensi:*\n${r.elemen}\n\n> _${r.catatan}_`)
+}
+potensipenyakit.help = ['potensipenyakit tgl bln thn']
+potensipenyakit.tags = ['primbon']
+potensipenyakit.command = /^(potensipenyakit|cekpenyakit)$/i
+
+// ─── Sifat Usaha Bisnis ───────────────────────────────────────
+export const sifatusahabisnis = async (m, { conn, args }) => {
+  if (args.length < 3) throw `💼 *sɪꜰᴀᴛ ᴜsᴀʜᴀ/ʙɪsɴɪs*\n\n> Format: tgl bln thn\n\n\`Contoh: ${m.prefix}sifatusahabisnis 1 1 2000\``
+  const [tgl, bln, thn] = args
+  conn.sendMessage(m.chat, { react: { text: '💼', key: m.key } })
+  const { data } = await (await import('axios')).default.get(
+    `https://api.siputzx.my.id/api/primbon/sifat_usaha_bisnis?tgl=${tgl}&bln=${bln}&thn=${thn}`,
+    { timeout: 30000 }
+  ).catch(() => ({ data: null }))
+  if (!data?.status || !data?.data) throw '❌ Gagal menganalisa'
+  const r = data.data
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
+  await m.reply(`💼 *sɪꜰᴀᴛ ᴜsᴀʜᴀ/ʙɪsɴɪs*\n\n> Lahir: *${r.hari_lahir}*\n\n📊 *Analisa:*\n${r.usaha}\n\n> _${r.catatan}_`)
+}
+sifatusahabisnis.help = ['sifatusahabisnis tgl bln thn']
+sifatusahabisnis.tags = ['primbon']
+sifatusahabisnis.command = /^(sifatusahabisnis|sifatbisnis|usahabisnis)$/i

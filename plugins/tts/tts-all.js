@@ -96,3 +96,33 @@ export const ttsMickeyHandler = async (m, { conn, text, usedPrefix, command }) =
 ttsMickeyHandler.help = ['ttsmickey <teks>']
 ttsMickeyHandler.tags = ['tts']
 ttsMickeyHandler.command = /^ttsmickey$/i
+
+// ─── TTS Elon Musk ─────────────────────────────────────────
+export const ttsElonHandler = async (m, { conn, text, usedPrefix, command }) => {
+  if (!text) throw `🚀 *ᴇʟᴏɴ ᴍᴜsᴋ ᴛᴛs*\n\nContoh: ${usedPrefix}${command} To Mars!`
+  conn.sendMessage(m.chat, { react: { text: '🚀', key: m.key } })
+  const res = await axios.get(`https://api.emiliabot.my.id/tools/text-to-speech?text=${encodeURIComponent(text)}`, { timeout: 60000 }).catch(() => null)
+  const voiceUrl = res?.data?.result?.find(v => v.elon_musk)?.elon_musk
+  if (!voiceUrl) throw '❌ Gagal generate TTS Elon Musk'
+  const audio = await axios.get(voiceUrl, { responseType: 'arraybuffer', timeout: 30000 })
+  await conn.sendMessage(m.chat, { audio: Buffer.from(audio.data), mimetype: 'audio/mpeg', ptt: false }, { quoted: m })
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
+}
+ttsElonHandler.help = ['ttselon <teks>']
+ttsElonHandler.tags = ['tts']
+ttsElonHandler.command = /^(ttselon|elontts|ttselonmusk)$/i
+
+// ─── TTS Nahida ────────────────────────────────────────────
+export const ttsNahidaHandler = async (m, { conn, text, usedPrefix, command }) => {
+  if (!text) throw `🌿 *ɴᴀʜɪᴅᴀ ᴛᴛs*\n\nContoh: ${usedPrefix}${command} Halo traveler!`
+  conn.sendMessage(m.chat, { react: { text: '🌿', key: m.key } })
+  const res = await axios.get(`https://api.emiliabot.my.id/tools/text-to-speech?text=${encodeURIComponent(text)}`, { timeout: 60000 }).catch(() => null)
+  const voiceUrl = res?.data?.result?.find(v => v.nahida)?.nahida
+  if (!voiceUrl) throw '❌ Gagal generate TTS Nahida'
+  const audio = await axios.get(voiceUrl, { responseType: 'arraybuffer', timeout: 30000 })
+  await conn.sendMessage(m.chat, { audio: Buffer.from(audio.data), mimetype: 'audio/mpeg', ptt: false }, { quoted: m })
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
+}
+ttsNahidaHandler.help = ['ttsnahida <teks>']
+ttsNahidaHandler.tags = ['tts']
+ttsNahidaHandler.command = /^(ttsnahida|nahidatts)$/i

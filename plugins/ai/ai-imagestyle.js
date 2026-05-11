@@ -45,3 +45,39 @@ handler.help = ['toghibli', 'tocartoon', 'tochibi']
 handler.tags = ['ai']
 handler.command = /^(toghibli|tocartoon|tochibi)$/i
 export default handler
+
+// ─── api-faa.my.id image style converters ────────────────────
+import { uploadImage } from '../../src/lib/uploader.js'
+import { f } from '../../src/lib/http.js'
+
+const FAA_ENDPOINTS = {
+    tofigure:     'tofigura',
+    tofigurev2:   'tofigurav3',
+    tohijab:      'tohijab',
+    tojapanese:   'tojapanese',
+    tomekah:      'tomekah',
+    toemotebatu:  'tomoai',
+}
+
+export let handlerFaa = async (m, { conn, command }) => {
+    const q = m.quoted || m
+    const mime = (q.msg || q).mimetype || ''
+    if (!/image/.test(mime)) return m.reply('Reply ke gambar!')
+    const endpoint = FAA_ENDPOINTS[command.toLowerCase()]
+    if (!endpoint) return
+    const img = await q.download()
+    await conn.sendMessage(m.chat, { react: { text: '🕐', key: m.key } })
+    try {
+        const imageUrl = await uploadImage(img, 'image.jpg')
+        const res = await f(`https://api-faa.my.id/faa/${endpoint}?url=${encodeURIComponent(imageUrl)}`, 'arrayBuffer')
+        if (!res) throw 'Gagal convert gambar'
+        await conn.sendFile(m.chat, Buffer.from(res), `${command}.jpg`, '', m)
+        conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
+    } catch (e) {
+        conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } })
+        m.reply('Gagal: ' + (e?.message || e))
+    }
+}
+handlerFaa.help = Object.keys(FAA_ENDPOINTS)
+handlerFaa.tags = ['ai']
+handlerFaa.command = /^(tofigure|tofigurev2|tohijab|tojapanese|tomekah|toemotebatu)$/i

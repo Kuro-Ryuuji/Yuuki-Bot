@@ -39,7 +39,7 @@ let handler = async (m, { conn, args, usedPrefix, isOwner }) => {
  }
 handler.help = ['judi']
 handler.tags = ['rpg']
-handler.command = /^(judi)$/i
+handler.command = /^(judidadu|judilama)$/i
 handler.group = true
 handler.rpg = true
 

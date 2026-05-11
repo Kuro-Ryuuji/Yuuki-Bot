@@ -1,7 +1,5 @@
 // © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-// Requires: npm install canvas
-// Linux/Termux: pkg install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev
-import { createCanvas } from 'canvas'
+import { Canvas } from 'skia-canvas'
 import { Sticker, StickerTypes } from 'wa-sticker-formatter'
 
 function wrapText(ctx, text, maxWidth) {
@@ -26,7 +24,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   const textColor = parts[2]?.trim() || '#FFFFFF'
 
   const size = 512
-  const canvas = createCanvas(size, size)
+  const canvas = new Canvas(size, size)
   const ctx = canvas.getContext('2d')
 
   if (bgColor) {
@@ -62,7 +60,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   const startY = size / 2 - (lines.length - 1) * lineH / 2
   lines.forEach((line, i) => ctx.fillText(line, size / 2, startY + i * lineH))
 
-  const sticker = new Sticker(canvas.toBuffer('image/png'), {
+  const sticker = new Sticker(await canvas.png, {
     pack: global.stickpack || 'Elaina BOT',
     author: global.stickauth || 'ElainaBOT',
     type: StickerTypes.FULL,

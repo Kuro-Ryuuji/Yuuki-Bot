@@ -25,22 +25,29 @@ let handler = async (m, { conn }) => {
 
     if (localHead === remoteHead) return m.reply('✅ Bot sudah versi terbaru, tidak ada update.')
 
+    // File/folder yang tidak boleh disentuh
+    const PROTECTED = ['config.js', 'database.json', 'elaina_session/', 'session/']
+
     let changedFiles
     try {
         const { stdout } = await exec('git diff --name-only HEAD origin/master', { cwd })
-        changedFiles = stdout.trim().split('\n').filter(f => f && f !== 'config.js')
+        changedFiles = stdout.trim().split('\n').filter(f =>
+            f && !PROTECTED.some(p => f === p || f.startsWith(p))
+        )
     } catch (e) {
         return m.reply(`❌ Gagal membaca daftar file:\n${e.message}`)
     }
 
-    await m.reply(`📦 *${changedFiles.length} file akan diupdate:*\n\n${changedFiles.map(f => `• ${f}`).join('\n')}`)
+    if (!changedFiles.length) return m.reply('✅ Bot sudah versi terbaru, tidak ada file yang perlu diupdate.')
 
-    // Backup config.js
-    let configBackup
-    try {
-        configBackup = readFileSync(`${cwd}/config.js`, 'utf8')
-    } catch (e) {
-        return m.reply(`❌ Gagal backup config.js:\n${e.message}`)
+    await m.reply(`📦 *${changedFiles.length} file akan diupdate:*\n\n${changedFiles.map(f => `• ${f}`).join('\n')}\n\n🔒 *Dilewati:* config.js, database.json, session`)
+
+    // Backup file-file yang dilindungi
+    const backups = {}
+    for (const file of ['config.js', 'database.json']) {
+        try {
+            backups[file] = readFileSync(`${cwd}/${file}`, 'utf8')
+        } catch (_) {}
     }
 
     // Pull dengan overwrite
@@ -50,11 +57,13 @@ let handler = async (m, { conn }) => {
         return m.reply(`❌ Gagal melakukan git reset:\n${e.message}`)
     }
 
-    // Pulihkan config.js
-    try {
-        writeFileSync(`${cwd}/config.js`, configBackup, 'utf8')
-    } catch (e) {
-        return m.reply(`❌ Update berhasil tapi gagal pulihkan config.js:\n${e.message}`)
+    // Pulihkan file yang dilindungi
+    for (const [file, content] of Object.entries(backups)) {
+        try {
+            writeFileSync(`${cwd}/${file}`, content, 'utf8')
+        } catch (e) {
+            await m.reply(`⚠️ Gagal pulihkan ${file}: ${e.message}`)
+        }
     }
 
     await m.reply('✅ *Update berhasil!* Bot akan restart dalam 3 detik...')
