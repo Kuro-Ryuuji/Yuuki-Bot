@@ -34,7 +34,7 @@ Dibuat Pada: ${guild.createdAt}`;
 };
 
 handler.help = ['guildinfoacc <@user>'];
-handler.tags = ['rpgG'];
+handler.tags = ['rpg']
 handler.command = /^(guildinfoacc)$/i;
 handler.rpg = true
 export default handler;

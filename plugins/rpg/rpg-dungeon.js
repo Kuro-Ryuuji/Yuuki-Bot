@@ -16,7 +16,7 @@ async function handler(m, { conn, usedPrefix, command, text }) {
         contextInfo: {
         externalAdReply: {
         title: 'D u n g e o n',
-        thumbnailUrl: 'https://telegra.ph/file/750e79e2764d529aea52e.jpg',
+        thumbnail: global.thumbBuffer,
         mediaType: 1,
         renderLargerThumbnail: true
         }}})
@@ -25,7 +25,7 @@ async function handler(m, { conn, usedPrefix, command, text }) {
         contextInfo: {
         externalAdReply: {
         title: 'D u n g e o n',
-        thumbnailUrl: 'https://telegra.ph/file/750e79e2764d529aea52e.jpg',
+        thumbnail: global.thumbBuffer,
         mediaType: 1,
         renderLargerThumbnail: true
         }}})
@@ -34,7 +34,7 @@ async function handler(m, { conn, usedPrefix, command, text }) {
         contextInfo: {
         externalAdReply: {
         title: 'D u n g e o n',
-        thumbnailUrl: 'https://telegra.ph/file/750e79e2764d529aea52e.jpg',
+        thumbnail: global.thumbBuffer,
         mediaType: 1,
         renderLargerThumbnail: true
         }}})
@@ -45,7 +45,7 @@ async function handler(m, { conn, usedPrefix, command, text }) {
         contextInfo: {
         externalAdReply: {
         title: 'D u n g e o n',
-        thumbnailUrl: 'https://telegra.ph/file/750e79e2764d529aea52e.jpg',
+        thumbnail: global.thumbBuffer,
         mediaType: 1,
         renderLargerThumbnail: true
         }}})
@@ -90,7 +90,7 @@ async function handler(m, { conn, usedPrefix, command, text }) {
         contextInfo: {
         externalAdReply: {
         title: 'D u n g e o n',
-        thumbnailUrl: 'https://telegra.ph/file/750e79e2764d529aea52e.jpg',
+        thumbnail: global.thumbBuffer,
         mediaType: 1,
         renderLargerThumbnail: true
         }}})
@@ -360,7 +360,7 @@ conn.sendMessage(m.chat, {
   contextInfo: {
   externalAdReply: {
   title: 'D u n g e o n',
-  thumbnailUrl: 'https://telegra.ph/file/750e79e2764d529aea52e.jpg',
+  thumbnail: global.thumbBuffer,
   mediaType: 1,
   renderLargerThumbnail: true
   }}})
@@ -394,7 +394,7 @@ if (room) {
         contextInfo: {
         externalAdReply: {
         title: 'D u n g e o n',
-        thumbnailUrl: 'https://telegra.ph/file/750e79e2764d529aea52e.jpg',
+        thumbnail: global.thumbBuffer,
         mediaType: 1,
         renderLargerThumbnail: true
         }}})

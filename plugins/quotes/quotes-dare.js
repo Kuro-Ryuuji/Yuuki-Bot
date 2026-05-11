@@ -18,7 +18,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 }
 
 handler.help = ['dare']
-handler.tags = ['quotes', 'fun']
+handler.tags = ['quotes']
 handler.command = /^(dare)$/i
 
 export default handler

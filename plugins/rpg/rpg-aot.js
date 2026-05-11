@@ -110,7 +110,7 @@ let handler = async (m, { conn, usedPrefix, owner }) => {
                                 mediaType: 1,
                                 title: 'BOTCAHX RPG',
                                 title: wm,
-                                thumbnailUrl: 'https://telegra.ph/file/e615e0a6000ff647b4314.jpg',
+                                thumbnail: global.thumbBuffer,
                                 renderLargerThumbnail: true,
                                 sourceUrl: ''
                             }

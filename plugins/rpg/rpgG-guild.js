@@ -28,7 +28,7 @@ let handler = async (m) => {
 };
 
 handler.help = ['guild'];
-handler.tags = ['rpgG'];
+handler.tags = ['rpg']
 handler.command = /^(guild)$/i;
 handler.rpg = true;
 export default handler;

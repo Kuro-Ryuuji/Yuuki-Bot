@@ -23,7 +23,7 @@ let handler = async (m, { conn, args, usedPrefix }) => {
             externalAdReply: {
               title: 'Nooo, Kamu sekarang memiliki hutang 10JT 😞',
               body: wm,
-              thumbnailUrl: 'https://telegra.ph/file/c6c4a6946a354317fe970.jpg',
+              thumbnail: global.thumbBuffer,
               mediaType: 1,
               showAdAttribution: false,
               renderLargerThumbnail: true
@@ -40,7 +40,7 @@ let handler = async (m, { conn, args, usedPrefix }) => {
             externalAdReply: {
               title: 'Selamat Telah Mendapatkan 5JT',
               body: wm,
-              thumbnailUrl: 'https://telegra.ph/file/6a6a440d7f123bed78263.jpg',
+              thumbnail: global.thumbBuffer,
               mediaType: 1,
               showAdAttribution: false,
               renderLargerThumbnail: true
@@ -58,7 +58,7 @@ let handler = async (m, { conn, args, usedPrefix }) => {
         externalAdReply: {
           title: 'C O O L D O W N',
           body: `${timers}`,
-          thumbnailUrl: 'https://telegra.ph/file/295949ff5494f3038f48c.jpg',
+          thumbnail: global.thumbBuffer,
           mediaType: 1,
           showAdAttribution: false,
           renderLargerThumbnail: true

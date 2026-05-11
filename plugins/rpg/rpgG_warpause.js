@@ -16,7 +16,7 @@ let handler = async (m, { conn }) => {
 };
 
 handler.help = ['guildwarpause'];
-handler.tags = ['rpgG'];
+handler.tags = ['rpg']
 handler.command = /^(guildwarpause)$/i;
 handler.rpg = true;
 export default handler;

@@ -125,7 +125,7 @@ Ketik *'kiri'* untuk bergerak ke kiri.`;
 };
 
 handler.help = ['koboy'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(koboy)$/i;
 handler.group = true;
 handler.rpg = true;

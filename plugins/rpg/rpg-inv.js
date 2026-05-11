@@ -86,7 +86,7 @@ text: capt,
 contextInfo: {
 externalAdReply: {
 title: 'I N V E N T O R Y',
-thumbnailUrl: 'https://telegra.ph/file/ea3ee889b63edfb616c2d.jpg',
+thumbnail: global.thumbBuffer,
 mediaType: 1,
 renderLargerThumbnail: true
 }}}, { quoted: m })*/

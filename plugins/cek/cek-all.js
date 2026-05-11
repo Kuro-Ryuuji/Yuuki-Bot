@@ -18,7 +18,7 @@ function makeCekHandler(name, aliases, desc, levels) {
     await m.reply(txt, { mentions: [mentioned] })
   }
   handler.help = [`${name} <nama/@tag>`]
-  handler.tags = ['cek']
+handler.tags = ['tools']
   handler.command = new RegExp(`^(${[name, ...aliases].join('|')})$`, 'i')
   return handler
 }

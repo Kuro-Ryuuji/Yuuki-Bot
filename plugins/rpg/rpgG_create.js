@@ -57,7 +57,7 @@ let handler = async (m, { conn, args }) => {
 };
 
 handler.help = ['createguild <nama_guild>'];
-handler.tags = ['rpgG'];
+handler.tags = ['rpg']
 handler.command = /^(createguild)$/i;
 handler.owner = false;
 handler.rpg = true;

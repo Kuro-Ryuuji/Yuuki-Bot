@@ -118,7 +118,7 @@ setTimeout(() => {
             externalAdReply: {
                 mediaType: 1,
                 title: wm,
-                thumbnailUrl: 'https://telegra.ph/file/221ec27b2997f203569eb.jpg',
+                thumbnail: global.thumbBuffer,
                 renderLargerThumbnail: true,
                 sourceUrl: ''
             }

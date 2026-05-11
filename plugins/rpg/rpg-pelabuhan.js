@@ -155,7 +155,7 @@ const handler = async (m, { conn, args }) => {
 };
 
 handler.help = ['pelabuhan <command>'];
-handler.tags = ['game'];
+handler.tags = ['game']
 handler.command = /^pelabuhan$/i;
 handler.limit = true;
 handler.rpg = true;

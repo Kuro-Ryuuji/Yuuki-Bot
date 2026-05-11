@@ -35,7 +35,7 @@ serverMessageId: -1
           externalAdReply: {
             mediaType: 1,
             title: 'BOTCAHX RPG',
-            thumbnailUrl: 'https://telegra.ph/file/505b8d95fd7ee7b9481e3.jpg',
+            thumbnail: global.thumbBuffer,
             renderLargerThumbnail: true,
             sourceUrl: ''
           }
@@ -170,7 +170,7 @@ serverMessageId: -1
 };
 
 handler.help = ["dokter", "dokter cari", "dokter status", "dokter item <item>", "dokter leaderboard", "dokter stop"];
-handler.tags = ["rpg"];
+handler.tags = ['rpg']
 handler.group = true;
 handler.command = ["dokter"];
 handler.rpg = true

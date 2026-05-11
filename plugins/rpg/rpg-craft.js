@@ -151,7 +151,7 @@ let handler = async (m, { conn, command, args, usedPrefix }) => {
                             externalAdReply: {
                                 mediaType: 1,
                                 title: 'BOTCAHX RPG',
-                                thumbnailUrl: 'https://telegra.ph/file/ed878d04e7842407c2b89.jpg',
+                                thumbnail: global.thumbBuffer,
                                 renderLargerThumbnail: true,
                                 sourceUrl: ''
                             }
@@ -175,7 +175,7 @@ let handler = async (m, { conn, command, args, usedPrefix }) => {
 };
 
 handler.help = ['craft', 'blacksmith'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(craft|crafting|chant|blacksmith)/i;
 handler.register = true;
 handler.group = true;

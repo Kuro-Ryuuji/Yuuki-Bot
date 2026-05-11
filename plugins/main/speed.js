@@ -84,7 +84,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 `,botdate, null, sgc, '🌎 GROUP OFFICIAL', null,null, [[null,null],[null,null],[null,null]], m)
 }
 handler.help = ['ping', 'speed']
-handler.tags = ['info', 'tools']
+handler.tags = ['tools']
 
 handler.command = /^(ping|speed|info)$/i
 export default handler

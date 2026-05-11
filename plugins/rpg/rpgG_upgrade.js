@@ -56,7 +56,7 @@ let handler = async (m, { conn, args }) => {
 };
 
 handler.help = ['guildupgrade <level/eliksir/harta/guardian/attack>'];
-handler.tags = ['rpgG'];
+handler.tags = ['rpg']
 handler.command = /^(guildupgrade)$/i;
 handler.rpg = true;
 export default handler;

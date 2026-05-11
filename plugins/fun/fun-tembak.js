@@ -48,7 +48,7 @@ let handler = async (m, { conn, args }) => {
         targetData.pasangan = m.sender
         delete senderData.tembakTarget
         delete targetData.tembakTarget
-        await m.react('💕')
+        await conn.sendMessage(m.chat, { react: { text: '💕', key: m.key } })
         return m.reply(
             `💕 *CIE CIEE :3*\n\n@${m.sender.split('@')[0]} dan @${targetJid.split('@')[0]} resmi pacaran!\n\nSemoga langgeng yak! 💍`,
             null, { mentions: [m.sender, targetJid] }
@@ -60,7 +60,7 @@ let handler = async (m, { conn, args }) => {
         shooter: m.sender, target: targetJid, chat: m.chat, timestamp: Date.now()
     }
 
-    await m.react('💘')
+    await conn.sendMessage(m.chat, { react: { text: '💘', key: m.key } })
     const quote = romanticQuotes[Math.floor(Math.random() * romanticQuotes.length)]
     await m.reply(
         `💘 *ADA YANG NEMBAK NIHH*\n\nHei @${targetJid.split('@')[0]}, kamu ditembak oleh @${m.sender.split('@')[0]}!\n\n_"${quote}"_\n\n⏱️ Berlaku *1 jam* dari sekarang\nGunakan: \`${m.prefix}terima\` / \`${m.prefix}tolak\``,
@@ -89,7 +89,7 @@ export let handlerTerima = async (m) => {
     delete db.users[sessData.shooter].tembakTarget
     delete global.tembakSessions[sessKey]
 
-    await m.react('💕')
+    await conn.sendMessage(m.chat, { react: { text: '💕', key: m.key } })
     await m.reply(
         `💕 *WIDIHHHH, CIE CIE DITERIMA* @${sessData.shooter.split('@')[0]}\n\n@${m.sender.split('@')[0]} dan @${sessData.shooter.split('@')[0]} resmi pacaran!\n\nSemoga langgeng dan bahagia 💍`,
         null, { mentions: [m.sender, sessData.shooter] }
@@ -112,7 +112,7 @@ export let handlerTolak = async (m) => {
     if (db.users[sessData.shooter]) delete db.users[sessData.shooter].tembakTarget
     delete global.tembakSessions[sessKey]
 
-    await m.react('💔')
+    await conn.sendMessage(m.chat, { react: { text: '💔', key: m.key } })
     await m.reply(
         `💔 *WADUHH, YANG SABAR YAK* @${sessData.shooter.split('@')[0]}\n\n@${m.sender.split('@')[0]} menolak @${sessData.shooter.split('@')[0]}\n\nSabar ya, masih banyak yang lain! 😢`,
         null, { mentions: [m.sender, sessData.shooter] }
@@ -134,7 +134,7 @@ export let handlerPutus = async (m) => {
     if (db.users[partnerJid]) delete db.users[partnerJid].pasangan
     delete senderData.pasangan
 
-    await m.react('💔')
+    await conn.sendMessage(m.chat, { react: { text: '💔', key: m.key } })
     await m.reply(
         `💔 *PUTUS*\n\n@${m.sender.split('@')[0]} dan @${partnerJid.split('@')[0]} sudah putus.\n\nSemoga bisa move on ya! 😢`,
         null, { mentions: [m.sender, partnerJid] }

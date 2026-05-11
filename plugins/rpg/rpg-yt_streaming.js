@@ -109,7 +109,7 @@ function msToTime(duration) {
 
 // Definisikan bantuan, tag, perintah, dan pendaftaran untuk handler perintah RPG
 handler.help = ['ytlive'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(ytlive|ytstreaming)/i;
 handler.register = true;
 handler.rpg = true;

@@ -7,7 +7,7 @@ let handler = async (m, { command, text }) => m.reply(`
 } : {})
 
 handler.help = ['apakah <teks>?']
-handler.tags = ['kerang', 'fun']
+handler.tags = ['fun']
 handler.command = /^apakah$/i
 
 export default handler

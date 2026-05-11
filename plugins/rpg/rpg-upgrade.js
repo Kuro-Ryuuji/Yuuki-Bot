@@ -222,7 +222,7 @@ const handler = async (m, {
                         externalAdReply: {
                             mediaType: 1,
                             title: 'BOTCAHX RPG',
-                            thumbnailUrl: 'https://telegra.ph/file/97dba25a7bd8084913166.jpg',
+                            thumbnail: global.thumbBuffer,
                             renderLargerThumbnail: true,
                             sourceUrl: ''
                         }
@@ -236,7 +236,7 @@ const handler = async (m, {
 };
 
 handler.help = ['uptool'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(up(tool)?)$/i;
 handler.fail = null;
 handler.group = true;

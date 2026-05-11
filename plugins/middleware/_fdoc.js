@@ -23,7 +23,7 @@ conn.sendMessage(m.chat,{ text: wm}, { quoted: anu })
 
 handler.help = ['doc']
 
-handler.tags = ['ᴘᴇɴᴅɪɴɢ sᴛᴜғғ']
+handler.tags = ['owner']
 
 handler.command = /^doc$/i
 handler.owner = false

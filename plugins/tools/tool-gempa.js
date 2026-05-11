@@ -37,6 +37,6 @@ let handler = async (m, { conn }) => {
 }
 
 handler.help = ['gempa']
-handler.tags = ['tools', 'info']
+handler.tags = ['tools']
 handler.command = /^(gempa|earthquake|gempabumi)$/i
 export default handler

@@ -11,7 +11,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   number = number.replace(/[^0-9]/g, '')
   if (!number) throw '❌ Nomor tidak valid'
   const jid = number + '@s.whatsapp.net'
-  m.react('🔍')
+  conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
   const [pp, status] = await Promise.all([
     conn.profilePictureUrl(jid, 'image').catch(() => global.thumb),
     conn.fetchStatus(jid).catch(() => null)
@@ -19,11 +19,11 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   let name = '-'
   try { name = conn.contacts[jid]?.name || conn.contacts[jid]?.notify || '-' } catch {}
   const caption = `📱 *ᴡʜᴀᴛsᴀᴘᴘ sᴛᴀʟᴋ*\n\n📞 *Nomor:* +${number}\n👤 *Nama:* ${name}\n💬 *Status:* ${status?.status || '-'}\n\n> Powered by Elaina-MD`
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   await conn.sendMessage(m.chat, { image: { url: pp }, caption }, { quoted: m })
 }
 handler.help = ['wastalk <nomor>']
-handler.tags = ['stalker']
+handler.tags = ['tools']
 handler.command = /^(wastalk|stalkwa)$/i
 export default handler
 
@@ -31,12 +31,12 @@ export default handler
 export const ffStalkHandler = async (m, { conn, args, usedPrefix, command }) => {
   const id = args[0]
   if (!id) throw `🎮 *ꜰꜰ sᴛᴀʟᴋ*\n\nContoh: ${usedPrefix}${command} 123456789`
-  m.react('🔍')
+  conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
   try {
     const { data } = await axios.get(`https://api.eliasnau.dev/ff/player?id=${id}`, { timeout: 15000 })
     if (!data) throw ''
     const caption = `🎮 *ꜰʀᴇᴇ ꜰɪʀᴇ sᴛᴀʟᴋ*\n\n🆔 *ID:* ${id}\n👤 *Nama:* ${data.name || data.nickname || '-'}\n🏆 *Level:* ${data.level || '-'}\n⭐ *Rank:* ${data.rank || '-'}\n❤️ *Likes:* ${data.likes || '-'}\n🌍 *Region:* ${data.region || '-'}\n\n> Powered by Elaina-MD`
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     m.reply(caption)
   } catch {
     throw 'Gagal mengambil data!'
@@ -50,7 +50,7 @@ ffStalkHandler.command = /^(ffstalk|stalkff|freefirestal)$/i
 export const robloxStalkHandler = async (m, { conn, args, usedPrefix, command }) => {
   const username = args[0]
   if (!username) throw `🎮 *ʀᴏʙʟᴏx sᴛᴀʟᴋ*\n\nContoh: ${usedPrefix}${command} Builderman`
-  m.react('🔍')
+  conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
   try {
     const { data } = await axios.get(`https://api.roblox.com/users/get-by-username?username=${encodeURIComponent(username)}`, { timeout: 15000 })
     if (!data?.Id) throw ''
@@ -59,7 +59,7 @@ export const robloxStalkHandler = async (m, { conn, args, usedPrefix, command })
       axios.get(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${uid}&size=420x420&format=Png&isCircular=false`, { timeout: 10000 }).catch(() => null)
     ])
     const caption = `🎮 *ʀᴏʙʟᴏx sᴛᴀʟᴋ*\n\n🆔 *ID:* ${uid}\n👤 *Username:* ${data.Username}\n✅ *Online:* ${data.IsOnline ? 'Ya' : 'Tidak'}\n\n🔗 https://www.roblox.com/users/${uid}/profile\n\n> Powered by Elaina-MD`
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     const thumbUrl = avatar?.data?.data?.[0]?.imageUrl
     if (thumbUrl) await conn.sendMessage(m.chat, { image: { url: thumbUrl }, caption }, { quoted: m })
     else m.reply(caption)

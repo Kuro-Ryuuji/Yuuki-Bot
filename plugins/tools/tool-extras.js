@@ -17,7 +17,7 @@ const te = (p, c, n) => `☢ *ᴇʀʀᴏʀ*\n\nKendala pada \`${p}${c}\`, coba l
 let handler = async (m, { conn, usedPrefix, command }) => {
   const isImg = /image/.test((m.quoted?.msg || m.msg || m)?.mimetype || '')
   if (!isImg) throw `⚠️ Reply gambar dengan \`${usedPrefix}${command}\``
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   m.reply('_Mengekstrak teks dari gambar..._')
   const buf = m.quoted ? await m.quoted.download() : await m.download()
   if (!buf?.length) throw '❌ Gagal download gambar'
@@ -25,7 +25,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   const { data: { text } } = await Tesseract.recognize(buf, 'eng+ind', {})
   const extracted = text?.trim()
   if (!extracted) throw '❌ Tidak ada teks yang terdeteksi'
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   m.reply(`📖 *ᴏᴄʀ ʀᴇsᴜʟᴛ*\n\n${extracted}\n\n> Total: ${extracted.length} karakter`)
 }
 handler.help = ['ocr (reply gambar)']
@@ -37,7 +37,7 @@ export default handler
 export const removebgHandler = async (m, { conn, usedPrefix, command }) => {
   const isImg = /image/.test((m.quoted?.msg || m.msg || m)?.mimetype || '')
   if (!isImg) throw `❌ Reply gambar dengan \`${usedPrefix}${command}\``
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const buf = m.quoted ? await m.quoted.download() : await m.download()
   if (!buf) throw '❌ Gagal download gambar'
   // Try remove.bg free tier via photroom
@@ -67,7 +67,7 @@ export const removebgHandler = async (m, { conn, usedPrefix, command }) => {
   })
   const result = Buffer.from(res.data)
   await conn.sendMessage(m.chat, { image: result, caption: '✅ *Background dihapus!*' }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 removebgHandler.help = ['removebg (reply gambar)']
 removebgHandler.tags = ['tools']
@@ -77,7 +77,7 @@ removebgHandler.command = /^(removebg|rmbg|nobg|hapusbg)$/i
 export const hdHandler = async (m, { conn, usedPrefix, command }) => {
   const isImg = /image/.test((m.quoted?.msg || m.msg || m)?.mimetype || '')
   if (!isImg) throw `✨ *REMINI*\n\nReply gambar dengan \`${usedPrefix}${command}\``
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const buf = m.quoted ? await m.quoted.download() : await m.download()
   if (!buf) throw '❌ Gagal download gambar'
   // Try ootaizumi first
@@ -92,7 +92,7 @@ export const hdHandler = async (m, { conn, usedPrefix, command }) => {
   } catch {}
   if (!resultUrl) throw '❌ Gagal enhance gambar'
   await conn.sendMessage(m.chat, { image: { url: resultUrl }, caption: '✨ *Gambar berhasil di-enhance!*' }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 hdHandler.help = ['remini (reply gambar)', 'hd (reply gambar)']
 hdHandler.tags = ['tools']
@@ -105,7 +105,7 @@ export const transkripHandler = async (m, { conn, usedPrefix, command }) => {
   if (!isAudio) throw `🎤 *ᴛʀᴀɴsᴋʀɪᴘ*\n\nReply voice note dengan \`${usedPrefix}${command}\``
   const groqKey = global.APIKeys?.groq
   if (!groqKey) throw '❌ API Key Groq belum diset di config.js → global.APIKeys.groq\nGratis di https://console.groq.com'
-  m.react('🎤')
+  conn.sendMessage(m.chat, { react: { text: '🎤', key: m.key } })
   const tmpDir = path.join(process.cwd(), 'tmp')
   fs.mkdirSync(tmpDir, { recursive: true })
   const inputFile = path.join(tmpDir, `stt_${Date.now()}.ogg`)
@@ -127,7 +127,7 @@ export const transkripHandler = async (m, { conn, usedPrefix, command }) => {
     })
     const text = data.text?.trim()
     if (!text) throw '❌ Tidak dapat mendeteksi suara'
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     m.reply(`🎤 *ᴛʀᴀɴsᴋʀɪᴘ*\n\n${text}\n\n> 🤖 Whisper Large V3 | Bahasa: Indonesia`)
   } finally {
     [inputFile, wavFile].forEach(f => { try { fs.unlinkSync(f) } catch {} })
@@ -166,7 +166,7 @@ export const tourlHandler = async (m, { conn, usedPrefix, command }) => {
   const q = m.quoted || m
   const mime_ = (q.msg || q)?.mimetype || ''
   if (!mime_ || /text/.test(mime_)) throw '⚠️ Reply media (gambar/video/audio/file)!'
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const buf = q.download ? await q.download() : await m.download()
   if (!buf?.length) throw '❌ Gagal download media'
   const ext = (await fileTypeFromBuffer(buf))?.ext || 'bin'
@@ -176,7 +176,7 @@ export const tourlHandler = async (m, { conn, usedPrefix, command }) => {
     try { results.push(await fn(buf, filename)) } catch {}
   }
   if (!results.length) throw '❌ Semua upload gagal!'
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   let txt = `📤 *ᴜᴘʟᴏᴀᴅ ʀᴇsᴜʟᴛ*\n\n`
   results.forEach(r => { txt += `*${r.host}* (${r.expires})\n🔗 ${r.url}\n\n` })
   m.reply(txt.trim())

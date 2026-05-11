@@ -13,7 +13,7 @@ conn.sendButton(id, '────━┅ *BROADCAST* ┅━────\n' + text
             body: titlebot,
             description: titlebot,
             mediaType: 2,
-          thumbnail: await(await fetch(thumbbc)).buffer(),
+          thumbnail: global.thumbBuffer,
          mediaUrl: sig
         }
      }
@@ -22,7 +22,7 @@ conn.sendButton(id, '────━┅ *BROADCAST* ┅━────\n' + text
   m.reply('*D O N E !*')
 }
 handler.command = ['bcgcb']
-handler.tags = ['host']
+handler.tags = ['owner']
 handler.help = ['bcgcb']
 
 handler.rowner = true

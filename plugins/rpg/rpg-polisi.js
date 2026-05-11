@@ -31,7 +31,7 @@ const handler = async (m, { conn, usedPrefix, command, args }) => {
           externalAdReply: {
             mediaType: 1,
             title: wm,
-            thumbnailUrl: 'https://telegra.ph/file/505b8d95fd7ee7b9481e3.jpg',
+            thumbnail: global.thumbBuffer,
             renderLargerThumbnail: true,
             sourceUrl: ''
           }
@@ -166,7 +166,7 @@ const handler = async (m, { conn, usedPrefix, command, args }) => {
 };
 
 handler.help = ["polisi", "polisi cari", "polisi status", "polisi item <item>", "polisi leaderboard", "polisi stop"];
-handler.tags = ["rpg"];
+handler.tags = ['rpg']
 handler.group = true;
 handler.command = ["polisi"];
 handler.rpg = true

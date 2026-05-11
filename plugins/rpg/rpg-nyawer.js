@@ -20,7 +20,7 @@ let handler = async(m, { groupMetadata, command, conn, text, args, usedPrefix })
 }
 
 handler.help = ['sawer'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(sawer|nyawer)$/i;
 handler.group = true;
 handler.rpg = true;

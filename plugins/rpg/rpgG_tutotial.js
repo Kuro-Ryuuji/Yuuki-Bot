@@ -59,7 +59,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 };
 
 handler.help = ['tutorguild'];
-handler.tags = ['rpgG'];
+handler.tags = ['rpg']
 handler.command = /^tutorguild$/i;
 handler.rpg = true; 
 export default handler;

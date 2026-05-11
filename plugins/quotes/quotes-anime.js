@@ -11,6 +11,6 @@ let handler = async (m) => {
 }
 
 handler.help = ['animequote']
-handler.tags = ['anime', 'quotes']
+handler.tags = ['quotes']
 handler.command = /^(animequote|quotenanime|animequotes)$/i
 export default handler

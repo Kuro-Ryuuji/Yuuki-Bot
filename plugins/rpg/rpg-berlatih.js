@@ -21,7 +21,7 @@ let handler = async (m, { conn, text }) => {
                 externalAdReply: {
                     mediaType: 1,
                     title: wm,
-                    thumbnailUrl: 'https://telegra.ph/file/05daab7b42157c06636b3.jpg',
+                    thumbnail: global.thumbBuffer,
                     renderLargerThumbnail: true,
                     sourceUrl: ''
                 }
@@ -56,7 +56,7 @@ let handler = async (m, { conn, text }) => {
                 externalAdReply: {
                     mediaType: 1,
                     title: wm,
-                    thumbnailUrl: 'https://telegra.ph/file/05daab7b42157c06636b3.jpg',
+                    thumbnail: global.thumbBuffer,
                     renderLargerThumbnail: true,
                     sourceUrl: ''
                 }
@@ -69,7 +69,7 @@ let handler = async (m, { conn, text }) => {
 }
 
 handler.help = ['berlatih <atribut>'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^berlatih$/i;
 handler.limit = true;
 handler.group = true;

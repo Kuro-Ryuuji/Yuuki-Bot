@@ -45,7 +45,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     const query = (text || '').trim()
     if (!query) return m.reply(`🎵 *PLAY*\n\nContoh: *${usedPrefix}${command} nama lagu*`)
 
-    m.react('🕐')
+    conn.sendMessage(m.chat, { react: { text: '🕐', key: m.key } })
 
     const search = await yts(query)
     if (!search?.videos?.length) throw 'Video tidak ditemukan!'
@@ -82,7 +82,7 @@ _⏳ Mengunduh audio, harap tunggu..._`
         ptt: false
     }, { quoted: m })
 
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 
 handler.help = ['play <lagu>']

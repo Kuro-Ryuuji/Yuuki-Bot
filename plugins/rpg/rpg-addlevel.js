@@ -4,7 +4,7 @@
 let handler = async (m, { conn, text }) => {
   if (!text) throw 'Masukkan jumlah level yang ingin ditambahkan. Contoh: .addlevel @user 10'
   
-  await m.react('🕒')
+  await conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key } })
 
   let mentionedJid = m.mentionedJid?.[0]
   if (!mentionedJid) throw 'Tag pengguna yang ingin ditambahkan levelnya. Contoh: .addlevel @user 10'

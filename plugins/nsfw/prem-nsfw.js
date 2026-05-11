@@ -55,11 +55,20 @@ let handler = async (m, { conn, command, args, usedPrefix }) => {
   }]
 
   if (!type) return conn.sendMessage(m.chat, {
-    text: teks,
-    footer: 'Ⓕ = Free',
-    title: '❏––––[ *NSFW* ]–––',
-    buttonText: '- -NSFW- -',
-    sections
+    interactiveMessage: {
+      footer: 'Ⓕ = Free',
+      contextInfo: { forwardingScore: 7, isForwarded: true },
+      nativeFlowMessage: {
+        messageParamsJson: JSON.stringify({ bottom_sheet: { button_title: '🔞 Pilih Kategori' } }),
+        buttons: [{
+          name: 'single_select',
+          buttonParamsJson: JSON.stringify({
+            title: '🔞 Pilih Kategori NSFW',
+            sections: [{ title: 'KATEGORI NSFW', rows: Object.keys(tagMap).map(k => ({ title: `Ⓕ ${k.charAt(0).toUpperCase() + k.slice(1)}`, id: `.nsfw ${k}` })) }]
+          })
+        }]
+      }
+    }
   }, { quoted: m })
 
   const tag = tagMap[type] || 'ecchi'

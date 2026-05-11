@@ -19,7 +19,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
 
 handler.help = ['cmd'].map(v => 'set' + v + ' <teks>')
-handler.tags = ['database', 'premium']
+handler.tags = ['owner']
 handler.command = ['setcmd']
 handler.premium = true
 

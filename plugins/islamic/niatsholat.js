@@ -9,7 +9,7 @@ Artinya: "Sesungguhnya (sahnya) amal itu tergantung kepada niat ... [Hadits Riwa
     m.reply(contoh + data + anjuran)
 }
 handler.help = ['niatsholat']
-handler.tags = ['quran']
+handler.tags = ['islamic']
 handler.command = /^(niatsh[ao]lat)$/i
 handler.register = true
 export default handler

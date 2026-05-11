@@ -27,6 +27,6 @@ let handler = async (m, { text, usedPrefix, command }) => {
 }
 
 handler.help = ['kbbi <kata>']
-handler.tags = ['tools', 'edukasi']
+handler.tags = ['tools']
 handler.command = /^(kbbi|kamus|artikata)$/i
 export default handler

@@ -43,7 +43,7 @@ let handler = async (m, { conn, text }) => {
 };
 
 handler.help = ['kencan'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^kencan$/i;
 handler.register = true;
 handler.group = true;

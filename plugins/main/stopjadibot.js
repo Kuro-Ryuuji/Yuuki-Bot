@@ -25,11 +25,11 @@ let handler = async (m, { conn, usedPrefix }) => {
     const status = getJadibotStatus(sender)
     const uptime = status ? formatUptime(Date.now() - status.startedAt) : '-'
 
-    await m.react('🕕')
+    await conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
 
     try {
         await stopJadibot(sender, false)
-        await m.react('✅')
+        await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 
         await m.reply(
             `🛑 *ᴊᴀᴅɪʙᴏᴛ ᴅɪʜᴇɴᴛɪᴋᴀɴ*\n\n` +
@@ -40,7 +40,7 @@ let handler = async (m, { conn, usedPrefix }) => {
             { mentions: [sender] }
         )
     } catch (e) {
-        await m.react('☢')
+        await conn.sendMessage(m.chat, { react: { text: '☢', key: m.key } })
         await m.reply(`❌ Gagal menghentikan jadibot: ${e.message}`)
     }
 }

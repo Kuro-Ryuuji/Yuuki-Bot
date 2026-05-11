@@ -26,7 +26,7 @@ let handler = async (m, { conn }) => {
 };
 
 handler.help = ['balance', 'bal'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(balance|bal|wallet|dompet)$/i;
 handler.register = true;
 

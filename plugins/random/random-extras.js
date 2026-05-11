@@ -6,12 +6,12 @@ import axios from 'axios'
 
 // ─── Cecan (random cewek cantik by region) ─────────────────
 async function sendCecan(m, conn, apiUrl, label) {
-  m.react('🔍')
+  conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
   const res = await axios.get(apiUrl, { timeout: 15000 })
   const url = res.data?.result?.url || res.data?.url || res.data?.data?.url || (typeof res.data === 'string' ? res.data : null)
   if (!url) throw `❌ Gagal ambil foto ${label}`
   await conn.sendMessage(m.chat, { image: { url }, caption: `📸 *${label}*` }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 
 let handler = async (m, { conn }) => sendCecan(m, conn, 'https://api.nexray.web.id/random/cecan/indonesia', 'Cecan Indo')
@@ -47,12 +47,12 @@ cecanVietnamHandler.command = /^cecanvietnam$/i
 
 // ─── Meme ──────────────────────────────────────────────────
 export const memeHandler = async (m, { conn }) => {
-  m.react('😂')
+  conn.sendMessage(m.chat, { react: { text: '😂', key: m.key } })
   const res = await axios.get('https://meme-api.com/gimme/indonesia', { timeout: 15000 })
   const url = res.data?.url
   if (!url) throw '❌ Gagal ambil meme'
   await conn.sendMessage(m.chat, { image: { url }, caption: res.data?.title || '😂' }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 memeHandler.help = ['meme']
 memeHandler.tags = ['random']
@@ -60,14 +60,14 @@ memeHandler.command = /^meme$/i
 
 // ─── Couple (random couple pic) ────────────────────────────
 export const coupleHandler = async (m, { conn }) => {
-  m.react('💕')
+  conn.sendMessage(m.chat, { react: { text: '💕', key: m.key } })
   const res = await axios.get('https://api.deline.web.id/random/ppcouple', { timeout: 15000 })
   const cowo = res.data?.result?.cowo || res.data?.cowo
   const cewe = res.data?.result?.cewe || res.data?.cewe
   if (cowo) await conn.sendMessage(m.chat, { image: { url: cowo }, caption: '💕 *Couple Goals (Cowo)*' }, { quoted: m })
   if (cewe) await conn.sendMessage(m.chat, { image: { url: cewe }, caption: '💕 *Couple Goals (Cewe)*' }, { quoted: m })
   if (!cowo && !cewe) throw '❌ Gagal ambil foto couple'
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 coupleHandler.help = ['couple']
 coupleHandler.tags = ['random']
@@ -75,7 +75,7 @@ coupleHandler.command = /^couple$/i
 
 // ─── Lahelu (meme Indonesia) ───────────────────────────────
 export const laheluHandler = async (m, { conn }) => {
-  m.react('😂')
+  conn.sendMessage(m.chat, { react: { text: '😂', key: m.key } })
   const res = await axios.get('https://api.cuki.biz.id/api/random/lahelu?apikey=cuki-x', { timeout: 15000 })
   const items = res.data?.data
   if (!items?.length) throw '❌ Gagal ambil meme lahelu'
@@ -85,7 +85,7 @@ export const laheluHandler = async (m, { conn }) => {
     ? { video: { url: random.media }, caption: random.title || '😂 *Lahelu*' }
     : { image: { url: random.media }, caption: random.title || '😂 *Lahelu*' }
   , { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 laheluHandler.help = ['lahelu']
 laheluHandler.tags = ['random']
@@ -93,13 +93,13 @@ laheluHandler.command = /^lahelu$/i
 
 // ─── Quotes Image ──────────────────────────────────────────
 export const quotesimageHandler = async (m, { conn }) => {
-  m.react('💭')
+  conn.sendMessage(m.chat, { react: { text: '💭', key: m.key } })
   const neoxrKey = global.APIKeys?.neoxr || ''
   const res = await axios.get(`https://api.neoxr.eu/api/quotesimage?apikey=${neoxrKey}`, { timeout: 15000 })
   const url = res.data?.data?.url || res.data?.url
   if (!url) throw '❌ Gagal ambil quotes image'
   await conn.sendMessage(m.chat, { image: { url } }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 quotesimageHandler.help = ['quotesimage']
 quotesimageHandler.tags = ['random']
@@ -107,12 +107,12 @@ quotesimageHandler.command = /^quotesimage$/i
 
 // ─── Bar Random (Blue Archive) ────────────────────────────
 export const barandomHandler = async (m, { conn }) => {
-  m.react('🎮')
+  conn.sendMessage(m.chat, { react: { text: '🎮', key: m.key } })
   const res = await axios.get('https://api.nexray.web.id/random/ba', { timeout: 15000 })
   const url = res.data?.result?.url || res.data?.url || (typeof res.data === 'string' ? res.data : null)
   if (!url) throw '❌ Gagal ambil gambar Blue Archive'
   await conn.sendMessage(m.chat, { image: { url } }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 barandomHandler.help = ['barandom']
 barandomHandler.tags = ['random']

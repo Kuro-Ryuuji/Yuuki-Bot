@@ -7,12 +7,12 @@
 let handler = async (m, { conn, usedPrefix, command }) => {
   const isImg = /image/.test((m.quoted?.msg || m.msg || m)?.mimetype || '')
   if (!isImg) throw `❌ Reply ke gambar dengan \`${usedPrefix}${command}\``
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   try {
     const buf = m.quoted ? await m.quoted.download() : await m.download()
     if (!buf?.length) throw '❌ Gagal download gambar'
     await conn.updateProfilePicture(conn.user.id, buf)
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     m.reply('✅ Foto profil bot berhasil diubah!')
   } catch {
     throw '❌ Gagal mengubah foto profil!'
@@ -27,10 +27,10 @@ export default handler
 // ─── Set Bot Name ──────────────────────────────────────────
 export const setnameHandler = async (m, { conn, usedPrefix, command, text }) => {
   if (!text) throw `❌ Contoh: ${usedPrefix}${command} Elaina Bot`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   try {
     await conn.updateProfileName(text)
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     m.reply(`✅ Nama bot berhasil diubah ke: *${text}*`)
   } catch {
     throw '❌ Gagal mengubah nama bot!'
@@ -44,10 +44,10 @@ setnameHandler.owner = true
 // ─── Set Bot Bio ───────────────────────────────────────────
 export const setbioHandler = async (m, { conn, usedPrefix, command, text }) => {
   if (!text) throw `❌ Contoh: ${usedPrefix}${command} Bot WhatsApp Elaina`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   try {
     await conn.updateProfileStatus(text)
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     m.reply(`✅ Bio bot berhasil diubah ke:\n${text}`)
   } catch {
     throw '❌ Gagal mengubah bio bot!'

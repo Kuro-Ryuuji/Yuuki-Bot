@@ -114,7 +114,7 @@ Rahim mu terasa hangat
     );
 };
 handler.help = ["ngentot"];
-handler.tags = ["rpg"];
+handler.tags = ['rpg']
 handler.command = /^(ngentot)$/i;
 handler.register = true;
 handler.group = true;

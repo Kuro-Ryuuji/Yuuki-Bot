@@ -41,7 +41,7 @@ let handler = async (m, { text }) => {
     const [nama1, nama2] = text.split('|').map(n => n.trim())
     if (!nama1 || !nama2) return m.reply(`❌ Masukkan 2 nama dengan format: \`${m.prefix}soulmatch nama1|nama2\``)
 
-    await m.react('🕕')
+    await conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
     const seed1 = Date.now() % 100
     const seed2 = (Date.now() + 50) % 100
     const soul1 = generateSoulData(nama1, seed1)
@@ -57,7 +57,7 @@ let handler = async (m, { text }) => {
     txt += `│ 🔮 *Reading:*\n│ ${getReading(compatibility)}\n│\n╰════════════════════`
 
     await m.reply(txt)
-    await m.react('✅')
+    await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 handler.help = ['soulmatch nama1|nama2']
 handler.tags = ['fun']

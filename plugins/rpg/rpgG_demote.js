@@ -22,7 +22,7 @@ let handler = async (m, { conn, args }) => {
 };
 
 handler.help = ['guilddemote <@user>'];
-handler.tags = ['rpgG'];
+handler.tags = ['rpg']
 handler.command = /^(guilddemote)$/i;
 handler.rpg = true
 export default handler;

@@ -58,8 +58,8 @@ let handler = async (m, { conn, usedPrefix, isOwner }) => {
 
     let thumbBuffer = null
     try {
-        const res = await fetch(global.thumbAllmenu || global.thumb2 || global.thumb)
-        thumbBuffer = await res.buffer()
+        const { readFileSync } = await import('fs')
+        thumbBuffer = readFileSync(global.thumbAllmenu || global.thumb2 || global.thumb)
     } catch { }
 
     let thumbSmall = thumbBuffer

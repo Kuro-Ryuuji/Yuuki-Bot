@@ -11,7 +11,7 @@ import axios from 'axios'
 let handler = async (m, { conn, usedPrefix, command }) => {
   const isImg = /image/.test((m.quoted?.msg || m.msg || m)?.mimetype || '')
   if (!isImg) return m.reply('❌ Reply ke gambar!')
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   try {
     const buf = m.quoted ? await m.quoted.download() : await m.download()
     if (!buf?.length) throw '❌ Gagal download gambar'
@@ -20,7 +20,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       { image: b64 },
       { responseType: 'arraybuffer', timeout: 60000 }
     )
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     await conn.sendMessage(m.chat, { image: Buffer.from(res.data), caption: '✨ *ʜᴅ ᴇɴʜᴀɴᴄᴇ*\n\nGambar berhasil di-enhance!' }, { quoted: m })
   } catch {
     throw '❌ Gagal enhance gambar!'

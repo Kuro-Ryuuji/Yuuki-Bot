@@ -28,7 +28,7 @@ conn.sendMessage(m.chat, { text: wm }, { quoted: anu })
 
 handler.help = ['vid']
 
-handler.tags = ['ᴘᴇɴᴅɪɴɢ sᴛᴜғғ']
+handler.tags = ['owner']
 
 handler.command = /^vid$/i
 handler.owner = false

@@ -43,7 +43,7 @@ let handler = async (m, { conn, command, usedPrefix }) => {
   const q = m.quoted || m
   const isAudio = /audio|video/.test((q.msg || q)?.mimetype || '')
   if (!isAudio) return m.reply(`${fx.emoji} *${effectName.toUpperCase()}*\n\nReply audio/video dengan command ini`)
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const tempDir = path.join(process.cwd(), 'tmp')
   fs.mkdirSync(tempDir, { recursive: true })
   const ts = Date.now()
@@ -57,12 +57,12 @@ let handler = async (m, { conn, command, usedPrefix }) => {
     if (!fs.existsSync(outputPath)) throw '❌ Gagal memproses audio'
     const audioBuf = fs.readFileSync(outputPath)
     await conn.sendMessage(m.chat, { audio: audioBuf, mimetype: 'audio/mpeg', ptt: false }, { quoted: m })
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   } finally {
     [inputPath, outputPath].forEach(f => { try { fs.unlinkSync(f) } catch {} })
   }
 }
 handler.help = ['audiofx list', ...EFFECT_NAMES.map(n => n)]
-handler.tags = ['convert']
+handler.tags = ['tools']
 handler.command = new RegExp(`^(audiofx|${EFFECT_NAMES.join('|')})$`, 'i')
 export default handler

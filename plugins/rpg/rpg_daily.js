@@ -24,7 +24,7 @@ cek .balance jumlah xp mu!
 
 handler.help = handler.disabled = true
 handler.command = ['daily'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.rpg = true
 
 export default handler;

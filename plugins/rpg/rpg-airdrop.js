@@ -47,7 +47,7 @@ let handler = async (m, { conn, args, usedPrefix, DevMode }) => {
 };
 
 handler.help = ['airdrop'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(airdrop)$/i;
 handler.group = true;
 handler.rpg = true

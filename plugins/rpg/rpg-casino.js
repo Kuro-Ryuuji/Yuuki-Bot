@@ -86,7 +86,7 @@ let handler = async (m, { conn, args, usedPrefix, DevMode }) => {
 };
 
 handler.help = ["casino <jumlah>"];
-handler.tags = ["rpg"];
+handler.tags = ['rpg']
 handler.command = /^(casino)$/i;
 handler.register = true;
 handler.group = true;

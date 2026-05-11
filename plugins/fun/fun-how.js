@@ -9,7 +9,7 @@ let handler = async (m, { conn, command, text, usedPrefix }) => {
     } : {})
 }
 handler.help = ['gay', 'pintar', 'cantik', 'ganteng', 'gabut', 'gila', 'lesbi', 'stress', 'bucin', 'jones', 'sadboy'].map(v => 'how' + v + ' siapa?')
-handler.tags = ['kerang', 'fun']
+handler.tags = ['fun']
 handler.command = /^how(gay|pintar|cantik|ganteng|gabut|gila|lesbi|stress?|bucin|jones|sadboy)/i
 
 export default handler

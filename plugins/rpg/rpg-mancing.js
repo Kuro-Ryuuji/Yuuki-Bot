@@ -63,7 +63,7 @@ let handler = async (m, {
 };
 
 handler.help = ['mancing'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(mancing|memancing)$/i;
 handler.rpg = true;
 

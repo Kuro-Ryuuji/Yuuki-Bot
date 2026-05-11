@@ -27,7 +27,7 @@ ${clockString(user.premiumTime)}
     conn.sendButton(m.chat, str, botdate, pp, [[`${registered ? 'Menu':'Verify'}`, `${user.registered ? '.menu':'.verify'}`]], fkon, { contextInfo: { mentionedJid: [who], forwardingScore: 999, isForwarded: true}})
 }
 handler.help = ['profile [@user]']
-handler.tags = ['exp']
+handler.tags = ['xp']
 handler.command = /^profile|pp$/i
 export default handler
 

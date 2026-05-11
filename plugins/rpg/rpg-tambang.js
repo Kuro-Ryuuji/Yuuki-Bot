@@ -138,7 +138,7 @@ handler.before = async m => {
 };
 
 handler.help = ['tambang'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(tambang)$/i;
 handler.group = true;
 handler.register = true;

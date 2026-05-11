@@ -17,7 +17,7 @@ let handler = async (m, { conn, command }) => {
     const mime = (q.msg || q).mimetype || ''
     if (!/image/.test(mime)) return m.reply('Reply ke gambar!')
     const img = await q.download()
-    await m.react('🕐')
+    await conn.sendMessage(m.chat, { react: { text: '🕐', key: m.key } })
     try {
         const url = await uploadToTelegraph(img)
         let result

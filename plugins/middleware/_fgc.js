@@ -16,7 +16,7 @@ let pp = await conn.profilePictureUrl(m.sender, 'image')
 			"inviteCode": "mememteeeekkeke",
 			"groupName": "P", 
             "caption": "Hi Kak", 
-            'jpegThumbnail': await ( await fetch(pp)).buffer()
+            'jpegThumbnail': global.thumbBuffer
 		}
 	}
 }
@@ -26,7 +26,7 @@ conn.sendMessage(m.chat, { text: wm} , { quoted: anu })
 
 handler.help = ['fgc']
 
-handler.tags = ['ᴘᴇɴᴅɪɴɢ sᴛᴜғғ']
+handler.tags = ['owner']
 
 handler.command = /^fgc$/i
 handler.owner = false

@@ -4,7 +4,7 @@ let handler = async (m, { text, usedPrefix, command }) => {
     throw `Fitur jadwal sholat sedang dalam perbaikan. Coba lagi nanti.`
 }
 handler.help = ['salat <daerah>']
-handler.tags = ['quran']
+handler.tags = ['islamic']
 handler.command = /^(jadwal)?s(a|o|ha|ho)lat$/i
 handler.disabled = true
 

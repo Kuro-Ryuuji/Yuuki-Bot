@@ -33,6 +33,6 @@ let handler = async (m, { args, usedPrefix, command }) => {
 }
 
 handler.help = ['sholat <kota>']
-handler.tags = ['tools', 'islam']
+handler.tags = ['tools']
 handler.command = /^(sholat|jadwalsholat|shalattime|prayertime)$/i
 export default handler

@@ -24,7 +24,7 @@ let handler = async (m, { conn }) => {
     if (!hasMsg && !hasQuoted) return m.reply('Kirim 2 gambar: reply gambar pertama sambil kirim gambar kedua!')
     if (!hasMsg || !hasQuoted) return m.reply('Kirim 2 gambar: reply gambar pertama sambil kirim gambar kedua!')
 
-    await m.react('🕐')
+    await conn.sendMessage(m.chat, { react: { text: '🕐', key: m.key } })
     try {
         const [sourceBuf, targetBuf] = await Promise.all([q.download(), m.download()])
         const [source, target] = await Promise.all([uploadToTelegraph(sourceBuf), uploadToTelegraph(targetBuf)])

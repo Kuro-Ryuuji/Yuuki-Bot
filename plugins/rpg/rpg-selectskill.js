@@ -31,7 +31,7 @@ let handler = async (m, { conn, usedPrefix, text, command }) => {
                 externalAdReply: {
                     mediaType: 1,
                     title: 'AXELLDX',
-                    thumbnailUrl: 'https://telegra.ph/file/a0e0fd6b16e109e36e455.jpg',
+                    thumbnail: global.thumbBuffer,
                     renderLargerThumbnail: true,
                     sourceUrl: ''
                 }

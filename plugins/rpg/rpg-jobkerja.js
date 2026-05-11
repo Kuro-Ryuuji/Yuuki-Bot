@@ -70,7 +70,7 @@ let handler = async (m, { isPrems, conn, text, usedPrefix, command }) => {
     }
 };
 handler.help = ['jobkerja'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(jobkerja)$/i;
 handler.limit = true;
 

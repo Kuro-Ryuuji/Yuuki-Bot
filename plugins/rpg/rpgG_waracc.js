@@ -22,7 +22,7 @@ let handler = async (m, { conn, args }) => {
 };
 
 handler.help = ['guildwaracc <nama_guild>'];
-handler.tags = ['rpgG'];
+handler.tags = ['rpg']
 handler.command = /^(guildwaracc)$/i;
 handler.rpg = true;
 export default handler;

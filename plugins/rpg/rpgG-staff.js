@@ -37,7 +37,7 @@ let handler = async (m, { conn, args }) => {
 };
 
 handler.help = ['guildstaff <tambah/hapus> <@user>'];
-handler.tags = ['rpgG'];
+handler.tags = ['rpg']
 handler.command = /^(guildstaff)$/i;
 handler.rpg = true;   
 export default handler;

@@ -27,7 +27,7 @@ let handler = async (m, {
 }
 
 handler.help = ['buyspeed <jumlah>'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^buyspeed$/i;
 handler.register = true;
 handler.rpg = true;

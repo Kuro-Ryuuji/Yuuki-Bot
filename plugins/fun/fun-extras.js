@@ -299,13 +299,13 @@ handlerGay.group = true
 // ─── Renungan ───────────────────────────────────────────────────
 let handlerRenungan = async (m, { conn }) => {
     try {
-        await m.react('🕕')
+        await conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
         const imageUrl = getRandomItem('renungan.json')
         if (!imageUrl) return m.reply('❌ Data tidak tersedia!')
         await conn.sendFile(m.chat, imageUrl, 'renungan.jpg', '', m)
-        await m.react('✅')
+        await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     } catch (e) {
-        await m.react('❌')
+        await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } })
         throw e
     }
 }

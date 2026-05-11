@@ -127,7 +127,7 @@ handler.before = async m => {
 };
 
 handler.help = ['berpetualang'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(berpetualang)$/i;
 handler.group = true;
 handler.limit = true;

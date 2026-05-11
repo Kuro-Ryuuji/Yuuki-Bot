@@ -5,11 +5,11 @@
 
 let handler = async (m, { conn, usedPrefix, command, text }) => {
   if (!text) throw `💻 *ᴄᴀʀʙᴏɴ*\n\nContoh: ${usedPrefix}${command} console.log('Hello World')`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   try {
     const { createCanvas } = await import('@napi-rs/canvas')
     const buf = await generateCarbon(createCanvas, text)
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     await conn.sendMessage(m.chat, { image: buf, caption: '💻 *ᴄᴀʀʙᴏɴ*' }, { quoted: m })
   } catch {
     throw '❌ Gagal generate carbon image!'

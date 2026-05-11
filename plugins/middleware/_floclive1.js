@@ -21,7 +21,7 @@ let msg = await generateWAMessageFromContent(m.chat, { locationMessage: {
   speedInMps: 0,
   degreesClockwiseFromMagneticNorth: 2,
   comment: '',
-  jpegThumbnail: await( await fetch(pp)).buffer()
+  jpegThumbnail: global.thumbBuffer
 }}, { quoted: m })
 
 return conn.relayMessage(m.chat, msg.message, {})

@@ -80,6 +80,6 @@ ${global.wmcredit || '⫹⫺ github.com/OmmniDevv/Elaina-MD'}
 }
 
 handler.help = ['tqto']
-handler.tags = ['info', 'main']
+handler.tags = ['info']
 handler.command = /^(credits?|thanks(to)?|tqto)$/i
 export default handler

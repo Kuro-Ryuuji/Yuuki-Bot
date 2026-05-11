@@ -26,20 +26,20 @@ async function googleLyrics(judul) {
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `🎶 *ʟɪʀɪᴋ*\n\nContoh: ${usedPrefix}${command} Somewhere only we know`
-  m.react('🔍')
+  conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
   const json = await googleLyrics(text)
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   m.reply(`🎶 \`\`\`${json.title}\`\`\`\n> ${json.subtitle}\n\n${json.lyrics}`)
 }
 handler.help = ['lirik <judul lagu>']
-handler.tags = ['search']
+handler.tags = ['internet']
 handler.command = /^(lirikyt|lyricyt|liriklagu)$/i
 export default handler
 
 // ─── Spotify Search ────────────────────────────────────────
 export const spotifySearchHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `🎵 *sᴘᴏᴛɪꜰʏ*\n\nContoh: ${usedPrefix}${command} Bohemian Rhapsody`
-  m.react('🔍')
+  conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
   const res = await axios.get(`https://api.fabdl.com/spotify/search?q=${encodeURIComponent(text)}&type=track&limit=5`, { timeout: 15000 })
   const tracks = res.data?.result?.tracks?.items
   if (!tracks?.length) throw '❌ Lagu tidak ditemukan'
@@ -47,7 +47,7 @@ export const spotifySearchHandler = async (m, { conn, text, usedPrefix, command 
   tracks.slice(0, 5).forEach((t, i) => {
     txt += `${i+1}. *${t.name}*\n   👤 ${t.artists?.map(a=>a.name).join(', ')}\n   🔗 ${t.external_urls?.spotify||'-'}\n\n`
   })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   m.reply(txt.trim())
 }
 spotifySearchHandler.help = ['spotify <query>']
@@ -57,14 +57,14 @@ spotifySearchHandler.command = /^(spotify|spotifysearch)$/i
 // ─── NPM Search ────────────────────────────────────────────
 export const npmHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `📦 *ɴᴘᴍ*\n\nContoh: ${usedPrefix}${command} axios`
-  m.react('🔍')
+  conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
   const res = await axios.get(`https://registry.npmjs.org/${encodeURIComponent(text)}`, { timeout: 15000 })
   const d = res.data
   if (!d?.name) throw '❌ Package tidak ditemukan'
   const latest = d['dist-tags']?.latest
   const v = d.versions?.[latest] || {}
   const txt = `📦 *ɴᴘᴍ ᴘᴀᴄᴋᴀɢᴇ*\n\n📛 *Nama:* ${d.name}\n📝 *Deskripsi:* ${d.description||'-'}\n🏷️ *Versi:* ${latest||'-'}\n👤 *Author:* ${d.author?.name||'-'}\n📜 *Lisensi:* ${v.license||'-'}\n\n🔗 https://npmjs.com/package/${d.name}`
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   m.reply(txt)
 }
 npmHandler.help = ['npm <package>']
@@ -74,7 +74,7 @@ npmHandler.command = /^(npm|npmjs)$/i
 // ─── Bing Image Search ─────────────────────────────────────
 export const bingimageHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `🖼️ *ʙɪɴɢ ɪᴍᴀɢᴇ*\n\nContoh: ${usedPrefix}${command} anime girl`
-  m.react('🔍')
+  conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
   const res = await axios.get(`https://www.bing.com/images/search?q=${encodeURIComponent(text)}&form=HDRSC2&first=1`, {
     headers: { 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }, timeout: 15000
   })
@@ -85,7 +85,7 @@ export const bingimageHandler = async (m, { conn, text, usedPrefix, command }) =
   })
   if (!imgs.length) throw '❌ Gambar tidak ditemukan'
   const url = imgs[Math.floor(Math.random() * Math.min(imgs.length, 10))]
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   await conn.sendMessage(m.chat, { image: { url }, caption: `🖼️ *${text}*` }, { quoted: m })
 }
 bingimageHandler.help = ['bingimage <query>']
@@ -95,7 +95,7 @@ bingimageHandler.command = /^(bingimage|bingimg|imgsearch)$/i
 // ─── YouTube Search ────────────────────────────────────────
 export const ytsHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `▶️ *ʏᴛ sᴇᴀʀᴄʜ*\n\nContoh: ${usedPrefix}${command} Bohemian Rhapsody`
-  m.react('🔍')
+  conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
   const { default: yts } = await import('yt-search')
   const res = await yts(text)
   const videos = res.videos?.slice(0, 5)
@@ -104,7 +104,7 @@ export const ytsHandler = async (m, { conn, text, usedPrefix, command }) => {
   videos.forEach((v, i) => {
     txt += `${i+1}. *${v.title}*\n   👤 ${v.author?.name||'-'} | ⏱️ ${v.timestamp||'-'}\n   🔗 ${v.url}\n\n`
   })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   m.reply(txt.trim())
 }
 ytsHandler.help = ['yts <query>']

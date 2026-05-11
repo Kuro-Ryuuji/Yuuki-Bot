@@ -1,117 +1,104 @@
 // © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { createHash } from 'crypto'
-import fetch from 'node-fetch'
 import { readFileSync } from 'fs'
 let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i
 
+function pickRandom(list) {
+    return list[Math.floor(Math.random() * list.length)]
+}
+
 let handler = async function (m, { text, usedPrefix, command }) {
-	function pickRandom(list) {
-  return list[Math.floor(Math.random() * list.length)]
-}
-	let namae = conn.getName(m.sender)
-	const sections = [
-	{
-	title: "Select Your Age Here !",
-	rows: [
-	    {title: "Random Years", rowId: '.daftar ' + namae + '.' + pickRandom(['30','29','28','27','26','25','24','23','22','21','20','19','18','17','16','15','14','13','12','11','10','9'])}
-	]
-    },
-    {
-	title: "O L D",
-	rows: [
-	    {title: "30 Years", rowId: '.daftar ' + namae + '.30 '},
-	    {title: "29 Years", rowId: '.daftar ' + namae + '.29 '},
-	    {title: "28 Years", rowId: '.daftar ' + namae + '.28 '},
-	{title: "27 Years", rowId: '.daftar ' + namae + '.27 '},
-	{title: "26 Years", rowId: '.daftar ' + namae + '.26 '},
-	{title: "25 Years", rowId: '.daftar ' + namae + '.25 '},
-	{title: "24 Years", rowId: '.daftar ' + namae + '.24 '},
-	{title: "23 Years", rowId: '.daftar ' + namae + '.23 '},
-	{title: "22 Years", rowId: '.daftar ' + namae + '.22 '},
-	{title: "21 Years", rowId: '.daftar ' + namae + '.21 '}
-	]
-    },
-    {
-	title: "Y O U N G",
-	rows: [
-	    {title: "20 Years", rowId: '.daftar ' + namae + '.20 '},
-	    {title: "19 Years", rowId: '.daftar ' + namae + '.19 '},
-	    {title: "18 Years", rowId: '.daftar ' + namae + '.18 '},
-	{title: "17 Years", rowId: '.daftar ' + namae + '.17 '},
-	{title: "16 Years", rowId: '.daftar ' + namae + '.16 '},
-	{title: "15 Years", rowId: '.daftar ' + namae + '.15 '},
-	{title: "14 Years", rowId: '.daftar ' + namae + '.14 '},
-	{title: "13 Years", rowId: '.daftar ' + namae + '.13 '},
-	{title: "12 Years", rowId: '.daftar ' + namae + '.12 '},
-	{title: "11 Years", rowId: '.daftar ' + namae + '.11 '},
-	{title: "10 Years", rowId: '.daftar ' + namae + '.10 '},
-	{title: "9 Years", rowId: '.daftar ' + namae + '.9 '}
-	]
-    },
-]
+    let user = global.db.data.users[m.sender]
+    if (user.registered === true) throw `[💬] Kamu sudah terdaftar\nMau daftar ulang? *${usedPrefix}unreg <SERIAL NUMBER>*`
 
-const listMessage = {
-  text: `│›Please select your age at the bottom button...`,
-  footer: `┗ *ʏᴏᴜʀ ɴᴀᴍᴇ:* ${conn.getName(m.sender)}\n<❔> Want a costume name? type *${usedPrefix + command} yourname.age*`,
-  title: "▢- - - - - ʀᴇɢɪsᴛᴇʀ - - - - -",
-  buttonText: "Click Here !",
-  sections
-}
+    let namae = m.pushName || m.name || conn.getName(m.sender) || m.sender.split('@')[0]
 
-  let user = global.db.data.users[m.sender]
-  if (user.registered === true) throw `[💬] Kamu sudah terdaftar\nMau daftar ulang? *${usedPrefix}unreg <SERIAL NUMBER>*`
-  if (!Reg.test(text)) return conn.sendMessage(m.chat, listMessage, { quoted: m })
-  let [_, name, splitter, age] = text.match(Reg)
-  if (!name) throw 'Nama tidak boleh kosong (Alphanumeric)'
-  if (!age) throw 'Umur tidak boleh kosong (Angka)'
-  age = parseInt(age)
-  if (age > 30) throw 'WOI TUA (。-`ω´-)'
-  if (age < 5) throw 'Halah dasar bocil'
-  user.name = name.trim()
-  user.age = age
-  user.regTime = + new Date
-  user.registered = true
-  let sn = createHash('md5').update(m.sender).digest('hex')
-  let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.fromMe ? conn.user.id : m.sender
-  let cap = `
-┏─• *ᴜsᴇʀs*
+    if (!Reg.test(text)) {
+        let thumb = null
+        try { thumb = readFileSync('./assets/images/elaina-daftar.jpg') } catch { }
+
+        const ageRows = [
+            { title: '🎲 Random', id: `${usedPrefix}${command} ${namae}.${pickRandom(['30','29','28','27','26','25','24','23','22','21','20','19','18','17','16','15','14','13','12','11','10','9'])}` },
+            ...['30','29','28','27','26','25','24','23','22','21'].map(a => ({ title: `${a} Years`, id: `${usedPrefix}${command} ${namae}.${a}` })),
+            ...['20','19','18','17','16','15','14','13','12','11','10','9'].map(a => ({ title: `${a} Years`, id: `${usedPrefix}${command} ${namae}.${a}` }))
+        ]
+
+        // orderMessage sebagai quoted (seperti menu.js)
+        const ftroliQuoted = {
+            key: { fromMe: false, participant: '0@s.whatsapp.net', remoteJid: 'status@broadcast' },
+            message: {
+                orderMessage: {
+                    orderId: '1337',
+                    thumbnail: thumb,
+                    itemCount: ageRows.length,
+                    status: 'INQUIRY',
+                    surface: 'CATALOG',
+                    message: `Pilih umurmu di bawah`,
+                    orderTitle: `📋 Register`,
+                    sellerJid: `${global.nomorbot}@s.whatsapp.net`,
+                    token: 'elaina-daftar',
+                    totalAmount1000: 0,
+                    totalCurrencyCode: 'IDR'
+                }
+            }
+        }
+
+        return await conn.sendMessage(m.chat, {
+            interactiveMessage: {
+                footer: `*ʏᴏᴜʀ ɴᴀᴍᴇ:* ${namae}\n❔ Custom name? ketik *${usedPrefix + command} yourname.age*`,
+                jpegThumbnail: thumb,
+                contextInfo: { forwardingScore: 7, isForwarded: true },
+                nativeFlowMessage: {
+                    messageParamsJson: JSON.stringify({ bottom_sheet: { button_title: '📅 Pilih Umur' } }),
+                    buttons: [{
+                        name: 'single_select',
+                        buttonParamsJson: JSON.stringify({
+                            title: '📅 Pilih Umur',
+                            sections: [
+                                { title: 'Select Your Age Here !', rows: ageRows.slice(0, 1) },
+                                { title: 'O L D  (21-30)', rows: ageRows.slice(1, 11) },
+                                { title: 'Y O U N G  (9-20)', rows: ageRows.slice(11) }
+                            ]
+                        })
+                    }]
+                }
+            }
+        }, { quoted: ftroliQuoted })
+    }
+
+    let [_, name, splitter, age] = text.match(Reg)
+    if (!name) throw 'Nama tidak boleh kosong (Alphanumeric)'
+    if (!age) throw 'Umur tidak boleh kosong (Angka)'
+    age = parseInt(age)
+    if (age > 30) throw 'WOI TUA (。-`ω´-)'
+    if (age < 5) throw 'Halah dasar bocil'
+    user.name = name.trim()
+    user.age = age
+    user.regTime = +new Date
+    user.registered = true
+
+    let sn = createHash('md5').update(m.sender).digest('hex')
+    let cap = `┏─• *ᴜsᴇʀs*
 │▸ *sᴛᴀᴛᴜs:* ☑️ sᴜᴄᴄᴇssғᴜʟ
 │▸ *ɴᴀᴍᴇ:* ${name}
 │▸ *ᴀɢᴇ:* ${age} ʏᴇᴀʀs
 │▸ *sɴ:* ${sn}
 ┗────···
 
-ᴅᴀᴛᴀ ᴜsᴇʀ ʏᴀɴɢ ᴛᴇʀsɪᴍᴘᴀɴ ᴅɪᴅᴀᴛᴀʙᴀsᴇ ʙᴏᴛ, ᴅɪᴊᴀᴍɪɴ ᴀᴍᴀɴ ᴛᴀɴᴘᴀ ᴛᴇʀsʜᴀʀᴇ (. ❛ ᴗ ❛.)
-`
-  let buttonMessage= {
-'document':{'url':sgc},
-'mimetype':global.ddocx,
-'fileName':'- - - - - ʀᴇɢɪsᴛᴇʀ - - - - -',
-'fileLength':fsizedoc,
-'pageCount':fpagedoc,
-'contextInfo':{
-'forwardingScore':555,
-'isForwarded':true,
-'externalAdReply':{
-'mediaUrl':global.sig,
-'mediaType':2,
-'previewType':'pdf',
-'title':global.titlebot,
-'body':global.titlebot,
-'thumbnail':(() => { try { return readFileSync('./assets/images/elaina-daftar.jpg') } catch { return Buffer.alloc(0) } })(),
-'sourceUrl':sgc}},
-'caption':cap,
-'footer':botdate,
-'buttons':[
-{'buttonId':'.menu','buttonText':{'displayText':'ᴍᴇɴᴜ'},'type':1},
-{'buttonId':'.donasi','buttonText':{'displayText':'ᴅᴏɴᴀsɪ'},'type':1}
-],
-'headerType':6}
-    await conn.sendMessage(m.chat,buttonMessage, { quoted:m})
+ᴅᴀᴛᴀ ᴜsᴇʀ ʏᴀɴɢ ᴛᴇʀsɪᴍᴘᴀɴ ᴅɪᴅᴀᴛᴀʙᴀsᴇ ʙᴏᴛ, ᴅɪᴊᴀᴍɪɴ ᴀᴍᴀɴ ᴛᴀɴᴘᴀ ᴛᴇʀsʜᴀʀᴇ (. ❛ ᴗ ❛.)`
+
+    let thumb = null
+    try { thumb = readFileSync('./assets/images/elaina-daftar.jpg') } catch { }
+
+    if (thumb) {
+        await conn.sendMessage(m.chat, { image: thumb, caption: cap }, { quoted: m })
+    } else {
+        await conn.sendMessage(m.chat, { text: cap }, { quoted: m })
+    }
 }
+
 handler.help = ['daftar', 'register'].map(v => v + ' <nama>.<umur>')
 handler.tags = ['xp']
-
 handler.command = /^(daftar|verify|reg(ister)?)$/i
 
 export default handler

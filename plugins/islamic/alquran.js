@@ -6,7 +6,7 @@ let handler = async (m, { args, usedPrefix, command }) => {
 
 handler.command = ['alquran']
 handler.help = ['alquran']
-handler.tags = ['quran']
+handler.tags = ['islamic']
 handler.disabled = true
 
 export default handler

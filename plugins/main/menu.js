@@ -71,12 +71,13 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
     for (const cmds of Object.values(cmdMap)) totalCmds += cmds.length
     const sortedCats = getSortedCats(cmdMap, isOwner)
 
-    // Load 3 thumbnails
+    // Load thumbnails from local file
     let thumbBuffer = null, thumbSmall = null, thumb2Buffer = null
     try {
+        const { readFileSync } = await import('fs')
         const sharp = (await import('sharp')).default
-        const [r1, r2] = await Promise.all([fetch(global.thumb), fetch(global.thumb2)])
-        const [raw1, raw2] = await Promise.all([r1.buffer(), r2.buffer()])
+        const raw1 = readFileSync(global.thumb)
+        const raw2 = readFileSync(global.thumb2)
         thumbBuffer = raw1
         thumb2Buffer = await sharp(raw2).resize(300, 300, { fit: 'cover' }).jpeg({ quality: 85 }).toBuffer()
         thumbSmall = await sharp(raw1).resize(300, 300, { fit: 'cover' }).jpeg({ quality: 80 }).toBuffer()

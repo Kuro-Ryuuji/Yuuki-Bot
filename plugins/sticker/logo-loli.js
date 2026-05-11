@@ -8,7 +8,7 @@ let response = args.join(' ').split('|')
   conn.sendFile(m.chat, res, 'sadboy.jpg', `Sudah Jadi`, m, false)
 }
 handler.help = ['logololi'].map(v => v + ' <text>')
-handler.tags = ['maker']
+handler.tags = ['tools']
 handler.command = /^(logololi)$/i
 handler.register = false
 

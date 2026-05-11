@@ -16,7 +16,7 @@ let animebree = pickRandom(global.animebre)
      })
 }
 handler.help = ['kataanimesad']
-handler.tags = ['quotes|anime']
+handler.tags = ['quotes']
 handler.command = /^((kata)?animesad|katanimesad)$/i
 
 handler.limit = true

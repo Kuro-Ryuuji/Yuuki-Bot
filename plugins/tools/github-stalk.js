@@ -10,7 +10,7 @@ let handler = async(m, { conn, text }) => {
     let json = await res.json()
     if (res.status !== 200) throw await res.text()
     if (!json.status) throw json
-    let thumb = await (await fetch(json.result.avatar)).buffer()
+    let thumb = Buffer.from(await (await fetch(json.result.avatar)).arrayBuffer())
     let hasil = `*── 「 GITHUB STALK 」 ──*
 
 ➸ *Bio*: ${json.result.bio}

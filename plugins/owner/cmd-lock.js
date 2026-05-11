@@ -9,7 +9,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     m.reply('Done!')
 } 
 handler.help = ['un', ''].map(v => v + 'lockcmd')
-handler.tags = ['database']
+handler.tags = ['owner']
 handler.command = /^(un)?lockcmd$/i
 handler.premium = true
 

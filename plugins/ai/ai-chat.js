@@ -10,11 +10,11 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `🧠 *ɢᴘᴛ-4ᴏ*\n\nContoh: ${usedPrefix}${command} Hai apa kabar?`
   const key = global.APIKeys?.covenant
   if (!key) throw '❌ API Key Covenant belum diset di config.js → global.APIKeys.covenant'
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const res = await axios.get(`https://api.covenant.sbs/api/ai/gpt4o?text=${encodeURIComponent(text)}&apikey=${key}`, { timeout: 60000 })
   const result = res.data?.result || res.data?.data?.result || res.data?.message
   if (!result) throw '❌ AI tidak merespon'
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   m.reply(`🧠 *GPT-4o*\n\n${result}`)
 }
 handler.help = ['gpt4o <pertanyaan>']
@@ -28,7 +28,7 @@ export const geminiVisionHandler = async (m, { conn, text, usedPrefix, command }
   if (!isImg) throw `👁️ *ɢᴇᴍɪɴɪ ᴠɪsɪᴏɴ*\n\nReply gambar dengan \`${usedPrefix}${command} <pertanyaan>\``
   const apiKey = global.APIKeys?.gemini
   if (!apiKey) throw '❌ API Key Gemini belum diset di config.js → global.APIKeys.gemini'
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const buf = m.quoted ? await m.quoted.download() : await m.download()
   if (!buf) throw '❌ Gagal download gambar'
   const base64 = buf.toString('base64')
@@ -40,7 +40,7 @@ export const geminiVisionHandler = async (m, { conn, text, usedPrefix, command }
   )
   const result = res.data?.candidates?.[0]?.content?.parts?.[0]?.text
   if (!result) throw '❌ AI tidak merespon'
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   m.reply(`👁️ *ɢᴇᴍɪɴɪ ᴠɪsɪᴏɴ*\n\n${result}`)
 }
 geminiVisionHandler.help = ['geminicek (reply gambar)', 'geminicek <pertanyaan> (reply gambar)']
@@ -52,7 +52,7 @@ export const aiRewriterHandler = async (m, { conn, text, usedPrefix, command }) 
   if (!text) throw `✍️ *ᴀɪ ʀᴇᴡʀɪᴛᴇʀ*\n\nContoh: ${usedPrefix}${command} teks yang ingin ditulis ulang`
   const apiKey = global.APIKeys?.gemini
   if (!apiKey) throw '❌ API Key Gemini belum diset'
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const res = await axios.post(
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
     { contents: [{ parts: [{ text: `Tulis ulang teks berikut dengan lebih baik dan natural dalam bahasa Indonesia:\n\n${text}` }] }] },
@@ -60,7 +60,7 @@ export const aiRewriterHandler = async (m, { conn, text, usedPrefix, command }) 
   )
   const result = res.data?.candidates?.[0]?.content?.parts?.[0]?.text
   if (!result) throw '❌ AI tidak merespon'
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   m.reply(`✍️ *ᴀɪ ʀᴇᴡʀɪᴛᴇʀ*\n\n${result}`)
 }
 aiRewriterHandler.help = ['airewrite <teks>']
@@ -70,10 +70,10 @@ aiRewriterHandler.command = /^(airewrite|rewrite|parafrase)$/i
 // ─── Text to Image (via Pollinations) ─────────────────────
 export const txt2imgHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `🎨 *ᴛxᴛ2ɪᴍɢ*\n\nContoh: ${usedPrefix}${command} anime girl with sword`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(text)}?width=512&height=512&nologo=true`
   await conn.sendMessage(m.chat, { image: { url }, caption: `🎨 *${text}*` }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 txt2imgHandler.help = ['txt2img <prompt>', 'text2img <prompt>']
 txt2imgHandler.tags = ['ai']
@@ -84,7 +84,7 @@ export const matematikaHandler = async (m, { conn, text, usedPrefix, command }) 
   if (!text) throw `🔢 *ᴍᴀᴛᴇᴍᴀᴛɪᴋᴀ*\n\nContoh: ${usedPrefix}${command} 2x + 5 = 15`
   const apiKey = global.APIKeys?.gemini
   if (!apiKey) throw '❌ API Key Gemini belum diset'
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const res = await axios.post(
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
     { contents: [{ parts: [{ text: `Selesaikan soal matematika berikut dengan langkah-langkah yang jelas:\n\n${text}` }] }] },
@@ -92,7 +92,7 @@ export const matematikaHandler = async (m, { conn, text, usedPrefix, command }) 
   )
   const result = res.data?.candidates?.[0]?.content?.parts?.[0]?.text
   if (!result) throw '❌ AI tidak merespon'
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   m.reply(`🔢 *ᴍᴀᴛᴇᴍᴀᴛɪᴋᴀ*\n\n${result}`)
 }
 matematikaHandler.help = ['matematika <soal>']
@@ -103,7 +103,7 @@ matematikaHandler.command = /^(matematika|math|solvemath)$/i
 export const toAnimeHandler = async (m, { conn, text, usedPrefix, command }) => {
   const isImg = /image/.test((m.quoted?.msg || m.msg || m)?.mimetype || '')
   if (!isImg) throw `🎌 *ᴛᴏ ᴀɴɪᴍᴇ*\n\nReply gambar dengan \`${usedPrefix}${command}\``
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const buf = m.quoted ? await m.quoted.download() : await m.download()
   if (!buf) throw '❌ Gagal download gambar'
   // Upload to catbox then use vreden/siputzx
@@ -121,7 +121,7 @@ export const toAnimeHandler = async (m, { conn, text, usedPrefix, command }) => 
   }).catch(() => null)
   if (!res?.data) throw '❌ Gagal convert ke anime'
   await conn.sendMessage(m.chat, { image: Buffer.from(res.data), caption: '🎌 *Anime Style!*' }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 toAnimeHandler.help = ['toanime (reply gambar)']
 toAnimeHandler.tags = ['ai']

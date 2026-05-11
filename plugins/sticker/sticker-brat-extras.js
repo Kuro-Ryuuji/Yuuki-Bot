@@ -4,13 +4,13 @@ import axios from 'axios'
 const bratHandler = (name, apiUrl) => {
     let h = async (m, { conn, text, usedPrefix, command }) => {
         if (!text) throw `🖼️ *${name.toUpperCase()}*\n\nContoh: ${usedPrefix}${command} Hai semua`
-        m.react('🕕')
+        conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
         try {
             const url = apiUrl(text)
             await conn.sendImageAsSticker(m.chat, url, m, { packname: global.stickpack, author: global.stickauth })
-            m.react('✅')
+            conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
         } catch (e) {
-            m.react('☢')
+            conn.sendMessage(m.chat, { react: { text: '☢', key: m.key } })
             throw `Error: ${e.message || e}`
         }
     }
@@ -74,7 +74,7 @@ export let handlerQC = async (m, { conn, args }) => {
     if (!message) return m.reply('❌ Masukkan text untuk quote!')
     if (message.length > 80) return m.reply(`❌ Maksimal 80 karakter! (Saat ini: ${message.length})`)
 
-    m.react('🕕')
+    conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
     try {
         let avatar = 'https://files.catbox.moe/nwvkbt.png'
         try { avatar = await conn.profilePictureUrl(m.sender, 'image') } catch {}
@@ -100,9 +100,9 @@ export let handlerQC = async (m, { conn, args }) => {
         })
         const buffer = Buffer.from(response.data, 'base64')
         await conn.sendImageAsSticker(m.chat, buffer, m, { packname: global.stickpack, author: global.stickauth })
-        m.react('✅')
+        conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     } catch (e) {
-        m.react('☢')
+        conn.sendMessage(m.chat, { react: { text: '☢', key: m.key } })
         throw `Error: ${e.message || e}`
     }
 }
@@ -122,7 +122,7 @@ export let handlerSmeme = async (m, { conn, args }) => {
         `😂 *ᴍᴇᴍᴇ sᴛɪᴄᴋᴇʀ*\n\n> Format: top|bottom\n\n\`Contoh: ${m.prefix}smeme Ketika|Kamu Lupa\``
     )
     const [top, bottom] = input.split('|').map(s => s.trim())
-    m.react('🕕')
+    conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
     try {
         const mediaBuffer = m.quoted ? await m.quoted.download() : await m.download()
         if (!mediaBuffer) throw '❌ Gagal download media'
@@ -145,9 +145,9 @@ export let handlerSmeme = async (m, { conn, args }) => {
         const memeUrl = `https://api.memegen.link/images/custom/${encodeText(top)}/${encodeText(bottom)}.png?background=${encodeURIComponent(imageUrl)}`
         const res = await axios.get(memeUrl, { responseType: 'arraybuffer', timeout: 30000 })
         await conn.sendImageAsSticker(m.chat, Buffer.from(res.data), m, { packname: global.stickpack, author: global.stickauth })
-        m.react('✅')
+        conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     } catch (e) {
-        m.react('☢')
+        conn.sendMessage(m.chat, { react: { text: '☢', key: m.key } })
         throw `Error: ${e.message || e}`
     }
 }

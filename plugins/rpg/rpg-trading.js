@@ -79,7 +79,7 @@ Kamu sudah melakukan trading. Silakan tunggu selama *🕐${new Date(timers).toIS
 };
 
 handler.help = ['trading'];
-handler.tags = ['rpg'];
+handler.tags = ['rpg']
 handler.command = /^(trading)$/i;
 handler.cooldown = cooldown;
 handler.disabled = false;

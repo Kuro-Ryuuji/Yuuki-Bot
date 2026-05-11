@@ -8,7 +8,7 @@ import axios from 'axios'
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `Contoh: ${usedPrefix}${command} https://youtube.com/watch?v=xxx`
   if (!text.includes('youtube.com') && !text.includes('youtu.be')) throw '❌ URL harus YouTube'
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   let dlUrl
   try {
     const { data } = await axios.get(`https://api.nexray.eu.cc/downloader/v1/ytmp4?url=${encodeURIComponent(text)}&resolusi=1080`, { timeout: 30000 })
@@ -23,7 +23,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   }
   if (!dlUrl) throw '❌ Gagal mendapatkan URL download'
   await conn.sendMessage(m.chat, { video: { url: dlUrl }, caption: `🎬 ${text}` }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 handler.help = ['ytmp4 <url>', 'ytvideo <url>']
 handler.tags = ['downloader']
@@ -34,7 +34,7 @@ export default handler
 export const ytmp3Handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `Contoh: ${usedPrefix}${command} https://youtube.com/watch?v=xxx`
   if (!text.includes('youtube.com') && !text.includes('youtu.be')) throw '❌ URL harus YouTube'
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   let dlUrl, title
   try {
     const { data } = await axios.get(`https://api.nexray.eu.cc/downloader/v1/ytmp3?url=${encodeURIComponent(text)}`, { timeout: 30000 })
@@ -43,7 +43,7 @@ export const ytmp3Handler = async (m, { conn, text, usedPrefix, command }) => {
   } catch {}
   if (!dlUrl) throw '❌ Gagal mendapatkan URL download'
   await conn.sendMessage(m.chat, { audio: { url: dlUrl }, mimetype: 'audio/mpeg', ptt: false, fileName: `${title||'audio'}.mp3` }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 ytmp3Handler.help = ['ytmp3 <url>', 'ytaudio <url>']
 ytmp3Handler.tags = ['downloader']
@@ -52,7 +52,7 @@ ytmp3Handler.command = /^(ytmp3|youtubemp3|ytaudio)$/i
 // ─── TikTok Download ───────────────────────────────────────
 export const tiktokdl2Handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `📌 Contoh: ${usedPrefix}${command} https://vt.tiktok.com/...`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const res = await axios.post('https://www.tikwm.com/api/', {}, {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'Mozilla/5.0' },
     params: { url: text, count: 12, cursor: 0, web: 1, hd: 1 }, timeout: 30000
@@ -67,7 +67,7 @@ export const tiktokdl2Handler = async (m, { conn, text, usedPrefix, command }) =
       await conn.sendMessage(m.chat, { image: { url: img } }, { quoted: m })
     }
   }
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 tiktokdl2Handler.help = ['tt2 <url>', 'tiktok2 <url>']
 tiktokdl2Handler.tags = ['downloader']
@@ -76,7 +76,7 @@ tiktokdl2Handler.command = /^(tt2|tiktok2|tiktokdl2)$/i
 // ─── Instagram Download ────────────────────────────────────
 export const igdlHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `📌 Contoh: ${usedPrefix}${command} https://instagram.com/p/xxx`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const res = await axios.get(`https://api.cobalt.tools/api/json`, {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -87,7 +87,7 @@ export const igdlHandler = async (m, { conn, text, usedPrefix, command }) => {
   const isVideo = /\.mp4/.test(url) || res?.data?.type === 'video'
   if (isVideo) await conn.sendMessage(m.chat, { video: { url }, caption: '' }, { quoted: m })
   else await conn.sendMessage(m.chat, { image: { url } }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 igdlHandler.help = ['igdl <url>', 'instagramdl <url>']
 igdlHandler.tags = ['downloader']
@@ -96,7 +96,7 @@ igdlHandler.command = /^(igdl|instagramdl|igdownload)$/i
 // ─── Spotify Download ──────────────────────────────────────
 export const spotifydlHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `📌 Contoh: ${usedPrefix}${command} https://open.spotify.com/track/xxx`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const res = await axios.get(`https://api.fabdl.com/spotify/get?url=${encodeURIComponent(text)}`, { timeout: 30000 })
   const d = res.data?.result
   if (!d) throw '❌ Gagal mendapatkan info lagu'
@@ -107,7 +107,7 @@ export const spotifydlHandler = async (m, { conn, text, usedPrefix, command }) =
     audio: { url: dlUrl }, mimetype: 'audio/mpeg', ptt: false,
     fileName: `${d.name||'spotify'}.mp3`
   }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 spotifydlHandler.help = ['spotifydl <url>']
 spotifydlHandler.tags = ['downloader']
@@ -116,7 +116,7 @@ spotifydlHandler.command = /^(spotifydl|spotifydown)$/i
 // ─── MediaFire Download ────────────────────────────────────
 export const mediafiredlHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `📌 Contoh: ${usedPrefix}${command} https://mediafire.com/file/xxx`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   // Scrape mediafire directly
   const page = await axios.get(text, { timeout: 30000, headers: { 'user-agent': 'Mozilla/5.0' } })
   const html = page.data
@@ -127,7 +127,7 @@ export const mediafiredlHandler = async (m, { conn, text, usedPrefix, command })
   const filename = nameMatch?.[1]?.trim() || 'file'
   const caption = `📁 *${filename}*`
   await conn.sendMessage(m.chat, { document: { url: dlUrl }, fileName: filename, mimetype: 'application/octet-stream', caption }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 mediafiredlHandler.help = ['mediafiredl <url>']
 mediafiredlHandler.tags = ['downloader']
@@ -136,7 +136,7 @@ mediafiredlHandler.command = /^(mediafiredl|mfdl)$/i
 // ─── Pinterest Download ────────────────────────────────────
 export const pindlHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `📌 Contoh: ${usedPrefix}${command} https://pin.it/xxx`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   // Use ilovepin.net scraper
   const mainPage = await axios.get('https://ilovepin.net/id', {
     headers: { 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
@@ -158,7 +158,7 @@ export const pindlHandler = async (m, { conn, text, usedPrefix, command }) => {
   const isVideo = /\.mp4/.test(mediaUrl)
   if (isVideo) await conn.sendMessage(m.chat, { video: { url: mediaUrl } }, { quoted: m })
   else await conn.sendMessage(m.chat, { image: { url: mediaUrl } }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 pindlHandler.help = ['pindl <url>']
 pindlHandler.tags = ['downloader']
@@ -167,7 +167,7 @@ pindlHandler.command = /^(pindl|pinterestdl)$/i
 // ─── Facebook Download ─────────────────────────────────────
 export const fbdlHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `📌 Contoh: ${usedPrefix}${command} https://facebook.com/...`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   const res = await axios.get(`https://api.cobalt.tools/api/json`, {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -176,7 +176,7 @@ export const fbdlHandler = async (m, { conn, text, usedPrefix, command }) => {
   const url = res?.data?.url
   if (!url) throw '❌ Gagal download Facebook'
   await conn.sendMessage(m.chat, { video: { url } }, { quoted: m })
-  m.react('✅')
+  conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 fbdlHandler.help = ['fbdl <url>', 'facebookdl <url>']
 fbdlHandler.tags = ['downloader']
@@ -186,15 +186,15 @@ fbdlHandler.command = /^(fbdl|facebookdl|fbdown)$/i
 export const capcutdlHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `📌 Contoh: ${usedPrefix}${command} https://www.capcut.com/t/xxx`
   if (!text.match(/capcut\.com/i)) throw '❌ URL tidak valid. Gunakan link CapCut.'
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   try {
     const { capcut } = await import('btch-downloader')
     const data = await capcut(text)
     if (!data?.status || !data?.originalVideoUrl) throw '❌ Gagal mengambil video'
     await conn.sendFile(m.chat, data.originalVideoUrl, 'capcut.mp4', '', m)
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   } catch (e) {
-    m.react('☢')
+    conn.sendMessage(m.chat, { react: { text: '☢', key: m.key } })
     throw `Error: ${e.message || e}`
   }
 }
@@ -206,15 +206,15 @@ capcutdlHandler.command = /^(capcutdl|ccdl|capcut)$/i
 export const snackvideodlHandler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `📌 Contoh: ${usedPrefix}${command} https://www.snackvideo.com/...`
   if (!text.match(/snackvideo\.com/i)) throw '❌ URL tidak valid. Gunakan link SnackVideo.'
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   try {
     const { snackvideo } = await import('btch-downloader')
     const data = await snackvideo(text)
     if (!data?.status || !data?.result?.videoUrl) throw '❌ Gagal mengambil video'
     await conn.sendFile(m.chat, data.result.videoUrl, 'snackvideo.mp4', '', m)
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   } catch (e) {
-    m.react('☢')
+    conn.sendMessage(m.chat, { react: { text: '☢', key: m.key } })
     throw `Error: ${e.message || e}`
   }
 }
@@ -226,7 +226,7 @@ snackvideodlHandler.command = /^(svdl|snackvideo|snackvideodl)$/i
 export const ttmp3Handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `📌 Contoh: ${usedPrefix}${command} https://vt.tiktok.com/xxx`
   if (!text.match(/tiktok\.com|vt\.tiktok/i)) throw '❌ URL tidak valid. Gunakan link TikTok.'
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   try {
     const ttdown = (await import('../../lib/scraper/tiktok.js')).default
     const result = await ttdown(text)
@@ -236,9 +236,9 @@ export const ttmp3Handler = async (m, { conn, text, usedPrefix, command }) => {
       audio: { url: audio.url }, mimetype: 'audio/mpeg',
       fileName: `TikTok_${Date.now()}.mp3`
     }, { quoted: m })
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   } catch (e) {
-    m.react('☢')
+    conn.sendMessage(m.chat, { react: { text: '☢', key: m.key } })
     throw `Error: ${e.message || e}`
   }
 }

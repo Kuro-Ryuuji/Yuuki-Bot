@@ -26,6 +26,7 @@ import { Low } from 'lowdb'
 import { JSONFile } from 'lowdb/node'
 import pino from 'pino'
 import { useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, fetchLatestBaileysVersion } from 'ourin-baileys'
+import './lib/errorLogger.js'
 
 const { CONNECTING } = ws
 const { chain } = lodash
@@ -83,8 +84,11 @@ let saveCreds = _saveCreds
 const usePairingCode = global.usePairingCode === true
 const pairingNumber = (global.pairingNumber || '').replace(/[^0-9]/g, '')
 
+const { version, isLatest } = await fetchLatestBaileysVersion()
+console.log(`\x1b[36m[VERSION]\x1b[0m WA v${version.join('.')} — isLatest: ${isLatest}`)
+
 const connectionOptions = {
-  version: [2, 3000, 1033105955],
+  version,
   auth: {
     creds: state.creds,
     keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'silent' }))
@@ -248,9 +252,8 @@ async function connectionUpdate(update) {
 
 
 process.on('uncaughtException', (err) => {
-  console.error(`${_tag('ERROR', '\x1b[31m')} \x1b[31m${err.message}\x1b[0m`)
-  console.error(err.stack || err)
-  // Hanya reconnect jika error benar-benar dari WebSocket baileys, bukan dari fetch/HTTP
+  // Logging ditangani oleh lib/errorLogger.js
+  // Reconnect hanya untuk error WebSocket, bukan fetch/HTTP
   const isFetchError = err.stack && (err.stack.includes('undici') || err.stack.includes('node-fetch') || err.stack.includes('Fetch.') || err.stack.includes('onAborted'))
   if (!isFetchError && /terminated|connection reset|ECONNRESET|ETIMEDOUT/i.test(err.message)) {
     global.reloadHandler(true).catch(console.error)

@@ -6,6 +6,7 @@
  * ╚══════════════════════════════════════════╝
  */
 import { smsg } from './lib/simple.js'
+import { logError } from './lib/errorLogger.js'
 import { format } from 'util'
 import { fileURLToPath } from 'url'
 import path, { join } from 'path'
@@ -32,16 +33,38 @@ export async function handler(chatUpdate) {
     this.msgqueque = this.msgqueque || []
     if (!chatUpdate)
         return
+    const _m0 = chatUpdate.messages?.[chatUpdate.messages.length - 1]
+    console.log(`\x1b[35m[MSG]\x1b[0m type=${chatUpdate.type} count=${chatUpdate.messages?.length} | from=${_m0?.key?.remoteJid || '?'} | fromMe=${_m0?.key?.fromMe} | id=${_m0?.key?.id || '?'} | hasMsg=${!!_m0?.message}`)
     this.pushMessage(chatUpdate.messages).catch(console.error)
+
+    // Only process new incoming messages, skip history sync (append)
+    if (chatUpdate.type !== 'notify') return
+
     let m = chatUpdate.messages[chatUpdate.messages.length - 1]
     if (!m)
         return
     if (global.db.data == null)
         await global.loadDatabase()
     try {
+        // ourin-baileys: @lid messages have extra fields (remoteJidAlt, addressingMode) in key
+        if (m.key?.addressingMode === 'lid' || m.key?.remoteJidAlt) {
+            const { remoteJidAlt, addressingMode, ...cleanKey } = m.key
+            m = { ...m, key: { ...cleanKey, remoteJid: remoteJidAlt || cleanKey.remoteJid } }
+        }
         m = smsg(this, m) || m
         if (!m)
             return
+
+        // Skip messages older than 5 minutes (prevents responding to history)
+        const _msgTs = m.messageTimestamp
+            ? (typeof m.messageTimestamp.toNumber === 'function'
+                ? m.messageTimestamp.toNumber()
+                : Number(m.messageTimestamp)) * 1000
+            : 0
+        if (_msgTs && (Date.now() - _msgTs) > 5 * 60 * 1000) {
+            console.log(`\x1b[33m[SKIP]\x1b[0m age check — ${Math.round((Date.now()-_msgTs)/1000)}s old`)
+            return
+        }
         m.exp = 0
         m.limit = false
         try {
@@ -773,7 +796,7 @@ export async function handler(chatUpdate) {
             }
         }
     } catch (e) {
-        console.error(e)
+        logError('handler', e)
     } finally {
         if (opts['queque'] && m.text) {
             const quequeIndex = this.msgqueque.indexOf(m.id || m.key.id)
@@ -825,6 +848,7 @@ export async function handler(chatUpdate) {
         }
         if (opts['autoread'])
             await this.chatRead(m.chat, m.isGroup ? m.sender : undefined, m.id || m.key.id).catch(() => { })
+        if (global.db.data) global.db.write().catch(console.error)
     }
 }
 

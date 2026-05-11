@@ -34,8 +34,8 @@ function buildCommandMap() {
 async function makeTroli(itemCount, title, token) {
     let thumbSmall = null
     try {
-        const res = await fetch(global.thumb)
-        const buf = await res.buffer()
+        const { readFileSync } = await import('fs')
+        const buf = readFileSync(global.thumb)
         const sharp = (await import('sharp')).default
         thumbSmall = await sharp(buf).resize(300, 300, { fit: 'cover' }).jpeg({ quality: 80 }).toBuffer()
     } catch { }

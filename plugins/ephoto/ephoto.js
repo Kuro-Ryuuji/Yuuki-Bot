@@ -50,11 +50,11 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
   const effectUrl = EFFECT_URLS[command]
   if (!effectUrl) return
   if (!text) throw `❌ Masukkan text!\n> Contoh: ${usedPrefix}${command} Elaina`
-  m.react('🕕')
+  conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
   try {
     const imageUrl = await ephoto(effectUrl, text)
     await conn.sendMessage(m.chat, { image: { url: imageUrl }, caption: `🎨 *${command}*` }, { quoted: m })
-    m.react('✅')
+    conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   } catch {
     throw '❌ Gagal membuat efek ephoto'
   }

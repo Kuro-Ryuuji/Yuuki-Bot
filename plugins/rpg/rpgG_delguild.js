@@ -42,7 +42,7 @@ let handler = async (m, { conn, args }) => {
 };
 
 handler.help = ['delguild <nomor_guild>'];
-handler.tags = ['rpgG'];
+handler.tags = ['rpg']
 handler.command = /^(delguild)$/i;
 handler.owner = false;
 handler.rpg = true
