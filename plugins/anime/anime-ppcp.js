@@ -1,15 +1,22 @@
 // © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-import fetch from 'node-fetch'
+import axios from 'axios'
 
-let handler = async (m, { conn, command }) => {
-  const res = await fetch('https://api.waifu.im/images?IncludedTags=waifu&IsNsfw=False')
-  const json = await res.json()
-  const url = json.items?.[0]?.url
-  if (!url) throw 'Gagal mengambil gambar'
-  await conn.sendMessage(m.chat, { image: { url }, caption: global.wm }, { quoted: m })
+let handler = async (m, { conn }) => {
+  try {
+    const res = await axios.get('https://api.deline.web.id/random/ppcouple', { timeout: 15000 })
+    const { cowo, cewe } = res.data.result
+    await conn.sendMessage(m.chat, {
+      albumMessage: [
+        { image: { url: cowo } },
+        { image: { url: cewe } }
+      ]
+    }, { quoted: m })
+  } catch (e) {
+    throw '❌ Gagal mengambil gambar pp couple. Coba lagi nanti.'
+  }
 }
 
 handler.help = ['ppcouple']
-handler.tags = ['anime']
-handler.command = /^(ppcp|ppcouple)$/i
+handler.tags = ['random']
+handler.command = /^(ppcp|ppcouple|cp)$/i
 export default handler
