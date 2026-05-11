@@ -1,275 +1,305 @@
+<div align="center">
 
-## CATATAN
-Script ini untuk semua orang, bukan untuk Dijual. Jika dijual neraka menunggumu kakak !
+<img src="https://i.ibb.co.com/ZZx3z8F/elaina-thumbnail.jpg" width="100%" />
 
-<p align="center">
-    <img src="https://i.ibb.co.com/ZZx3z8F/elaina-thumbnail.jpg" width="100%" style="margin-left: auto;margin-right: auto;display: block;">
-</p>
-<h1 align="center">ElainaBOT - MD</h1>
-<p align="center">
-  <a href="https://github.com/OmmniDevv"><img src="http://readme-typing-svg.herokuapp.com?color=FFFFFF&center=true&vCenter=true&multiline=false&lines=Elaina+BOT+Multi+Device;Base+ori+by+BochilGaming;Recode+By+OmniDevv;Give+star+and+forks+this+Repo+:D;Follow+My+Github" alt="ʘᴗʘ">
-</p>
+# 🌸 ElainaBOT — MD
+### *"Aku bukan sekadar bot biasa — aku adalah teman setia yang selalu siap membantumu, Master~"*
 
-<p align="center">
- <a href="#"><img title="ElainaBOT" src="https://img.shields.io/badge/Elaina BOT-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
-</p>
-<p align="center">
-<a href="https://github.com/OmmniDevv"><img title="Author" src="https://img.shields.io/badge/AUTHOR-OmniDevv-blue.svg?style=for-the-badge&logo=github"></a>
-<a href="https://www.npmjs.com/package/ourin-baileys"><img title="Baileys" src="https://img.shields.io/badge/Baileys-ourin--baileys-red.svg?style=for-the-badge&logo=npm"></a>
+[![ElainaBOT](https://img.shields.io/badge/Elaina_BOT-Multi_Device-b39ddb?style=for-the-badge&logo=whatsapp&logoColor=white)](https://github.com/OmmniDevv/Elaina-MD)
+[![Author](https://img.shields.io/badge/Author-OmniDevv-7e57c2?style=for-the-badge&logo=github)](https://github.com/OmmniDevv)
+[![Baileys](https://img.shields.io/badge/Baileys-ourin--baileys-ef5350?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/ourin-baileys)
+[![Changelog](https://img.shields.io/badge/Changelog-📜_Riwayat_Update-4caf50?style=for-the-badge)](https://github.com/OmmniDevv/Elaina-MD/blob/main/CHANGELOG.md)
 
----------
-## ```Connect With Me 📞``` ## `Connect With Me 📞`
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/6285869074622)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/mermaid_mannz)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:omnidevv@gmail.com)
 
-<a href="https://wa.me/6285869074622">
-  <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
-</a>
-<a href="https://www.instagram.com/mermaid_mannz">
-  <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
-</a>
-<a href="mailto:omnidevv@gmail.com">
-  <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
-</a>
+</div>
 
-#### KELEBIHAN 🪄
-| Kelebihan | Check |
-|--------|--------|
-| **Fast Respon** |[✔️](https://github.com/OmmniDevv) |
-| **Simple** |[✔️](https://github.com/OmmniDevv) |
-| **Button Template** |[✔️](https://github.com/OmmniDevv) |
-| **Multi Device** |[✔️](https://github.com/OmmniDevv) |
-| **Button Document** |[✔️](https://github.com/OmmniDevv) |
-| **Jadibot Support** |[✔️](https://github.com/OmmniDevv) |
-| **Ourin-Baileys** |[✔️](https://www.npmjs.com/package/ourin-baileys) |
----------
-#### FITUR 🎀
-| Fitur | Check |
-|--------|--------|
-| **Downloader** |[✔️](https://github.com/OmmniDevv) |
-| **Internet** |[✔️](https://github.com/OmmniDevv) |
-| **Game Rpg** |[✔️](https://github.com/OmmniDevv) |
-| **Nsfw** |[✔️](https://github.com/OmmniDevv) |
-| **Sticker** |[✔️](https://github.com/OmmniDevv) |
-| **Game** |[✔️](https://github.com/OmmniDevv) |
-| **Kerang Ajaib** |[✔️](https://github.com/OmmniDevv) |
-| **Quotes** |[✔️](https://github.com/OmmniDevv) |
-| **Anime** |[✔️](https://github.com/OmmniDevv) |
-| **Premium** |[✔️](https://github.com/OmmniDevv) |
-| **Tools** |[✔️](https://github.com/OmmniDevv) |
-| **Exec** |[✔️](https://github.com/OmmniDevv) |
-| **React** |[✔️](https://github.com/OmmniDevv) |
-| **Jadibot** |[✔️](https://github.com/OmmniDevv) |
----------
+---
 
-## `SETTING`
+> [!CAUTION]
+> **Baca dulu sebelum lanjut, senpai~ 🙏**
+> Script ini dibuat dengan **sepenuh hati dan gratis untuk semua orang**. Dilarang keras untuk **diperjualbelikan** dalam bentuk apapun. Kalau ketahuan dijual, ingat — karma itu nyata dan neraka itu panas~ 🔥
+> Sebelum pakai, tolong kasih ⭐ dan follow GitHub-nya. Itu aja, kok. Murah banget kan? 😊
 
-- Owner Number [Here](https://github.com/OmmniDevv/Elaina-MD/blob/master/config.js#L1)
-- Owner Name [Here](https://github.com/OmmniDevv/Elaina-MD/blob/master/config.js#L1)
-- Bot Name [Here](https://github.com/OmmniDevv/Elaina-MD/blob/master/config.js#L1)
----------
+---
 
-## ```Heroku Buildpack```
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/OmmniDevv/Elaina-MD)
+## 🌟 Tentang ElainaBOT
 
-| BuildPack | LINK |
-|--------|--------|
-| **FFMPEG** |[here](https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest) |
-| **IMAGEMAGICK** | [here](https://github.com/rocketmobile/heroku-buildpack-imagemagick.git) |
+ElainaBOT adalah WhatsApp bot berbasis **[ourin-baileys](https://www.npmjs.com/package/ourin-baileys)** yang di-*recode* ulang oleh **OmniDevv** dari base original milik **BochilGaming**. Dirancang agar ringan, responsif, dan kaya fitur — mulai dari downloader, game RPG, hingga fitur unik **Jadibot** yang memungkinkan siapa saja menjalankan bot dari nomor mereka sendiri.
 
-## TERMUX USER
-```bash
-$ pkg upgrade && pkg update
-$ pkg install git -y
-$ pkg install nodejs -y
-$ pkg install ffmpeg -y
-$ pkg install imagemagick -y
-$ git clone https://github.com/OmmniDevv/Elaina-MD
-$ cd Elaina-MD
-$ npm i 
-```
-If error try using yarn instead of npm, see [here](https://github.com/BochilGaming/games-wabot/tree/multi-device#if-npm-install-failed--try--using-yarn-instead-of-npm)
-```bash
-$ node .
-```
+Cocok untuk personal maupun komunitas. Ringan di HP kentang, powerful di server~ ⚡
 
-#### For android 10 and above don't use npm, use yarn install
-```bash
-$ pkg install yarn -y
-$ yarn install
-```
----------
+---
 
-## TERMUX WITH UBUNTU
+## ✨ Kelebihan
 
-```bash
-apt update && apt full-upgrade
-apt install wget curl git proot-distro
-proot-distro install ubuntu
-echo "proot-distro login ubuntu" > $PREFIX/bin/ubuntu
-ubuntu
-```
----------
+> *"Kenapa harus pakai ElainaBOT? Karena waifu terbaik selalu punya kelebihan~"*
 
-[ INSTALLING REQUIRED PACKAGES ]
+| Fitur | Keterangan | Status |
+|---|---|---|
+| ⚡ Fast Response | Respons cepat tanpa delay berarti, bahkan di kondisi jaringan pas-pasan | ✅ |
+| 🪄 Simple & Ringan | Kode bersih, mudah dikustomisasi, nggak berat di memori | ✅ |
+| 🔘 Button Template | Mendukung tampilan pesan dengan tombol interaktif ala WhatsApp Business | ✅ |
+| 📱 Multi Device | Bisa jalan di banyak perangkat sekaligus tanpa perlu scan ulang | ✅ |
+| 📄 Button Document | Kirim dokumen sekaligus dengan tombol pilihan, lebih rapi dan informatif | ✅ |
+| 🤖 Jadibot Support | User lain bisa jadi bot sementara pakai nomor mereka sendiri | ✅ |
+| 📦 Ourin-Baileys | Menggunakan fork Baileys terbaru yang lebih stabil dan aktif dikembangkan | ✅ |
+
+---
+
+## 🎀 Fitur Lengkap
+
+> *"Satu bot, seribu kegunaan. Ara ara~"*
+
+| Kategori | Fitur | Keterangan Singkat |
+|---|---|---|
+| 📥 **Downloader** | YouTube, TikTok, dll | Download konten dari berbagai platform populer |
+| 🌐 **Internet** | Pencarian & info online | Cari informasi langsung dari WhatsApp |
+| ⚔️ **Game RPG** | Sistem leveling & battle | Game RPG berbasis teks ala isekai~ |
+| 🎮 **Game** | Mini-game seru | Berbagai game ringan untuk hiburan di grup |
+| 🐚 **Kerang Ajaib** | Tanya jawab acak | Minta kerang ajaib untuk meramal nasibmu |
+| 💬 **Quotes** | Kutipan inspiratif & random | Quotes anime, motivasi, hingga galau~ |
+| 🌸 **Anime** | Info & gambar anime | Cari info anime, karakter, hingga gambar random |
+| 🔞 **NSFW** | Konten dewasa | Khusus grup 18+, digunakan dengan bijak ya~ |
+| 🖼️ **Sticker** | Buat stiker dari foto/video | Jadikan foto apapun stiker WhatsApp instan |
+| 💫 **React** | Emote reaksi anime | Kirim gif reaksi ala anime: hug, pat, slap, dll |
+| 👑 **Premium** | Fitur eksklusif berbayar | Unlock fitur spesial untuk user premium |
+| 🛠️ **Tools** | Utilitas serba guna | Konversi, kalkulator, cuaca, dan banyak lagi |
+| 💻 **Exec** | Eksekusi kode/perintah | Jalankan perintah shell atau kode langsung dari WA |
+| 🤖 **Jadibot** | Jadi bot sementara | User bisa menjalankan bot pakai nomor sendiri |
+
+---
+
+## ⚙️ Konfigurasi
+
+Edit file [`config.js`](https://github.com/OmmniDevv/Elaina-MD/blob/master/config.js) untuk menyesuaikan bot dengan kebutuhanmu:
+
+| Pengaturan | Keterangan |
+|---|---|
+| `ownerNumber` | Nomor HP owner (format: `628xxxxxxxx`) |
+| `ownerName` | Nama owner yang tampil di info bot |
+| `botName` | Nama panggilanmu untuk sang waifu bot |
+
+---
+
+## 📜 Changelog
+
+Penasaran ada update apa aja? Cek riwayat perubahan lengkapnya di sini:
+
+> 👉 **[CHANGELOG.md](https://github.com/OmmniDevv/Elaina-MD/blob/main/CHANGELOG.md)** — Semua update, perbaikan bug, dan fitur baru tercatat rapi di sana~
+
+---
+
+## 🚀 Instalasi
+
+> *"Tenang, Master~ Aku akan membimbing kamu langkah demi langkah~"*
+
+### 📱 Termux (Android)
+
+Cara termudah untuk menjalankan ElainaBOT langsung dari HP Android-mu:
 
 ```bash
-ubuntu
-apt update && apt full-upgrade
-apt install wget curl git ffmpeg imagemagick build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev dbus-x11 ffmpeg2theora ffmpegfs ffmpegthumbnailer ffmpegthumbnailer-dbg ffmpegthumbs libavcodec-dev libavcodec-extra libavcodec-extra58 libavdevice-dev libavdevice58 libavfilter-dev libavfilter-extra libavfilter-extra7 libavformat-dev libavformat58 libavifile-0.7-bin libavifile-0.7-common libavifile-0.7c2 libavresample-dev libavresample4 libavutil-dev libavutil56 libpostproc-dev libpostproc55 graphicsmagick graphicsmagick-dbg graphicsmagick-imagemagick-compat graphicsmagick-libmagick-dev-compat groff imagemagick-6.q16hdri imagemagick-common libchart-gnuplot-perl libgraphics-magick-perl libgraphicsmagick++-q16-12 libgraphicsmagick++1-dev
-```
+# Update dulu biar nggak drama
+pkg upgrade && pkg update
 
----------
+# Install semua yang dibutuhkan
+pkg install git nodejs ffmpeg imagemagick -y
 
-[ INSTALLING NODEJS & ELAINABOT-MD]
-
-```bash
-ubuntu
-curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-apt install -y nodejs gcc g++ make
+# Clone repositori ElainaBOT
 git clone https://github.com/OmmniDevv/Elaina-MD
 cd Elaina-MD
+
+# Install dependensi Node
 npm install
-npm update
-```
 
----------
-
-## FOR WINDOWS/VPS/RDP USER 💻
-
-* Download And Install Git [`Click Here`](https://git-scm.com/downloads)
-* Download And Install NodeJS [`Click Here`](https://nodejs.org/en/download)
-* Download And Install FFmpeg [`Click Here`](https://ffmpeg.org/download.html) (**Don't Forget Add FFmpeg to PATH enviroment variables**)
-* Download And Install ImageMagick [`Click Here`](https://imagemagick.org/script/download.php)
-
-```bash
-git clone https://github.com/OmmniDevv/Elaina-MD
-cd Elaina-MD
-npm install
-npm update
-```
-
----------
-
-## Run 🏃
-
-```bash
+# Jalankan botnya~
 node .
 ```
 
----------
+> [!TIP]
+> **Pengguna Android 10 ke atas**, `npm` kadang rewel. Pakai `yarn` aja yang lebih kalem:
+> ```bash
+> pkg install yarn -y
+> yarn install
+> node .
+> ```
+> Kalau masih error, cek panduan lengkapnya [di sini](https://github.com/BochilGaming/games-wabot/tree/multi-device#if-npm-install-failed--try--using-yarn-instead-of-npm).
 
-## ```Arguments node . [--options] [<session name>]```
+---
 
-## `--self`
-* Activate self mode (Ignores other)
+### 🐧 Termux + Ubuntu (Lebih Stabil)
 
-## `--pconly`
-* If that chat not from private bot, bot will ignore
+Rekomendasi untuk kamu yang mau performa lebih optimal dan stabil di Android:
 
-## `--gconly`
-* If that chat not from group, bot will ignore
+```bash
+# Install proot-distro dan setup Ubuntu
+apt update && apt full-upgrade
+apt install wget curl git proot-distro
+proot-distro install ubuntu
 
-## `--swonly`
-* If that chat not from status, bot will ignore
+# Buat shortcut biar gampang masuk Ubuntu
+echo "proot-distro login ubuntu" > $PREFIX/bin/ubuntu
+ubuntu
 
-## `--prefix <prefixes>`
-* `prefixes` are seperated by each character
-Set prefix
+# Di dalam Ubuntu — install Node.js versi terbaru
+curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+apt install -y nodejs gcc g++ make
 
-## `--server`
-* Used for [heroku](https://heroku.com/) or scan through website
+# Clone & jalankan
+git clone https://github.com/OmmniDevv/Elaina-MD
+cd Elaina-MD
+npm install && npm update
+node .
+```
 
-## `--restrict`
-* Enables restricted plugins (which can lead your number to be **banned** if used too often)
-* Group Administration `add, kick`
+---
 
-## `--img`
-* Enable image inspector through terminal
+### 💻 Windows / VPS / RDP
 
-## `--autoread`
-* If enabled, all incoming messages will be marked as read
+Untuk kamu yang pakai laptop, komputer, atau sewa VPS. Pastikan semua tools berikut sudah terinstall:
 
-## `--nyimak`
-* No bot, just print received messages and add users to database
+| Tools | Download | Catatan |
+|---|---|---|
+| Git | [git-scm.com](https://git-scm.com/downloads) | Buat clone repo |
+| Node.js | [nodejs.org](https://nodejs.org/en/download) | Runtime utama bot |
+| FFmpeg | [ffmpeg.org](https://ffmpeg.org/download.html) | ⚠️ Wajib ditambahkan ke PATH |
+| ImageMagick | [imagemagick.org](https://imagemagick.org/script/download.php) | Untuk fitur edit gambar |
 
-## `--test`
-* **Development** Testing Mode
+```bash
+git clone https://github.com/OmmniDevv/Elaina-MD
+cd Elaina-MD
+npm install && npm update
+node .
+```
 
----------
+---
 
-## ```How To Customise Message Display```
+### ☁️ Deploy ke Heroku
+
+Mau bot jalan 24 jam tanpa perlu nyalain HP atau komputer? Deploy ke Heroku~
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/OmmniDevv/Elaina-MD)
+
+Tambahkan buildpack berikut agar fitur media berjalan sempurna:
+
+| Buildpack | Fungsi | Link |
+|---|---|---|
+| FFmpeg | Proses audio & video | [heroku-buildpack-ffmpeg-latest](https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest) |
+| ImageMagick | Proses gambar & stiker | [heroku-buildpack-imagemagick](https://github.com/rocketmobile/heroku-buildpack-imagemagick.git) |
+
+---
+
+## 🖥️ Argumen CLI
+
+Jalankan bot dengan opsi tambahan sesuai kebutuhan:
+
+```
+node . [--opsi] [<nama sesi>]
+```
+
+| Argumen | Keterangan |
+|---|---|
+| `--self` | Mode self — bot hanya merespons pesan owner sendiri |
+| `--pconly` | Bot hanya aktif di private chat, abaikan pesan grup |
+| `--gconly` | Bot hanya aktif di grup, abaikan private chat |
+| `--swonly` | Bot hanya merespons pesan dari status WA |
+| `--prefix <karakter>` | Set custom prefix sesukamu (default biasanya `.`) |
+| `--server` | Aktifkan mode server untuk Heroku atau scan via website |
+| `--restrict` | Aktifkan plugin restricted seperti add & kick member ⚠️ |
+| `--autoread` | Semua pesan masuk otomatis ditandai sudah terbaca |
+| `--img` | Tampilkan preview gambar langsung di terminal |
+| `--nyimak` | Bot diam saja — hanya catat pesan masuk ke database |
+| `--test` | Mode development untuk testing fitur baru |
+
+---
+
+## 🤖 Fitur Jadibot
+
+> *"Sekarang kamu pun bisa punya bot sendiri, tanpa perlu beli nomor baru~"*
+
+Fitur **Jadibot** memungkinkan siapapun menjalankan bot WhatsApp sementara menggunakan nomor mereka sendiri — tanpa harus install apapun!
+
+**Cara pakai:**
+
+| Perintah | Fungsi |
+|---|---|
+| `.jadibot` | Mulai Jadibot via pairing code |
+| `.jadibot qr` | Mulai Jadibot via scan QR code |
+| `.stopjadibot` | Hentikan dan hapus sesi Jadibot |
+
+**Catatan penting:**
+- 🔒 Setiap user punya sesi sendiri yang tersimpan otomatis
+- 🔄 Bisa reconnect kapan saja tanpa perlu setup ulang
+- ⚡ Ringan dan tidak mengganggu performa bot utama
+
+---
+
+## 🛠️ Cara Kustomisasi Pesan
+
+ElainaBOT mendukung berbagai format pesan interaktif. Contoh penggunaan fungsi `sendButton`:
+
 ```js
-// Syntax
+// Kirim pesan dengan tombol biasa
 conn.sendButton(
-      jid, // jid of the user to send the message to
-      text, // text to send
-      foooter, // footer to send
-      buffer, // buffer to send (optional), if you want to send button image, location, etc
-      buttons, // buttons to send, example [['text1', 'id1'], ['text2', 'id2']]
-      quoted, // quoted message to send (optional)
-      options // options to send, example { asLocation: true }
+  m.chat,                          // Tujuan pesan
+  'Halo, Master~ Ada yang bisa kubantu?', // Isi pesan
+  '@ElainaBOT',                    // Footer
+  null,                            // Buffer (opsional)
+  [['Ya~', 'yes'], ['Nggak deh', 'no']]  // Tombol [teks, id]
 )
 
-// example 
-conn.sendButton(m.chat, 'Hello world!', '@BochilGaming', null, [
-      ['Hello', 'hello'], ['Bye', 'bye']
-])
-// example button location
-conn.sendButton(m.chat, 'Hello world!', '@BochilGaming', 'https://github.com/BochilGaming', 
-      [['Hello', 'hello'], ['Bye', 'bye']], 
-      null, { asLocation: true }
+// Kirim pesan tombol dengan gambar/lokasi
+conn.sendButton(
+  m.chat,
+  'Ini lokasi master~',
+  '@ElainaBOT',
+  'https://link-gambar.com/foto.jpg',
+  [['Buka Maps', 'maps']],
+  null,
+  { asLocation: true }             // Tampilkan sebagai lokasi
 )
 ```
----------
 
-## ```Fitur Jadibot 🤖```
+---
 
-Bot ini mendukung fitur **Jadibot** yang memungkinkan user lain untuk menjadi bot sementara menggunakan nomor mereka sendiri!
+## 📜 Syarat & Ketentuan
 
-### Cara Menggunakan:
-1. **Mulai Jadibot:**
-   - Ketik `.jadibot` untuk menggunakan pairing code
-   - Ketik `.jadibot qr` untuk menggunakan QR code
-   
-2. **Stop Jadibot:**
-   - Ketik `.stopjadibot` untuk menghentikan bot
+> *"Aturannya simpel kok, Master. Tolong dipatuhi ya~ 🙏"*
 
-### Catatan:
-- Session jadibot tersimpan otomatis
-- Bisa reconnect kapan saja
-- Setiap user punya session sendiri
+1. ❌ **Jangan diperjualbelikan** — script ini gratis, bukan produk komersial
+2. ⭐ **Kasih star** sebelum clone dan pakai
+3. 👤 **Follow akun GitHub** OmniDevv
+4. ✅ **Gunakan dengan bijak** — jangan sampai merugikan orang lain
+5. 📜 **Cek changelog** secara berkala untuk update terbaru
 
----------
+---
 
-### 📮 S&K
-1. Jangan diperjual belikan Script ini
-2. Sebelum pakai jangan lupa kasih star
-3. Follow Github !
-4. Jangan salah gunakan script ini!
+## 🙏 Credits & Kontributor
 
----------
+> *"ElainaBOT hadir berkat kerja keras banyak orang. Arigatou gozaimasu~ 🌸"*
 
-### ❗ Note
-- Bot ini menggunakan **[ourin-baileys](https://www.npmjs.com/package/ourin-baileys)** versi terbaru
-- Apikeynya Beli Sendiri Ya Guys😁
-- Untuk fitur RPG, makasih kode nya **RTXZY**
-- Untuk fitur Jadibot, makasih kode nya **OURIN**
+| Nama | Kontribusi |
+|---|---|
+| [Allah SWT](https://github.com/OmmniDevv) | Atas segala kemudahan dan rahmat-Nya 🤲 |
+| [Adiwajshing](https://github.com/adiwajshing/Baileys) | Pencipta library Baileys original |
+| [BochilGaming](https://github.com/bochilgaming) | Base bot original |
+| [OURIN](https://github.com/OURIN) | Kontributor fitur Jadibot |
+| [RTXZY](https://github.com/RTXZY) | Kontributor fitur RPG |
+| [Nurutomo](https://github.com/nurutima) | Kontributor |
+| [KannaChann](https://github.com/kannachann) | Kontributor |
+| [The.Sad.Boy01](https://github.com/Kangsad01) | Kontributor |
+| [Papah-Chan](https://github.com/FahriAdison) | Kontributor |
 
----------
+---
 
-## ```Thanks to ✨```
-* [`Allah SWT`](https://github.com/OmmniDevv)
-* [`My parents`](https://github.com/OmmniDevv)
-* [`All Friends`](https://github.com/OmmniDevv)
-* [`All Contributors`](https://github.com/OmmniDevv)
-* [`All Creator Bot`](https://github.com/OmmniDevv)
-* [`Adiwajshing`](https://github.com/adiwajshing/Baileys)
-* [`Nurutomo`](https://github.com/nurutomi)
-* [`BochilGaming`](https://github.com/bochilgaming)
-* [`KannaChann`](https://github.com/kannachann) 
-* [`The.Sad.Boy01`](https://github.com/Kangsad01) 
-* [`Papah-Chan`](https://github.com/FahriAdison)
-* [`OURIN`](https://github.com/OURIN) - Jadibot Feature
-* [`RTXZY`](https://github.com/RTXZY) - RPG Features
+<div align="center">
 
-## ```Recode By ✏️```
-[![OmmniDevv](https://github.com/OmmniDevv.png?size=70)](https://github.com/OmmniDevv)
+*Dibuat dengan 💜 oleh [OmniDevv](https://github.com/OmmniDevv)*
+
+**「頑張れ、マスター — Ganbatte, Master~」**
+
+*Semangat terus ya, dan jangan lupa kasih bintangnya~ 🌟*
+
+</div>
