@@ -11,17 +11,26 @@ async function cobaltDownload(url, audioOnly = false) {
   let lastError
   for (const instance of COBALT_INSTANCES) {
     try {
+      // Create timeout controller for older Node.js compatibility
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000)
+      
       const res = await fetch(instance, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ url, downloadMode: audioOnly ? 'audio' : 'auto', videoQuality: '720', audioFormat: 'mp3' }),
-        signal: AbortSignal.timeout(10000)
+        signal: controller.signal
       })
+      
+      clearTimeout(timeoutId)
+      
       if (!res.ok) continue
       const data = await res.json()
       if (data.status === 'error') { lastError = data.error?.code; continue }
       return data
-    } catch (e) { lastError = e.message }
+    } catch (e) { 
+      lastError = e.message 
+    }
   }
   throw lastError || 'Semua instance Cobalt tidak merespon'
 }

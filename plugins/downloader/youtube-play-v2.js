@@ -18,7 +18,9 @@ async function getAudioUrl(videoUrl) {
             { timeout: 15000 }
         )
         if (data?.result?.url) return { url: data.result.url, title: data.result.title }
-    } catch { }
+    } catch (e) { 
+      console.error('Audio URL fetch error:', e.message)
+    }
 
     // Fallback 1: siputzx
     try {
@@ -27,7 +29,9 @@ async function getAudioUrl(videoUrl) {
             { timeout: 15000 }
         )
         if (data?.data?.dl) return { url: data.data.dl, title: data.data.title }
-    } catch { }
+    } catch (e) { 
+      console.error('Audio URL fetch error:', e.message)
+    }
 
     // Fallback 2: ryzendesu
     try {
@@ -36,7 +40,9 @@ async function getAudioUrl(videoUrl) {
             { timeout: 15000 }
         )
         if (data?.url) return { url: data.url, title: data.title }
-    } catch { }
+    } catch (e) { 
+      console.error('Audio URL fetch error:', e.message)
+    }
 
     throw 'Gagal mendapatkan audio. Coba lagi nanti.'
 }

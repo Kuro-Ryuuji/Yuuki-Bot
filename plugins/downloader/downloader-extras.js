@@ -15,11 +15,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     dlUrl = data?.result?.url
   } catch {}
   if (!dlUrl) {
-    const { data } = await axios.get(`https://api.cobalt.tools/api/json`, {
-      method: 'POST', data: { url: text, vQuality: '720' },
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, timeout: 30000
-    }).catch(() => ({ data: null }))
-    dlUrl = data?.url
+    try {
+      const { data } = await axios.post(`https://api.cobalt.tools/api/json`, {
+        url: text, 
+        vQuality: '720'
+      }, {
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, 
+        timeout: 30000
+      })
+      dlUrl = data?.url
+    } catch (e) {
+      console.error('Cobalt API error:', e.message)
+    }
   }
   if (!dlUrl) throw '❌ Gagal mendapatkan URL download'
   await conn.sendMessage(m.chat, { video: { url: dlUrl }, caption: `🎬 ${text}` }, { quoted: m })
