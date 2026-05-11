@@ -1,0 +1,79 @@
+// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
+// Credits: Letta - Sama 💗🐰
+// Recode 2026: waifu.im NSFW API
+
+import fetch from 'node-fetch'
+
+function pickRandom(list) { return list[Math.floor(Math.random() * list.length)] }
+
+// waifu.im NSFW tags
+const WAIFUIM_NSFW = ['ero', 'ecchi', 'hentai', 'milf', 'oral', 'paizuri', 'ass', 'oppai']
+// waifu.pics NSFW tags
+const WAIFUPICS_NSFW = ['waifu', 'neko', 'trap', 'blowjob']
+
+async function getNsfwImg(tag) {
+  // Try waifu.im first
+  if (WAIFUIM_NSFW.includes(tag)) {
+    const res = await fetch(`https://api.waifu.im/search?included_tags=${tag}&is_nsfw=true`)
+    const json = await res.json()
+    return json.images?.[0]?.url
+  }
+  // Fallback waifu.pics
+  const wpTag = WAIFUPICS_NSFW.includes(tag) ? tag : 'waifu'
+  const res = await fetch(`https://api.waifu.pics/nsfw/${wpTag}`)
+  const json = await res.json()
+  return json.url
+}
+
+// Map command → waifu.im/waifu.pics tag
+const tagMap = {
+  ahegao: 'ecchi', anal: 'oral', ass: 'ass', blowjob: 'oral',
+  cums: 'oral', ecchi: 'ecchi', ero: 'ero', erofeet: 'ecchi',
+  erogirl: 'ero', holoero: 'ecchi', erokitsune: 'ecchi', eroneko: 'ecchi',
+  eroyuri: 'ecchi', feet: 'ecchi', femdom: 'ecchi', futanari: 'ecchi',
+  girlsolo: 'ero', hentai: 'hentai', holo: 'ecchi', kitsune: 'ecchi',
+  kuni: 'oral', loli: 'ecchi', manga: 'hentai', milf: 'milf',
+  mstrb: 'ero', neko: 'ecchi', panties: 'ecchi', pussy: 'ero',
+  oppai: 'oppai', spank: 'ecchi', tentacles: 'hentai', thighs: 'ecchi',
+  tits: 'oppai', trap: 'ecchi', uniform: 'ecchi', waifu: 'ecchi',
+  yaoi: 'ecchi', yuri: 'ecchi'
+}
+
+let handler = async (m, { conn, command, args, usedPrefix }) => {
+  if (global.db.data.chats[m.chat].nsfw == false && m.isGroup)
+    return m.reply('❗ NSFW di chat ini belum diaktifkan oleh admin group')
+
+  const type = (args[0] || '').toLowerCase()
+  const ch = global.db.data.chats[m.chat].premnsfw
+
+  const p = '🅟 | ', f = 'Ⓕ | '
+  const teks = `┊ 📮 Silahkan Pilih Dibawah!\n┊› Atau ketik ${usedPrefix}nsfw <kategori>\n❏──···––`
+
+  const sections = [{
+    title: 'KATEGORI NSFW',
+    rows: Object.keys(tagMap).map(k => ({ title: `${f}${k.charAt(0).toUpperCase() + k.slice(1)}`, rowId: `.nsfw ${k}` }))
+  }]
+
+  if (!type) return conn.sendMessage(m.chat, {
+    text: teks,
+    footer: 'Ⓕ = Free',
+    title: '❏––––[ *NSFW* ]–––',
+    buttonText: '- -NSFW- -',
+    sections
+  }, { quoted: m })
+
+  const tag = tagMap[type] || 'ecchi'
+  const url = await getNsfwImg(tag)
+  if (!url) throw 'Gagal mengambil gambar NSFW'
+
+  await conn.sendMessage(m.chat, {
+    image: { url },
+    caption: `\`\`\`➩ Random Image Nsfw ${type}\`\`\``
+  }, { quoted: m })
+}
+
+handler.help = ['nsfw <kategori>']
+handler.tags = ['nsfw']
+handler.command = /^(nsfw|hentai)$/i
+handler.nsfw = true
+export default handler

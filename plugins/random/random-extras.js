@@ -1,0 +1,119 @@
+/**
+ * Elaina-MD — https://github.com/OmmniDevv/Elaina-MD
+ * Script by OmmniDevv — Jangan Dijual!
+ */
+import axios from 'axios'
+
+// ─── Cecan (random cewek cantik by region) ─────────────────
+async function sendCecan(m, conn, apiUrl, label) {
+  m.react('🔍')
+  const res = await axios.get(apiUrl, { timeout: 15000 })
+  const url = res.data?.result?.url || res.data?.url || res.data?.data?.url || (typeof res.data === 'string' ? res.data : null)
+  if (!url) throw `❌ Gagal ambil foto ${label}`
+  await conn.sendMessage(m.chat, { image: { url }, caption: `📸 *${label}*` }, { quoted: m })
+  m.react('✅')
+}
+
+let handler = async (m, { conn }) => sendCecan(m, conn, 'https://api.nexray.web.id/random/cecan/indonesia', 'Cecan Indo')
+handler.help = ['cecanindo']
+handler.tags = ['random']
+handler.command = /^cecanindo$/i
+export default handler
+
+export const cecanKoreaHandler = async (m, { conn }) => sendCecan(m, conn, 'https://api.nexray.web.id/random/cecan/korea', 'Cecan Korea')
+cecanKoreaHandler.help = ['cecankorea']
+cecanKoreaHandler.tags = ['random']
+cecanKoreaHandler.command = /^cecankorea$/i
+
+export const cecanJepangHandler = async (m, { conn }) => sendCecan(m, conn, 'https://api.nexray.web.id/random/cecan/jepang', 'Cecan Jepang')
+cecanJepangHandler.help = ['cecanjepang']
+cecanJepangHandler.tags = ['random']
+cecanJepangHandler.command = /^cecanjepang$/i
+
+export const cecanChinaHandler = async (m, { conn }) => sendCecan(m, conn, 'https://api.nexray.web.id/random/cecan/china', 'Cecan China')
+cecanChinaHandler.help = ['cecanchina']
+cecanChinaHandler.tags = ['random']
+cecanChinaHandler.command = /^cecanchina$/i
+
+export const cecanThaiHandler = async (m, { conn }) => sendCecan(m, conn, 'https://api.nexray.web.id/random/cecan/thai', 'Cecan Thailand')
+cecanThaiHandler.help = ['cecanthai']
+cecanThaiHandler.tags = ['random']
+cecanThaiHandler.command = /^cecanthai$/i
+
+export const cecanVietnamHandler = async (m, { conn }) => sendCecan(m, conn, 'https://api.nexray.web.id/random/cecan/vietnam', 'Cecan Vietnam')
+cecanVietnamHandler.help = ['cecanvietnam']
+cecanVietnamHandler.tags = ['random']
+cecanVietnamHandler.command = /^cecanvietnam$/i
+
+// ─── Meme ──────────────────────────────────────────────────
+export const memeHandler = async (m, { conn }) => {
+  m.react('😂')
+  const res = await axios.get('https://meme-api.com/gimme/indonesia', { timeout: 15000 })
+  const url = res.data?.url
+  if (!url) throw '❌ Gagal ambil meme'
+  await conn.sendMessage(m.chat, { image: { url }, caption: res.data?.title || '😂' }, { quoted: m })
+  m.react('✅')
+}
+memeHandler.help = ['meme']
+memeHandler.tags = ['random']
+memeHandler.command = /^meme$/i
+
+// ─── Couple (random couple pic) ────────────────────────────
+export const coupleHandler = async (m, { conn }) => {
+  m.react('💕')
+  const res = await axios.get('https://api.deline.web.id/random/ppcouple', { timeout: 15000 })
+  const cowo = res.data?.result?.cowo || res.data?.cowo
+  const cewe = res.data?.result?.cewe || res.data?.cewe
+  if (cowo) await conn.sendMessage(m.chat, { image: { url: cowo }, caption: '💕 *Couple Goals (Cowo)*' }, { quoted: m })
+  if (cewe) await conn.sendMessage(m.chat, { image: { url: cewe }, caption: '💕 *Couple Goals (Cewe)*' }, { quoted: m })
+  if (!cowo && !cewe) throw '❌ Gagal ambil foto couple'
+  m.react('✅')
+}
+coupleHandler.help = ['couple']
+coupleHandler.tags = ['random']
+coupleHandler.command = /^couple$/i
+
+// ─── Lahelu (meme Indonesia) ───────────────────────────────
+export const laheluHandler = async (m, { conn }) => {
+  m.react('😂')
+  const res = await axios.get('https://api.cuki.biz.id/api/random/lahelu?apikey=cuki-x', { timeout: 15000 })
+  const items = res.data?.data
+  if (!items?.length) throw '❌ Gagal ambil meme lahelu'
+  const random = items[Math.floor(Math.random() * items.length)]
+  const isVideo = random.media?.includes('.mp4')
+  await conn.sendMessage(m.chat, isVideo
+    ? { video: { url: random.media }, caption: random.title || '😂 *Lahelu*' }
+    : { image: { url: random.media }, caption: random.title || '😂 *Lahelu*' }
+  , { quoted: m })
+  m.react('✅')
+}
+laheluHandler.help = ['lahelu']
+laheluHandler.tags = ['random']
+laheluHandler.command = /^lahelu$/i
+
+// ─── Quotes Image ──────────────────────────────────────────
+export const quotesimageHandler = async (m, { conn }) => {
+  m.react('💭')
+  const neoxrKey = global.APIKeys?.neoxr || ''
+  const res = await axios.get(`https://api.neoxr.eu/api/quotesimage?apikey=${neoxrKey}`, { timeout: 15000 })
+  const url = res.data?.data?.url || res.data?.url
+  if (!url) throw '❌ Gagal ambil quotes image'
+  await conn.sendMessage(m.chat, { image: { url } }, { quoted: m })
+  m.react('✅')
+}
+quotesimageHandler.help = ['quotesimage']
+quotesimageHandler.tags = ['random']
+quotesimageHandler.command = /^quotesimage$/i
+
+// ─── Bar Random (Blue Archive) ────────────────────────────
+export const barandomHandler = async (m, { conn }) => {
+  m.react('🎮')
+  const res = await axios.get('https://api.nexray.web.id/random/ba', { timeout: 15000 })
+  const url = res.data?.result?.url || res.data?.url || (typeof res.data === 'string' ? res.data : null)
+  if (!url) throw '❌ Gagal ambil gambar Blue Archive'
+  await conn.sendMessage(m.chat, { image: { url } }, { quoted: m })
+  m.react('✅')
+}
+barandomHandler.help = ['barandom']
+barandomHandler.tags = ['random']
+barandomHandler.command = /^barandom$/i
