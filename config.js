@@ -57,17 +57,17 @@ global.ppulsa = '08xxxxxxxxx' //Nomor SimCard Yang Kamu Pake
 global.psaweria = '-' //Link Saweriamu Kalo Nggada Ketik - aja
 
 /*============== NOMOR ==============*/
-global.nomorbot = '6285869074622' //Nomor Bot
-global.nomorown = '6285187605007' //Nomor Owner
-global.namebot = 'Elaina BOT' //Nama Bot
-global.nameown = 'ZansLord' // Nama Owner
+global.nomorbot = '6281952716944' //Nomor Bot
+global.nomorown = '6281952716944' //Nomor Owner
+global.namebot = 'Yuuki BOT' //Nama Bot
+global.nameown = 'Dimzz' // Nama Owner
 // ↓ TAMBAHKAN INI ↓
 global.usePairingCode = true             // Aktifkan pairing code
-global.pairingNumber = '6285869074622'   // Nomor WA bot kamu (kosongkan untuk input manual)
+global.pairingNumber = '6281952716944'   // Nomor WA bot kamu (kosongkan untuk input manual)
 
 /*============== STAFF ==============*/
 global.owner = [
-  ['6285187605007', '❦ Zans Lord? 🎐', true] //Ganti jd nomormu sama Namamu
+  ['6281952716944', '❦ Dimzz? 🎐', true] //Ganti jd nomormu sama Namamu
   // [number, nama, dia owner?]
 ] // Put your number here
 global.mods = [] // Want some help?
@@ -107,7 +107,7 @@ global.APIKeys = {
   groq: 'ISI_APIKEY_GROQ_DISINI',
 
   // Covenant (GPT-4o) - Daftar: https://covenant.sbs
-  covenant: 'ISI_APIKEY_COVENANT_DISINI',
+  covenant: 'cov_live_fa5117eb6327a5ee4640e7dc633ee4d5d9fe851cf2e69195',
 
   // NeoXR API - Daftar: https://api.neoxr.eu
   neoxr: 'ISI_APIKEY_NEOXR_DISINI',
@@ -121,9 +121,9 @@ global.APIKeys = {
 
 /*============== WATERMARK ==============*/
 // © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD
-global.wm = '                「 ᴇʟᴀɪɴᴀ 𝙱𝙾𝚃 汉  」' //Main Watermark
-global.wm2 = '꒷︶꒷꒥꒷ ‧₊˚ ꒰ฅ˘ᴇʟᴀɪɴᴀ - ᴄʜᴀɴ˘ฅ ꒱ ‧₊˚꒷︶꒷꒥꒷'
-global.wm3 = '⫹⫺ ᴇʟᴀɪɴᴀ 𝙱𝙾𝚃'
+global.wm = '                「 ʏᴜᴜᴋɪ 𝙱𝙾𝚃 汉  」' //Main Watermark
+global.wm2 = '꒷︶꒷꒥꒷ ‧₊˚ ꒰ฅ˘ʏᴜᴜᴋɪ - ᴄʜᴀɴ˘ฅ ꒱ ‧₊˚꒷︶꒷꒥꒷'
+global.wm3 = '⫹⫺ ʏᴜᴜᴋɪ 𝙱𝙾𝚃'
 global.wmcredit = '⫹⫺ github.com/OmmniDevv/Elaina-MD' // Credit - JANGAN DIHAPUS
 global.botdate = `⫹⫺ 𝗛𝗮𝗿𝗶: ${week} ${date}`
 global.bottime = `𝗪𝗮𝗸𝘁𝘂 : ${wktuwib}`
@@ -132,8 +132,8 @@ global.author = global.wm
 
 
 /*============== LOGO ==============*/
-global.thumb = './assets/images/elaina-thumbnail.jpg' //Main Thumbnail
-global.thumb2 = './assets/images/elaina-thumbnail2.jpg'
+global.thumb = './assets/images/yuuki-thumbnail.jpg' //Main Thumbnail
+global.thumb2 = './assets/images/yuuki-thumbnail2.jpg'
 global.thumbAllmenu = './assets/images/elaina-allmenu.jpeg'
 global.thumbDaftar = './assets/images/elaina-daftar.jpg'
 global.thumbbc = 'https://telegra.ph/file/05f874dc87f7e27fa8127.jpg' //For broadcast

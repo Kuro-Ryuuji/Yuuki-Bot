@@ -1,7 +1,7 @@
 {
-    "name": "elaina-md",
+    "name": "yuuki-md",
     "version": "6.1.0",
-    "description": "Elaina-MD WhatsApp Bot",
+    "description": "Yuuki-MD WhatsApp Bot",
     "main": "index.js",
     "type": "module",
     "engines": {
@@ -20,7 +20,7 @@
     ],
     "homepage": "https://github.com/OmmniDevv/Elaina-MD",
     "author": {
-        "name": "OmmniDevv",
+        "name": "Dimzz",
         "url": "https://github.com/OmmniDevv"
     },
     "repository": {

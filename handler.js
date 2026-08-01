@@ -1,10 +1,3 @@
-/**
- * ╔══════════════════════════════════════════╗
- * ║         E L A I N A  -  M D             ║
- * ║   Script by OmmniDevv — Jangan Dijual!  ║
- * ║  https://github.com/OmmniDevv/Elaina-MD ║
- * ╚══════════════════════════════════════════╝
- */
 import { smsg } from './lib/simple.js'
 import { logError } from './lib/errorLogger.js'
 import { format } from 'util'
