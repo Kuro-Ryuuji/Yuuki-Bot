@@ -4,7 +4,7 @@ import { createRequire } from "module" // Bring in the ability to create the 're
 import path, { join } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { platform } from 'process'
-global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL).toString() }; global.__dirname = function dirname(pathURL) { return path.dirname(global.__filename(pathURL, true)) }; global.__require = function require(dir = import.meta.url) { return createRequire(dir) }
+global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL) }
 
 import * as ws from 'ws';
 import {
@@ -13,7 +13,9 @@ import {
   unlinkSync,
   existsSync,
   readFileSync,
-  watch
+  watch,
+  writeFileSync,
+  mkdirSync
 } from 'fs';
 import yargs from 'yargs'
 import { spawn } from 'child_process'
@@ -108,8 +110,8 @@ conn.isInit = false
 
 // Request pairing code SEBELUM setup event listener (seperti RTXZY)
 // Gunakan flag file untuk prevent multiple requests
-const pairingFlagFile = `./${global.authFile}/.pairing_requested`
-if (usePairingCode && !conn.authState.creds.registered && !existsSync(pairingFlagFile)) {
+const pairingFlagFile = join(global.authFile, '.pairing_requested')
+if (usePairingCode && !state.creds.registered && !existsSync(pairingFlagFile)) {
   let phone = pairingNumber
   if (!phone) {
     const { createInterface } = await import('readline')
@@ -117,12 +119,13 @@ if (usePairingCode && !conn.authState.creds.registered && !existsSync(pairingFla
     phone = await new Promise(resolve => rl.question('\x1b[36m📱 Masukkan nomor WA (contoh: 6281234567890): \x1b[0m', ans => { rl.close(); resolve(ans.replace(/[^0-9]/g, '')) }))
   }
   
-  // Buat flag file SEBELUM request
+  // Buat flag file dan direktori SEBELUM request
   try {
-    const { writeFileSync, mkdirSync } = await import('fs')
-    mkdirSync('./elaina_session', { recursive: true })
+    mkdirSync(global.authFile, { recursive: true })
     writeFileSync(pairingFlagFile, phone)
-  } catch {}
+  } catch (e) {
+    console.error(`\x1b[33m[PAIRING] Gagal membuat flag file: ${e.message}\x1b[0m`)
+  }
   
   setTimeout(async () => {
     try {
@@ -132,7 +135,11 @@ if (usePairingCode && !conn.authState.creds.registered && !existsSync(pairingFla
       console.log('\x1b[33m  Masukkan kode ini di WhatsApp:\x1b[0m')
       console.log('\x1b[33m  Settings → Linked Devices → Link a Device\x1b[0m\n')
     } catch (e) {
-      console.error('\x1b[31m[PAIRING] Gagal:', e.message, '\x1b[0m')
+      console.error(`\x1b[31m[PAIRING] Gagal: ${e.message}\x1b[0m`)
+      // Hapus flag file jika pairing gagal
+      try {
+        if (existsSync(pairingFlagFile)) unlinkSync(pairingFlagFile)
+      } catch {}
     }
   }, 3000)
 }
@@ -242,8 +249,7 @@ async function connectionUpdate(update) {
     const botName = global.namebot || PROJECT_NAME
     console.log(`${_tag('CONN', '\x1b[32m')} \x1b[32mConnected\x1b[0m — berjalan sebagai \x1b[1m${botName}\x1b[0m`)
     try {
-      const flagFile = './elaina_session/.pairing_requested'
-      if (existsSync(flagFile)) unlinkSync(flagFile)
+      if (existsSync(pairingFlagFile)) unlinkSync(pairingFlagFile)
     } catch {}
     global.timestamp.connect = new Date
   }
@@ -294,7 +300,7 @@ global.reloadHandler = async function (restatConn) {
     conn.ev.off('creds.update', conn.credsUpdate)
   }
 
-  conn.welcome = '❖━━━━━━[ *いらっしゃいませ* ]━━━━━━❖\n\n┏––––––━━━━━━━━•\n│☘︎ @subject\n┣━━━━━━━━┅┅┅\n│( 👋 Hallo @user)\n├[ *ɪɴᴛʀᴏ* ]—\n│ *ɴᴀᴍᴀ:* \n│ *ᴜᴍᴜʀ:* \n│ *ɢᴇɴᴅᴇʀ:*\n┗––––––━━┅┅┅\n\n––––––┅┅ *ᴅᴇsᴄʀɪᴘᴛɪᴏɴ* ┅┅––––––\n@desc'
+  conn.welcome = '❖━━━━━━[ *いらっしゃいませ* ]━━━━━━❖\n\n┏––––––━━━━━━━━•\n│☘︎ @subject\n┣━━━━━━━━┅┅┅━━━━┫\n┃ *Selamat Datang di Group*\n┃━━━━━━━━━━━━━━━━\n┃ Tata tertib:\n┃ ✓ No SARA\n┃ ✓ No Spam\n┃ ✓ No Iklan\n┣━━━━━━━━━━━━━━━━┫\n┃ Jika tidak patuh akan dikeluarkan!\n┗━━━━━━━━━━━━━━━━┛\n\n*Selamat datang @user* 🎉'
   conn.bye = '❖━━━━━━[ *さようなら* ]━━━━━━❖\n𝚂𝚊𝚢𝚘𝚗𝚊𝚛𝚊𝚊 *@user* 👋😃'
   conn.spromote = '@user sekarang admin!'
   conn.sdemote = '@user sekarang bukan admin!'
