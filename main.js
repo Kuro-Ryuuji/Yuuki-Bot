@@ -108,40 +108,127 @@ const connectionOptions = {
 global.conn = makeWASocket(connectionOptions)
 conn.isInit = false
 
-// Request pairing code SEBELUM setup event listener (seperti RTXZY)
-// Gunakan flag file untuk prevent multiple requests
+// Function untuk menampilkan menu dan mendapatkan pilihan user
+async function showAuthenticationMenu() {
+  const { createInterface } = await import('readline')
+  const rl = createInterface({ input: process.stdin, output: process.stdout })
+  
+  console.log('\n\x1b[36m╔════════════════════════════════════╗\x1b[0m')
+  console.log('\x1b[36m║     PILIH METODE AUTENTIKASI       ║\x1b[0m')
+  console.log('\x1b[36m╠════════════════════════════════════╣\x1b[0m')
+  console.log('\x1b[33m║  1. QR Code (Recommended)           ║\x1b[0m')
+  console.log('\x1b[33m║  2. Pairing Code                    ║\x1b[0m')
+  console.log('\x1b[36m╚════════════════════════════════════╝\x1b[0m\n')
+  
+  return new Promise(resolve => {
+    rl.question('\x1b[36m📱 Pilih metode (1/2): \x1b[0m', answer => {
+      rl.close()
+      resolve(answer.trim())
+    })
+  })
+}
+
+// Request pairing code atau QR Code
 const pairingFlagFile = join(global.authFile, '.pairing_requested')
-if (usePairingCode && !state.creds.registered && !existsSync(pairingFlagFile)) {
-  let phone = pairingNumber
-  if (!phone) {
-    const { createInterface } = await import('readline')
-    const rl = createInterface({ input: process.stdin, output: process.stdout })
-    phone = await new Promise(resolve => rl.question('\x1b[36m📱 Masukkan nomor WA (contoh: 6281234567890): \x1b[0m', ans => { rl.close(); resolve(ans.replace(/[^0-9]/g, '')) }))
+const PAIRING_TIMEOUT = 10000 // 10 detik
+
+if (!state.creds.registered && !existsSync(pairingFlagFile)) {
+  let authMethod = usePairingCode ? '2' : '1' // Default ke QR jika tidak ada flag
+  
+  // Jika tidak ada usePairingCode flag, tanyakan ke user
+  if (!global.usePairingCode && !global.pairingNumber) {
+    authMethod = await showAuthenticationMenu()
   }
   
-  // Buat flag file dan direktori SEBELUM request
+  // Buat flag file untuk prevent multiple requests
   try {
     mkdirSync(global.authFile, { recursive: true })
-    writeFileSync(pairingFlagFile, phone)
+    writeFileSync(pairingFlagFile, authMethod)
   } catch (e) {
-    console.error(`\x1b[33m[PAIRING] Gagal membuat flag file: ${e.message}\x1b[0m`)
+    console.error(`\x1b[33m[AUTH] Gagal membuat flag file: ${e.message}\x1b[0m`)
   }
   
-  setTimeout(async () => {
+  // Method 1: QR Code (Default)
+  if (authMethod === '1') {
+    console.log(`\x1b[32m[AUTH] Menggunakan metode QR Code\x1b[0m`)
+    
+    // QR Code akan ditampilkan oleh library Baileys secara otomatis
+    // pada event 'connection.update' dengan status 'qr'
+    global.conn.ev.on('connection.update', (update) => {
+      const { qr } = update
+      if (qr) {
+        console.log('\n\x1b[42m\x1b[30m  QR CODE  \x1b[0m')
+        console.log('\x1b[36mScan QR Code di atas dengan WhatsApp Anda\x1b[0m\n')
+      }
+    })
+  }
+  
+  // Method 2: Pairing Code
+  else if (authMethod === '2') {
+    console.log(`\x1b[32m[AUTH] Menggunakan metode Pairing Code\x1b[0m`)
+    
+    let phone = pairingNumber
+    if (!phone) {
+      const { createInterface } = await import('readline')
+      const rl = createInterface({ input: process.stdin, output: process.stdout })
+      phone = await new Promise(resolve => 
+        rl.question('\x1b[36m📱 Masukkan nomor WA (contoh: 6281234567890): \x1b[0m', ans => { 
+          rl.close()
+          resolve(ans.replace(/[^0-9]/g, ''))
+        })
+      )
+    }
+    
+    if (!phone) {
+      console.error('\x1b[31m[PAIRING] Nomor WA tidak valid!\x1b[0m')
+      process.exit(1)
+    }
+    
+    // Update flag file dengan nomor
     try {
-      const pairCode = await conn.requestPairingCode(phone)
-      console.log('\n\x1b[42m\x1b[30m  PAIRING CODE  \x1b[0m')
-      console.log(`\x1b[1m\x1b[32m  ${pairCode}  \x1b[0m`)
-      console.log('\x1b[33m  Masukkan kode ini di WhatsApp:\x1b[0m')
-      console.log('\x1b[33m  Settings → Linked Devices → Link a Device\x1b[0m\n')
+      mkdirSync(global.authFile, { recursive: true })
+      writeFileSync(pairingFlagFile, `2:${phone}`)
     } catch (e) {
-      console.error(`\x1b[31m[PAIRING] Gagal: ${e.message}\x1b[0m`)
-      // Hapus flag file jika pairing gagal
+      console.error(`\x1b[33m[PAIRING] Gagal menyimpan nomor: ${e.message}\x1b[0m`)
+    }
+    
+    // Timeout untuk pairing code (10 detik)
+    const pairingTimeout = setTimeout(async () => {
+      console.error(`\x1b[31m[PAIRING] Timeout! Pairing code tidak diterima dalam 10 detik\x1b[0m`)
       try {
         if (existsSync(pairingFlagFile)) unlinkSync(pairingFlagFile)
       } catch {}
-    }
-  }, 3000)
+      process.exit(1)
+    }, PAIRING_TIMEOUT)
+    
+    setTimeout(async () => {
+      try {
+        console.log('\x1b[36m[PAIRING] Meminta pairing code...\x1b[0m')
+        const pairCode = await conn.requestPairingCode(phone)
+        clearTimeout(pairingTimeout)
+        
+        console.log('\n\x1b[42m\x1b[30m  PAIRING CODE  \x1b[0m')
+        console.log(`\x1b[1m\x1b[32m  ${pairCode}  \x1b[0m`)
+        console.log('\x1b[33m  Masukkan kode ini di WhatsApp:\x1b[0m')
+        console.log('\x1b[33m  Settings → Linked Devices → Link a Device\x1b[0m')
+        console.log('\x1b[90m  (Kode ini berlaku selama 10 menit)\x1b[0m\n')
+      } catch (e) {
+        clearTimeout(pairingTimeout)
+        console.error(`\x1b[31m[PAIRING] Gagal: ${e.message}\x1b[0m`)
+        try {
+          if (existsSync(pairingFlagFile)) unlinkSync(pairingFlagFile)
+        } catch {}
+      }
+    }, 1000)
+  }
+  
+  else {
+    console.error('\x1b[31m[AUTH] Pilihan tidak valid! Gunakan 1 atau 2\x1b[0m')
+    try {
+      if (existsSync(pairingFlagFile)) unlinkSync(pairingFlagFile)
+    } catch {}
+    process.exit(1)
+  }
 }
 
 // Patch deprecated button methods → plain sendMessage fallback
@@ -175,8 +262,6 @@ try {
     writable: true, configurable: true
   })
 } catch {}
-
-// Pairing code akan di-request di connectionUpdate saat status 'open' pertama kali
 
 if (!opts['test']) {
   setInterval(async () => {
