@@ -4,7 +4,8 @@ import { createRequire } from "module" // Bring in the ability to create the 're
 import path, { join } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { platform } from 'process'
-global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL) }
+global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return rmPrefix ? /file:\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL) }
+global.__dirname = function dirname(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return path.dirname(global.__filename(pathURL, rmPrefix)) }
 
 import * as ws from 'ws';
 import {
@@ -203,6 +204,8 @@ if (!state.creds.registered && !existsSync(pairingFlagFile)) {
     
     setTimeout(async () => {
       try {
+        console.log('\x1b[36m[PAIRING] Menunggu koneksi WhatsApp siap...\x1b[0m')
+        await new Promise(resolve => setTimeout(resolve, 5000))
         console.log('\x1b[36m[PAIRING] Meminta pairing code...\x1b[0m')
         const pairCode = await conn.requestPairingCode(phone)
         clearTimeout(pairingTimeout)
