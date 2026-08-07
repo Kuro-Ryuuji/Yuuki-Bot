@@ -90,7 +90,7 @@ let handler = async (m, { conn, usedPrefix, args, isOwner }) => {
         }
         text += `╰─⬣\n\n_Contoh: *${usedPrefix}menucat tools*_`
 
-        const troli = await makeTroli(totalCmds, `📋 ${totalCmds} Commands`, 'elaina-menucat')
+        const troli = await makeTroli(totalCmds, `📋 ${totalCmds} Commands`, 'yuuki-menucat')
         return conn.sendMessage(m.chat, {
             text,
             contextInfo: {
@@ -102,10 +102,10 @@ let handler = async (m, { conn, usedPrefix, args, isOwner }) => {
     }
 
     if (categoryArg === 'owner' && !isOwner)
-        return m.reply(`❌ Kamu tidak punya akses ke kategori *owner*.`)
+        return m.reply(`❌ Kamu ga punya akses ke kategori *owner*, minta bang dimzz kalo pengen akses.`)
 
     if (!cmdMap[categoryArg] || cmdMap[categoryArg].length === 0)
-        return m.reply(`❌ Kategori *${categoryArg}* tidak ditemukan.\nKetik *${usedPrefix}menucat* untuk melihat daftar kategori.`)
+        return m.reply(`❌ Kategori *${categoryArg}* ga ketemu nih senpai.\nKetik *${usedPrefix}menucat* untuk melihat daftar kategori.`)
 
     const cmds = cmdMap[categoryArg]
     const emoji = CATEGORY_EMOJIS[categoryArg] || '📁'
