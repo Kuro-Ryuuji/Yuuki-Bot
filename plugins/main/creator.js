@@ -8,28 +8,26 @@ let handler = async (m, { conn, command, args, usedPrefix }) => {
 ------- ${nameown} -------
 
 📮 *Note:*
-• Owner tidak menerima save contact
-• Owner berhak blockir tanpa alasan
-• Berbicaralah yang sopan & tidak spam
-• Owner Hanya merespon yang berkaitan dengan BOT
+• boleh jadi temen owner 
+• boleh request fitur 
+• Jangan spam
 • No Telp`
 
   const teksbio = `${htki} *BIODATA* ${htka}
-${htjava} *💌 Nama* : ZansLord
-${htjava} *✉️ Nama RL* : Abdul Malik R.N
-${htjava} *♂️ Gender* : Boys
+${htjava} *💌 Nama* : Fulanzz
+${htjava} *✉️ Nama RL* : Adimas
+${htjava} *♂️ Gender* : Lanang 
 ${htjava} *🕋 Agama* : Islam
-${htjava} *⏰ Tanggal lahir* : 04 July 2007
-${htjava} *🎨 Umur* : 15
-${htjava} *🧮 Kelas* : 9
-${htjava} *🧩 Hobby* : Nonton Donghua, Chatting, Musik, Recode script bot
-${htjava} *💬 Sifat* : Idiot, Tidak Ramah, Bilek, Prik, Nolep
-${htjava} *🗺️ Tinggal* : Indo, Jawa Barat, Kab.bandung
-${htjava} *❤️ Suka* : Cintod🐦
-${htjava} *💔 Benci* : autis, seleb
+${htjava} *⏰ Tanggal lahir* : ytta
+${htjava} *🎨 Umur* : ytta
+${htjava} *🧮 Kelas* : 1 esde
+${htjava} *🧩 Hobby* : Workout, koding, rebahan
+${htjava} *💬 Sifat* : Cool banget 
+${htjava} *🗺️ Tinggal* : Indo
+${htjava} *❤️ Suka* : Ichinose Honami
 
 ${htjava} *📷 ɪɴsᴛᴀɢʀᴀᴍ* : ${sig}
-${htjava} *🇫  ғᴀᴄᴇʙᴏᴏᴋ* : Abdul Malik Rizky
+${htjava} *🇫  ғᴀᴄᴇʙᴏᴏᴋ* : Fulanzz
 ${htjava} *🐈 ɢɪᴛʜᴜʙ:* ${sgh}
 •·––––––––––––––––––––––––––·•`
 
@@ -54,7 +52,7 @@ ${htjava} *🐈 ɢɪᴛʜᴜʙ:* ${sgh}
         message: `Info owner & support`,
         orderTitle: `👑 Owner`,
         sellerJid: `${global.nomorbot}@s.whatsapp.net`,
-        token: 'elaina-owner',
+        token: 'yuuki-owner',
         totalAmount1000: 0,
         totalCurrencyCode: 'IDR'
       }
@@ -94,7 +92,7 @@ ${htjava} *🐈 ɢɪᴛʜᴜʙ:* ${sgh}
         default:
           return await conn.sendMessage(m.chat, {
             interactiveMessage: {
-              footer: `Pilih dibawah kak ! o(〃＾▽＾〃)o`,
+              footer: `Pilih dibawah senpai ! o(〃＾▽＾〃)o`,
               contextInfo: { forwardingScore: 7, isForwarded: true },
               nativeFlowMessage: {
                 messageParamsJson: JSON.stringify({ bottom_sheet: { button_title: '👑 Pilih Info' } }),
