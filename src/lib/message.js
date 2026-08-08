@@ -1,5 +1,3 @@
-
-
 import { generateWAMessageFromContent, proto } from 'ourin'
 import fs from 'fs'
 import path from 'path'
@@ -110,7 +108,7 @@ async function sendVideo(sock, jid, video, caption = '', options = {}) {
         } else if (fs.existsSync(video)) {
             buffer = fs.readFileSync(video);
         } else {
-            throw new Error('Invalid video source');
+            throw new Error('aduh video nya error nih, senpai');
         }
     } else {
         buffer = video;
@@ -144,7 +142,7 @@ async function sendAudio(sock, jid, audio, ptt = false, options = {}) {
         } else if (fs.existsSync(audio)) {
             buffer = fs.readFileSync(audio);
         } else {
-            throw new Error('Invalid audio source');
+            throw new Error('aduh audio nya error nih, senpai');
         }
     } else {
         buffer = audio;
@@ -176,7 +174,7 @@ async function sendSticker(sock, jid, sticker, options = {}) {
         } else if (fs.existsSync(sticker)) {
             buffer = fs.readFileSync(sticker);
         } else {
-            throw new Error('Invalid sticker source');
+            throw new Error('aduh stiker nya error nih, senpai');
         }
     } else {
         buffer = sticker;
@@ -208,7 +206,7 @@ async function sendDocument(sock, jid, file, fileName, mimetype, options = {}) {
         } else if (fs.existsSync(file)) {
             buffer = fs.readFileSync(file);
         } else {
-            throw new Error('Invalid file source');
+            throw new Error('aduh file nya error nih, senpai');
         }
     } else {
         buffer = file;

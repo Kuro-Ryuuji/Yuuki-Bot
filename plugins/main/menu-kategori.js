@@ -48,7 +48,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     const sorted = Object.entries(cats).sort((a, b) => a[0].localeCompare(b[0]))
     let txt = `╭──────────────────\n`
     txt += `│ 📂 *DAFTAR KATEGORI*\n`
-    txt += `│ ${global.namebot || 'Elaina BOT'}\n`
+    txt += `│ ${global.namebot || 'Yuuki BOT'}\n`
     txt += `╰──────────────────\n\n`
     for (const [cat, cmds] of sorted) {
       txt += `│ ${getEmoji(cat)} *${cat.toUpperCase()}* — ${cmds.length} cmd\n`

@@ -11,12 +11,19 @@ async function cobaltDownload(url) {
   let lastError
   for (const instance of COBALT_INSTANCES) {
     try {
+      // Use AbortController for timeout compatibility
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000)
+
       const res = await fetch(instance, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ url, downloadMode: 'auto', videoQuality: '720' }),
-        signal: AbortSignal.timeout(10000)
+        signal: controller.signal
       })
+
+      clearTimeout(timeoutId)
+
       if (!res.ok) continue
       const data = await res.json()
       if (data.status === 'error') { lastError = data.error?.code; continue }
