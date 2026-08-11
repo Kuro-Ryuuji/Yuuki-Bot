@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { Jimp as jimp } from 'jimp'
 
 let handler = async (m, { conn, text }) => {

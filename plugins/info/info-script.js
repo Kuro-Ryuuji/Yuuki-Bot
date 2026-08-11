@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-// Credits: Kannachann & Papah-Chan
 let handler = async (m, { conn }) => {
     await conn.sendMessage(m.chat, {
         text: `📜 *Info Script ${global.namebot}*\n\n` +

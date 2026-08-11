@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 let handler = async (m, { conn }) => {
     try {
         let users = global.db.data.users

@@ -1,9 +1,3 @@
-/**
- * Auto Reply System — Elaina-MD
- * Referensi: OURIN autoreply.js
- * https://github.com/OmmniDevv/Elaina-MD
- */
-
 // Middleware: cek autoreply setiap pesan
 let handler = m => m
 handler.all = async function (m) {

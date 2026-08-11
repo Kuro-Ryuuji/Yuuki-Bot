@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = function (m) {
     if (!m.quoted) throw false
     let { chat, fromMe, isBaileys } = m.quoted

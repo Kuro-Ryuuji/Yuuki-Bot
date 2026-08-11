@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fs from 'fs'
 let handler = async (m, { conn, args, command }) => {
 	let _muptime

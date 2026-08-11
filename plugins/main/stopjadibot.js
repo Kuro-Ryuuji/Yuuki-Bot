@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-// Makasih kode nya OURIN
 import { stopJadibot, isJadibotActive, getJadibotStatus } from '../../src/lib/jadibot-manager.js'
 
 function formatUptime(ms) {

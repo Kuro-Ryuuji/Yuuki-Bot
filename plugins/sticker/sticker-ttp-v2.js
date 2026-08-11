@@ -1,6 +1,5 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { Canvas } from 'skia-canvas'
-import { Sticker, StickerTypes } from 'wa-sticker-formatter'
+import { Sticker, StickerTypes } from 'wa-stiker-formatter'
 
 function wrapText(ctx, text, maxWidth) {
   const words = text.split(' ')
@@ -61,8 +60,8 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   lines.forEach((line, i) => ctx.fillText(line, size / 2, startY + i * lineH))
 
   const sticker = new Sticker(await canvas.png, {
-    pack: global.stickpack || 'Elaina BOT',
-    author: global.stickauth || 'ElainaBOT',
+    pack: global.stickpack || 'Yuuki BOT',
+    author: global.stickauth || 'YuukiBOT',
     type: StickerTypes.FULL,
     quality: 80
   })

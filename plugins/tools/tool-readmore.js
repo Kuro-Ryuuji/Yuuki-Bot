@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, text }) => {
     let [l, r] = text.split`|`
     if (!l) l = ''

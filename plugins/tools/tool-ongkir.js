@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 let handler = async (m, { args, usedPrefix, command }) => {
@@ -18,8 +17,8 @@ let handler = async (m, { args, usedPrefix, command }) => {
   const asalData = (await asalRes.json()).rajaongkir?.results?.[0]
   const tujuanData = (await tujuanRes.json()).rajaongkir?.results?.[0]
 
-  if (!asalData) throw `Kota asal "${asal}" tidak ditemukan`
-  if (!tujuanData) throw `Kota tujuan "${tujuan}" tidak ditemukan`
+  if (!asalData) throw `Kota asal "${asal}" ga ketemu nih`
+  if (!tujuanData) throw `Kota tujuan "${tujuan}" ga ketemu nih`
 
   const costRes = await fetch('https://api.rajaongkir.com/starter/cost', {
     method: 'POST',
@@ -27,7 +26,7 @@ let handler = async (m, { args, usedPrefix, command }) => {
     body: new URLSearchParams({ origin: asalData.city_id, destination: tujuanData.city_id, weight: berat, courier: kurir.toLowerCase() })
   })
   const costs = (await costRes.json()).rajaongkir?.results?.[0]?.costs
-  if (!costs?.length) throw 'Layanan tidak tersedia untuk rute ini'
+  if (!costs?.length) throw 'Shumimasen, lagi ada kendala untuk rute ini senpai'
 
   const lines = costs.map(c =>
     `📦 *${c.service}* — ${c.description}\n   💰 Rp ${c.cost[0].value.toLocaleString('id-ID')}\n   ⏱️ ${c.cost[0].etd} hari`

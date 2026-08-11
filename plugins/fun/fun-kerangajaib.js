@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { text, command, usedPrefix }) => {
     if (!text) throw `Use example ${usedPrefix}${command} i'm alien?`
     m.reply(`"${[

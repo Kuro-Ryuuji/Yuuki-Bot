@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, command, text, usedPrefix }) => {
     if (!text) throw `Use example ${usedPrefix}${command} i'm`
     conn.reply(m.chat, `
@@ -8,7 +7,7 @@ let handler = async (m, { conn, command, text, usedPrefix }) => {
         mentions: m.mentionedJid
     } : {})
 }
-handler.help = ['gay', 'pintar', 'cantik', 'ganteng', 'gabut', 'gila', 'lesbi', 'stress', 'bucin', 'jones', 'sadboy'].map(v => 'how' + v + ' siapa?')
+handler.help = ['gay', 'pintar', 'bodoh', 'cantik', 'ganteng', 'gabut', 'gila', 'lesbi', 'stress', 'birahi', 'sange', 'darksystem', 'kacung', 'mager', 'jawa', 'bucin', 'femboy', 'tomboy', 'jones', 'sadboy', 'sadgirl'].map(v => 'how' + v + ' siapa?')
 handler.tags = ['fun']
 handler.command = /^how(gay|pintar|cantik|ganteng|gabut|gila|lesbi|stress?|bucin|jones|sadboy)/i
 

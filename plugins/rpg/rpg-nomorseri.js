@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-// Makasih kode nya RTXZY
 import { createHash } from 'crypto'
 
 let handler = async function (m, { usedPrefix }) { 

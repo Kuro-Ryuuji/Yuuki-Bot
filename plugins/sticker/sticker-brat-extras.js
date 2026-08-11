@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import axios from 'axios'
 
 const bratHandler = (name, apiUrl) => {
@@ -67,11 +66,11 @@ export let handlerQC = async (m, { conn, args }) => {
     }
     const color = args[0].toLowerCase()
     const backgroundColor = COLORS[color]
-    if (!backgroundColor) return m.reply(`❌ Warna \`${color}\` tidak ditemukan!`)
+    if (!backgroundColor) return m.reply(`❌ Warna \`${color}\` ga ketemu nih!`)
 
     let message = args.slice(1).join(' ')
     if (m.quoted && !message) message = m.quoted.text || m.quoted.body || ''
-    if (!message) return m.reply('❌ Masukkan text untuk quote!')
+    if (!message) return m.reply('❌ Masukkin text untuk quote!')
     if (message.length > 80) return m.reply(`❌ Maksimal 80 karakter! (Saat ini: ${message.length})`)
 
     conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
@@ -125,7 +124,7 @@ export let handlerSmeme = async (m, { conn, args }) => {
     conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
     try {
         const mediaBuffer = m.quoted ? await m.quoted.download() : await m.download()
-        if (!mediaBuffer) throw '❌ Gagal download media'
+        if (!mediaBuffer) throw '❌ Duh gagal download media nih'
 
         const FormData = (await import('form-data')).default
         const form = new FormData()
@@ -139,7 +138,7 @@ export let handlerSmeme = async (m, { conn, args }) => {
             if (uploadRes.data?.[0]?.src) imageUrl = 'https://telegra.ph' + uploadRes.data[0].src
         } catch {}
 
-        if (!imageUrl) throw '❌ Gagal upload gambar'
+        if (!imageUrl) throw '❌ Duh gagal upload gambar nih'
 
         const encodeText = t => t ? encodeURIComponent(t).replace(/-/g, '--').replace(/_/g, '__').replace(/%20/g, '_') : '_'
         const memeUrl = `https://api.memegen.link/images/custom/${encodeText(top)}/${encodeText(bottom)}.png?background=${encodeURIComponent(imageUrl)}`

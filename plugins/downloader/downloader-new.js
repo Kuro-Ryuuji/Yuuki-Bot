@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import axios from 'axios'
 import { fbdown, capcut } from 'btch-downloader'
 import { aiodl, aiodownload } from '../../lib/scraper/aio.js'

@@ -1,5 +1,3 @@
-/** !! THIS CODE GENERATE BY RODOTZBOT !! **/
-
 const STATES = {
   IDLE: 0,
   SEARCHING: 1,

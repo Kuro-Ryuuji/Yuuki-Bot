@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fs from 'fs'
 import path from 'path'
 
@@ -6,7 +5,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   let q = m.quoted ? m.quoted : m
   let mime = (q.msg || q).mimetype || q.mediaType || ''
   
-  if (!/image/g.test(mime)) throw `Send/reply an image with command ${usedPrefix + command}`
+  if (!/image/g.test(mime)) throw `Reply gambar dengan command ${usedPrefix + command}`
   
   m.reply(global.wait)
   
@@ -37,9 +36,9 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 
     try { fs.unlinkSync(tmpFile) } catch {}
 
-    if (!res.ok) throw 'Gagal remove background'
+    if (!res.ok) throw 'Duh gagal remove background nih'
     const result = Buffer.from(await res.arrayBuffer())
-    await conn.sendMessage(m.chat, { image: result, caption: '✅ *Background dihapus!*' }, { quoted: m })
+    await conn.sendMessage(m.chat, { image: result, caption: '✅ *Yatta, background berhasil dihapus!*' }, { quoted: m })
   } catch (e) {
     throw `Error: ${e.message || e}`
   }

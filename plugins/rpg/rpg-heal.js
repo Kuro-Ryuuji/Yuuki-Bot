@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { args, usedPrefix }) => {
     let user = global.db.data.users[m.sender]
     if (user.health >= 100) return m.reply(`

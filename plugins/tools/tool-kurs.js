@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 let handler = async (m, { args, usedPrefix, command }) => {
@@ -7,13 +6,13 @@ let handler = async (m, { args, usedPrefix, command }) => {
   const amount = parseFloat(args[2]) || 1
 
   const res = await fetch(`https://open.er-api.com/v6/latest/${from}`)
-  if (!res.ok) throw 'Gagal mengambil data kurs'
+  if (!res.ok) throw 'Duh gagal ngambil data kurs nih'
 
   const data = await res.json()
-  if (data.result !== 'success') throw 'Mata uang tidak ditemukan'
+  if (data.result !== 'success') throw 'Mata uang ga ketemu nih senpai'
 
   const rate = data.rates[to]
-  if (!rate) throw `Mata uang ${to} tidak ditemukan`
+  if (!rate) throw `Mata uang ${to} ga ketemu nih senpai`
 
   m.reply(`💱 *KONVERSI MATA UANG*\n\n${amount} *${from}* = *${(amount * rate).toFixed(2)} ${to}*\n\n📅 Update: ${data.time_last_update_utc}\n\n${global.wm}`)
 }

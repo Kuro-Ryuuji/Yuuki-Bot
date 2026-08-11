@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 let handler = async (m, {text, args}) => {
   if (!args[0]) throw `Use example .simi halo`

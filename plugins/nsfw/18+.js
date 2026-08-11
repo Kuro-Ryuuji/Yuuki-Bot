@@ -1,7 +1,6 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler  = async (m, { conn }) => {
 	
-	await m.reply('[!] Please Wait, Tunggu Sebentar')
+	await m.reply('[!] Chotto matte ne senpai, lagi di proses nih')
   conn.reply(m.chat,`${pickRandom(global.bokep)}`, m)
 }
 handler.help = ['filebokep']

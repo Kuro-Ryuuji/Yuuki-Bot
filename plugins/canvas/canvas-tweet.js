@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 async function makeTweet(avatarUrl, username, displayname, text) {
   const { createCanvas, loadImage } = await import('@napi-rs/canvas')
   const W = 600, H = 200

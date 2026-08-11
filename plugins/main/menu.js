@@ -1,5 +1,4 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-import fetch from 'node-fetch'
+  import fetch from 'node-fetch'
 
 const CATEGORY_EMOJIS = {
     owner: '👑', main: '🏠', downloader: '📥', sticker: '🖼️',
@@ -24,10 +23,10 @@ function clockString(ms) {
 
 function getTimeGreeting() {
     const hour = new Date(Date.now() + 7 * 3600000).getUTCHours()
-    if (hour >= 4 && hour < 11) return 'Selamat Pagi 🌅'
-    if (hour >= 11 && hour < 15) return 'Selamat Siang ☀️'
-    if (hour >= 15 && hour < 19) return 'Selamat Sore 🌆'
-    return 'Selamat Malam 🌙'
+    if (hour >= 4 && hour < 11) return 'Ohayou gozaima 🌅'
+    if (hour >= 11 && hour < 15) return 'Konnichiwa gozaimas ☀️'
+    if (hour >= 15 && hour < 19) return 'Konbanwa gozaimas 🌆'
+    return 'Konbanwa gozaimas 🌙'
 }
 
 function buildCommandMap() {
@@ -94,14 +93,6 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
     const buttons = [
         {
             name: 'single_select',
-            buttonParamsJson: JSON.stringify({ has_multiple_buttons: true })
-        },
-        {
-            name: 'quick_reply',
-            buttonParamsJson: JSON.stringify({ display_text: '🌺 Lihat Semua Menu', id: `${usedPrefix}allmenu` })
-        },
-        {
-            name: 'single_select',
             buttonParamsJson: JSON.stringify({
                 title: '📁 Pilih Kategori',
                 sections: [{ title: '📋 PILIH CATEGORY', rows: catRows }],
@@ -120,10 +111,11 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
                 itemCount: totalCmds,
                 status: 'INQUIRY',
                 surface: 'CATALOG',
-                message: `★ Terima kasih\n✦ Ada Error? Lapor owner`,
+                message: `👋 aloow minna, watashi *Yuuki BOT*\n✦ 📥 Asisten download video/foto tanpa WM\n✦ 🎮 Nyediain game seru buat main bareng\n━━━━━━━━━━━━━━━\n⚠️ Ada error? Lapor Owner\n💡 Request fitur? Bilang ke Owner`,
+
                 orderTitle: `📋 ${totalCmds} Commands`,
                 sellerJid: `${global.nomorbot}@s.whatsapp.net`,
-                token: 'elaina-menu',
+                token: 'yuuki-menu',
                 totalAmount1000: 0,
                 totalCurrencyCode: 'IDR',
                 contextInfo: {
@@ -139,7 +131,7 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
         }
     }
 
-    const footerText = `Hai *${pushName}* 👋
+    const footerText = `Hai senpai *${pushName}* 👋
 Selamat datang di *${global.namebot}* ✨
 
 ╭─〔 🤖 \`ʙᴏᴛ ɪɴꜰᴏ\` 〕─⬣
@@ -188,8 +180,8 @@ _© ${global.namebot} | ${global.wmcredit}_`
                 nativeFlowMessage: {
                     messageParamsJson: JSON.stringify({
                         bottom_sheet: {
-                            in_thread_buttons_limit: 2,
-                            divider_indices: [1, 2, 3, 999],
+                            in_thread_buttons_limit: 1,
+                            divider_indices: [1, 2],
                             list_title: 'Silahkan pilih menu yang kamu inginkan',
                             button_title: '🍀 Pilih Kategori'
                         }

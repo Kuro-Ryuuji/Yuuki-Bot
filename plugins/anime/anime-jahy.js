@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import axios from 'axios'
 
 const BASE = 'https://raw.githubusercontent.com/Leoo7z/Image-Source/main/image'

@@ -1,7 +1,6 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, text, command, args, usedPrefix }) => { 
     conn.slots = conn.slots ? conn.slots : {}
-    if (m.chat in conn.slots) return m.reply('𝙼𝚊𝚜𝚒𝚑 𝙰𝚍𝚊 𝚈𝚐 𝙱𝚎𝚛𝚖𝚊𝚒𝚗 𝚂𝚕𝚘𝚝 𝙳𝚒𝚜𝚒𝚗𝚒, 𝚃𝚞𝚗𝚐𝚐𝚞 𝚂𝚊𝚖𝚙𝚊𝚒 𝚂𝚎𝚕𝚎𝚜𝚊𝚒!!')
+    if (m.chat in conn.slots) return m.reply('𝙼𝚊𝚜𝚒𝚑 𝙰𝚍𝚊 𝚈𝚐 𝚖𝚊𝚒𝚗 𝚂𝚕𝚘𝚝 𝙳𝚒𝚜𝚒𝚗𝚒, 𝚃𝚞𝚗𝚐𝚐𝚞 𝚂𝚊𝚖𝚙𝚊𝚒 𝚂𝚎𝚕𝚎𝚜𝚊𝚒!!')
     else conn.slots[m.chat] = true
     try { 
         if (args.length < 1) return m.reply(`Gunakan format *${usedPrefix}${command} [jumlah]*

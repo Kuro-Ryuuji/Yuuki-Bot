@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 function handler(m, { text }) {
     let teks = text ? text : m.quoted && m.quoted.text ? m.quoted.text : m.text
     m.reply(teks.replace(/[a-z]/gi, v => {

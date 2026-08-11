@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!m.quoted) throw 'Reply Pesan!'
     if (!m.quoted.fileSha256) throw 'SHA256 Hash Missing'

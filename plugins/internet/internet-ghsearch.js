@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 let handler = async (m, { text, command, usedPrefix }) => {
     if (!text) throw `contoh:\n${usedPrefix + command} stikerinbot`

@@ -1,8 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-/**
- * Cek Khodam — Elaina-MD
- * Referensi: OURIN fun/cekkhodam.js
- */
 const KHODAMS = [
   { name: "Harimau Putih", meaning: "Kamu kuat dan berani, pendahulumu mewariskan kekuatan besar." },
   { name: "Panda Ompong", meaning: "Menggemaskan dan selalu bikin orang tersenyum." },

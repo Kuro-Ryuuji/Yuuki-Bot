@@ -1,8 +1,3 @@
-/**
- * List & Reset Warn — Elaina-MD
- * https://github.com/OmmniDevv/Elaina-MD
- */
-
 let handler = async (m, { conn, args, usedPrefix, command }) => {
   const chat = global.db.data.chats[m.chat] || {}
   const warnings = chat.warnings || {}

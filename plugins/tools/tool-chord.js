@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 import * as cheerio from 'cheerio'
 
@@ -7,7 +6,7 @@ const HEADERS = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Apple
 
 async function searchChord(query) {
   const res = await fetch(`${BASE}/?s=${encodeURIComponent(query)}`, { headers: HEADERS })
-  if (!res.ok) throw 'Gagal mengambil data chord'
+  if (!res.ok) throw 'Gagal ngambil data chord nih senpai'
   const $ = cheerio.load(await res.text())
   const results = []
   $('h2.entry-title a, .post-title a, article h2 a').each((i, el) => {
@@ -31,7 +30,6 @@ async function getChord(url) {
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `Contoh: ${usedPrefix}${command} Kangen Band - Pujaan Hati`
 
-  // Try direct slug first
   const slug = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   let chordData = null
   try {
@@ -48,11 +46,9 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     return m.reply(out)
   }
 
-  // Fallback: search
   const results = await searchChord(text)
-  if (!results.length) throw 'Chord tidak ditemukan'
+  if (!results.length) throw 'Chord ga ketemu senpai'
 
-  // Try to fetch first result
   try {
     chordData = await getChord(results[0].url)
   } catch { chordData = null }
@@ -66,7 +62,6 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     return m.reply(out)
   }
 
-  // Return search list
   m.reply(`🎸 *Hasil Pencarian: ${text}*\n\n` +
     results.map((r, i) => `${i + 1}. *${r.title}*\n   ${r.url}`).join('\n\n'))
 }

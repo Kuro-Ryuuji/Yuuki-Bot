@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { tmpdir } from 'os'
 import path, { join } from 'path'
 import {

@@ -1,7 +1,3 @@
-/**
- * Elaina-MD — https://github.com/OmmniDevv/Elaina-MD
- * Script by OmmniDevv — Jangan Dijual!
- */
 import axios from 'axios'
 import FormData from 'form-data'
 import fs from 'fs'
@@ -11,7 +7,7 @@ import { fileTypeFromBuffer } from 'file-type'
 import mime from 'mime-types'
 import fetch from 'node-fetch'
 
-const te = (p, c, n) => `☢ *ᴇʀʀᴏʀ*\n\nKendala pada \`${p}${c}\`, coba lagi nanti ${n}`
+const te = (p, c, n) => `☢ *ᴇʀʀᴏʀ*\n\nKendala pada \`${p}${c}\`, coba lagi nanti senpai ${n}`
 
 // ─── OCR ───────────────────────────────────────────────────
 let handler = async (m, { conn, usedPrefix, command }) => {
@@ -24,7 +20,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   const { default: Tesseract } = await import('tesseract.js')
   const { data: { text } } = await Tesseract.recognize(buf, 'eng+ind', {})
   const extracted = text?.trim()
-  if (!extracted) throw '❌ Tidak ada teks yang terdeteksi'
+  if (!extracted) throw '❌ Ga ada teks yang terdeteksi nih senpai'
   conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   m.reply(`📖 *ᴏᴄʀ ʀᴇsᴜʟᴛ*\n\n${extracted}\n\n> Total: ${extracted.length} karakter`)
 }
@@ -112,7 +108,7 @@ export const transkripHandler = async (m, { conn, usedPrefix, command }) => {
   const wavFile = path.join(tmpDir, `stt_${Date.now()}.wav`)
   try {
     const buf = await q.download()
-    if (!buf || buf.length < 500) throw '❌ Audio terlalu kecil'
+    if (!buf || buf.length < 500) throw '❌ Audio terlalu kecil nih senpai'
     fs.writeFileSync(inputFile, buf)
     await new Promise((res, rej) => exec(`ffmpeg -y -i "${inputFile}" -ar 16000 -ac 1 -f wav "${wavFile}"`, { timeout: 30000 }, e => e ? rej(e) : res()))
     const wavBuf = fs.readFileSync(wavFile)
@@ -126,7 +122,7 @@ export const transkripHandler = async (m, { conn, usedPrefix, command }) => {
       timeout: 60000, maxContentLength: Infinity
     })
     const text = data.text?.trim()
-    if (!text) throw '❌ Tidak dapat mendeteksi suara'
+    if (!text) throw '❌ Suaranya ga kedengeran nih senpai' 
     conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     m.reply(`🎤 *ᴛʀᴀɴsᴋʀɪᴘ*\n\n${text}\n\n> 🤖 Whisper Large V3 | Bahasa: Indonesia`)
   } finally {

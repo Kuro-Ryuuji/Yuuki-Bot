@@ -1,6 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-// Makasih kode nya RTXZY
-
 const delay = (time) => new Promise((res) => setTimeout(res, time))
 
 export async function before(m) {

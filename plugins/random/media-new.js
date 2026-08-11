@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 // ─── Music Collection (music1-music65) ───────────────────────
 let handlerMusic = async (m, { conn, command }) => {
     const num = parseInt(command.replace(/music/i, ''))

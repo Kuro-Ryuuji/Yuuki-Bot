@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { webp2mp4 } from '../../lib/webp2mp4.js'
 import fs from 'fs'
 
@@ -6,7 +5,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   let q = m.quoted ? m.quoted : m
   let mime = (q.msg || q).mimetype || ''
   
-  if (!/webp/.test(mime)) throw `Reply sticker dengan command ${usedPrefix + command}`
+  if (!/webp/.test(mime)) throw `Reply stiker gerak dengan command ${usedPrefix + command}`
   
   m.reply(global.wait)
   

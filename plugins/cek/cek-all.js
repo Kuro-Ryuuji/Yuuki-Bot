@@ -1,20 +1,14 @@
-/**
- * Elaina-MD — https://github.com/OmmniDevv/Elaina-MD
- * Script by OmmniDevv — Jangan Dijual!
- */
-// ============================================================
-// CEK PLUGINS — Makasih kode nya OURIN
-// ============================================================
-
 function makeCekHandler(name, aliases, desc, levels) {
   const handler = async (m, { conn, usedPrefix, command }) => {
     const percent = Math.floor(Math.random() * 101)
     const mentioned = m.mentionedJid?.[0] || m.sender
     let lvl = levels.find(l => percent >= l.min) || levels[levels.length - 1]
     const isSelf = mentioned === m.sender
+        const namaTarget = conn.getName(mentioned) || mentioned.split('@')[0]
+    const namaPengirim = conn.getName(m.sender) || m.sender.split('@')[0]
     const txt = isSelf
-      ? `Hai @${mentioned.split('@')[0]}\n\n${desc} kamu *${percent}%*\n\`\`\`${lvl.desc}\`\`\``
-      : `Kamu ingin ngecek ${desc.toLowerCase()} @${mentioned.split('@')[0]} yak?\n\n${desc} dia sebesar *${percent}%*\n\`\`\`${lvl.desc}\`\`\``
+      ? `Hai senpai @${mentioned.split('@')[0]}\n\n${desc} kamu *${percent}%*\n\`\`\`${lvl.desc}\`\`\``
+      : `Kamu mau ngecek ${desc.toLowerCase()} @${mentioned.split('@')[0]} ya senpai?\n\n${desc} dia sebesar *${percent}%*\n\`\`\`${lvl.desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
   }
   handler.help = [`${name} <nama/@tag>`]
@@ -29,13 +23,13 @@ export const cantikHandler = makeCekHandler('cekcantik', ['cantik', 'beautiful']
   { min: 70, desc: 'Cantik banget! 💕' },
   { min: 50, desc: 'Manis dan cantik~ 🌸' },
   { min: 30, desc: 'Lumayan cantik 😊' },
-  { min: 0,  desc: 'Tetep cantik kok! 💖' },
+  { min: 0,  desc: 'Tetep cantik kok senpai! 💖' },
 ])
 export default cantikHandler
 
 // --- Ganteng ---
 export const gantengHandler = makeCekHandler('cekganteng', ['ganteng', 'handsome'], 'Tingkat kegantengan', [
-  { min: 90, desc: 'Ganteng maksimal! 😍🔥' },
+  { min: 90, desc: 'Gila ganteng maksimal! 😍🔥' },
   { min: 70, desc: 'Ganteng banget! 😎' },
   { min: 50, desc: 'Lumayan ganteng~ 👍' },
   { min: 30, desc: 'Biasa aja sih 😅' },
@@ -44,7 +38,7 @@ export const gantengHandler = makeCekHandler('cekganteng', ['ganteng', 'handsome
 
 // --- Wibu ---
 export const wibuHandler = makeCekHandler('cekwibu', ['wibu', 'otaku2'], 'Tingkat kewibu-an', [
-  { min: 90, desc: 'Wibu sejati! Waifu mu pasti banyak 🎌' },
+  { min: 90, desc: 'Wibu sejati! Waifu mu pasti banyak kan senpai 🎌' },
   { min: 70, desc: 'Wibu banget! 🍜' },
   { min: 50, desc: 'Lumayan wibu~ 🌸' },
   { min: 30, desc: 'Sedikit wibu 😅' },
@@ -62,16 +56,16 @@ export const bucinHandler = makeCekHandler('cekbucin', ['bucin2'], 'Tingkat kebu
 
 // --- Jomblo ---
 export const jombloHandler = makeCekHandler('cekjomblo', ['jomblo2'], 'Tingkat kejombloan', [
-  { min: 90, desc: 'Jomblo akut! Kapan nikah? 😭' },
+  { min: 90, desc: 'Jomblo akut! Kapan nikahnya senpai? 😭' },
   { min: 70, desc: 'Jomblo banget 😢' },
   { min: 50, desc: 'Lumayan jomblo~ 😅' },
   { min: 30, desc: 'Sedikit jomblo 🙂' },
-  { min: 0,  desc: 'Gak jomblo! Ada yang suka nih 😏' },
+  { min: 0,  desc: 'Gak jomblo? Pasti ada yang suka nih 😏' },
 ])
 
 // --- Gila ---
 export const gilaHandler = makeCekHandler('cekgila', ['gila2'], 'Tingkat kegilaan', [
-  { min: 90, desc: 'Gila parah! Perlu dirawat 🤪' },
+  { min: 90, desc: 'Gila parah! Perlu dirawat nih , dokter odgj mana ya 🤪' },
   { min: 70, desc: 'Gila banget! 😜' },
   { min: 50, desc: 'Lumayan gila~ 😝' },
   { min: 30, desc: 'Sedikit gila 😅' },
@@ -80,20 +74,20 @@ export const gilaHandler = makeCekHandler('cekgila', ['gila2'], 'Tingkat kegilaa
 
 // --- Malas ---
 export const malasHandler = makeCekHandler('cekmalas', ['malas2'], 'Tingkat kemalasan', [
-  { min: 90, desc: 'Mager parah! Gerak dikit dong 🦥' },
+  { min: 90, desc: 'Mager parah! Gerak dikit dong senpai 🦥' },
   { min: 70, desc: 'Malas banget! 😴' },
   { min: 50, desc: 'Lumayan malas~ 😪' },
   { min: 30, desc: 'Sedikit malas 🙂' },
-  { min: 0,  desc: 'Rajin banget! 💪' },
+  { min: 0,  desc: 'Rajin banget kamu! 💪' },
 ])
 
 // --- Gabut ---
 export const gabutHandler = makeCekHandler('cekgabut', ['gabut2'], 'Tingkat kegabutan', [
-  { min: 90, desc: 'Gabut parah! Cari kerjaan dong 😂' },
-  { min: 70, desc: 'Gabut banget! 🥱' },
+  { min: 90, desc: 'Gabut parah! Cari kerjaan dong senpai 😂' },
+  { min: 70, desc: 'Gabut banget kamu! 🥱' },
   { min: 50, desc: 'Lumayan gabut~ 😑' },
   { min: 30, desc: 'Sedikit gabut 🙂' },
-  { min: 0,  desc: 'Sibuk banget! 💼' },
+  { min: 0,  desc: 'Sibuk banget kamu! 💼' },
 ])
 
 // --- Kaya ---
@@ -102,7 +96,7 @@ export const kayaHandler = makeCekHandler('cekkaya', ['kaya2'], 'Tingkat kekayaa
   { min: 70, desc: 'Kaya banget! 💵' },
   { min: 50, desc: 'Lumayan kaya~ 💳' },
   { min: 30, desc: 'Pas-pasan 😅' },
-  { min: 0,  desc: 'Bokek! Nabung dulu 😭' },
+  { min: 0,  desc: 'Bokek! Nabung dulu senpai 😭' },
 ])
 
 // --- Pintar ---

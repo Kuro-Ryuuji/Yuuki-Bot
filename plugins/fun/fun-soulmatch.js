@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 const ELEMENTS = ['Api 🔥', 'Air 💧', 'Tanah 🌍', 'Angin 🌪️', 'Petir ⚡', 'Es ❄️', 'Cahaya ✨', 'Bayangan 🌑']
 const ZODIAC = ['♈ Aries', '♉ Taurus', '♊ Gemini', '♋ Cancer', '♌ Leo', '♍ Virgo',
     '♎ Libra', '♏ Scorpio', '♐ Sagittarius', '♑ Capricorn', '♒ Aquarius', '♓ Pisces']
@@ -27,9 +25,9 @@ function getMatchDesc(score) {
 }
 
 function getReading(score) {
-    if (score >= 80) return 'Jiwa kalian memiliki koneksi yang sangat istimewa dan langka. Takdir telah merencanakan pertemuan ini.'
-    if (score >= 60) return 'Ada chemistry yang kuat di antara kalian. Perbedaan kalian justru menciptakan harmoni.'
-    if (score >= 40) return 'Butuh waktu untuk saling memahami. Setiap tantangan akan memperkuat ikatan kalian.'
+    if (score >= 80) return 'Jiwa kalian punya koneksi yang istimewa dan langka banget. Takdir udah ngerencanain pertemuan ini.'
+    if (score >= 60) return 'Ada chemistry yang kuat di antara kalian. Perbedaan kalian justru bisa nyiptain harmoni.'
+    if (score >= 40) return 'Butuh waktu untuk saling memahami. Setiap tantangan bakal memperkuat ikatan kalian.'
     return 'Perbedaan signifikan dalam energi jiwa. Butuh banyak adaptasi dan pengertian.'
 }
 
@@ -39,7 +37,7 @@ let handler = async (m, { text }) => {
     )
 
     const [nama1, nama2] = text.split('|').map(n => n.trim())
-    if (!nama1 || !nama2) return m.reply(`❌ Masukkan 2 nama dengan format: \`${m.prefix}soulmatch nama1|nama2\``)
+    if (!nama1 || !nama2) return m.reply(`❌ Masukkin 2 nama dengan format: \`${m.prefix}soulmatch nama1|nama2\``)
 
     await conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
     const seed1 = Date.now() % 100

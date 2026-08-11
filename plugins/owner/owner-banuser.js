@@ -1,6 +1,5 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, text }) => {
-    if (!text) throw 'Siapa yg mau dibanned?🗿'
+    if (!text) throw 'Siapa nih yang mau aku banned?'
     let who
     if (m.isGroup) who = m.mentionedJid[0]
     else who = m.chat

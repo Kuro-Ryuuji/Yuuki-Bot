@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import ytdl from '@distube/ytdl-core'
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {

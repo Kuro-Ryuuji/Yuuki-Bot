@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
@@ -6,7 +5,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   let res = await fetch(`https://id.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(text)}`)
   if (!res.ok) res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(text)}`)
-  if (!res.ok) throw 'Tidak ditemukan di Wikipedia'
+  if (!res.ok) throw 'Ga ketemu di Wikipedia nih senpai'
 
   const json = await res.json()
   const link = json.content_urls?.desktop?.page || `https://id.wikipedia.org/wiki/${encodeURIComponent(text)}`

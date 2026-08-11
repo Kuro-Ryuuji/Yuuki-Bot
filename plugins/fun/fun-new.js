@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import axios from 'axios'
 
 // ─── Fuck My Life ────────────────────────────────────────────
@@ -17,7 +16,7 @@ export { handlerFml }
 
 // ─── Jodoh ───────────────────────────────────────────────────
 const loveQuotes = [
-    'Cinta sejati tidak pernah mengenal jarak 💕',
+    'Cinta sejati ga pernah mengenal jarak 💕',
     'Dua hati yang bersatu takkan terpisahkan 💗',
     'Kalian seperti puzzle yang sempurna 🧩',
     'Match made in heaven! ✨',
@@ -27,17 +26,17 @@ const loveQuotes = [
 ]
 
 let handlerJodoh = async (m, { conn }) => {
-    if (!m.isGroup) throw '❌ Perintah ini hanya bisa digunakan di grup!'
+    if (!m.isGroup) throw '❌ Fitur ini cuma bisa dipake di grup!'
     const participants = m.groupMetadata?.participants || []
     const botId = conn.user?.jid || conn.user?.id
     const members = participants.map(p => p.jid || p.id).filter(j => j && j !== botId)
-    if (members.length < 2) throw '❌ Minimal ada 2 member untuk dijodohkan!'
+    if (members.length < 2) throw '❌ Minimal ada 2 member untuk dijodohin!'
 
     const shuffled = [...members].sort(() => Math.random() - 0.5)
     const p1 = shuffled[0], p2 = shuffled[1]
     const compat = Math.floor(Math.random() * 100) + 1
     const bar = '█'.repeat(Math.floor(compat / 10)) + '░'.repeat(10 - Math.floor(compat / 10))
-    const status = compat >= 90 ? 'JODOH SEJATI! 💍' : compat >= 70 ? 'Sangat Cocok! 💖' : compat >= 50 ? 'Lumayan Cocok 💗' : compat >= 30 ? 'Bisa Dicoba 💓' : 'Butuh Usaha Lebih 💔'
+    const status = compat >= 90 ? 'FIX JODOH SEJATI INI! 💍' : compat >= 70 ? 'Cocok banget ini mah! 💖' : compat >= 50 ? 'Lumayan cocok sih 💗' : compat >= 30 ? 'Bisa dicoba 💓' : 'Butuh usaha lebih 💔'
     const quote = loveQuotes[Math.floor(Math.random() * loveQuotes.length)]
 
     await conn.sendMessage(m.chat, { react: { text: '💕', key: m.key } })
@@ -62,17 +61,17 @@ export { handlerJodoh }
 if (!global.sulapSessions) global.sulapSessions = new Map()
 
 const sulapLines = [
-    '💨 *POOF!* Dan... dia menghilang!',
-    '🌟 Sulap berhasil! Sampai jumpa lagi~',
-    '✨ Absen dulu ya, ditunggu berikutnya!',
-    '🎪 Pertunjukan selesai! 👏'
+    '💨 *POOF!* Dan... dia menghilang dari lane!',
+    '🌟 Sulap berhasil! Sayonara~',
+    '✨ Absen dulu ya senpai, ditunggu berikutnya!',
+    '🎪 Pertunjukan udah selesai! 👏'
 ]
 
 let handlerSulap = async (m, { conn }) => {
-    if (!m.isGroup) throw '❌ Hanya bisa di grup!'
+    if (!m.isGroup) throw '❌ Cuma bisa di grup!'
     await conn.sendMessage(m.chat, { react: { text: '🎩', key: m.key } })
     const sent = await m.reply(
-        `🎩✨ *ᴘᴇʀᴛᴜɴᴊᴜᴋᴀɴ sᴜʟᴀᴘ*\n\nSiapa yang ingin dihilangkan?\n\n> Reply pesan ini + mention orangnya`
+        `🎩✨ *ᴘᴇʀᴛᴜɴᴊᴜᴋᴀɴ sᴜʟᴀᴘ*\n\nSiapa yang pengen dihilangin?\n\n> Reply pesan ini + tunjuk orangnya`
     )
     global.sulapSessions.set(sent.key?.id, { admin: m.sender, chat: m.chat, timestamp: Date.now() })
     setTimeout(() => global.sulapSessions.delete(sent.key?.id), 120000)
@@ -92,17 +91,17 @@ export let sulapAll = async function (m) {
     const session = global.sulapSessions?.get(quotedId)
     if (!session || session.chat !== m.chat || session.admin !== m.sender) return
     const targetJid = m.mentionedJid?.[0]
-    if (!targetJid) return this.sendMessage(m.chat, { text: '❌ Mention orangnya dong!' }, { quoted: m })
+    if (!targetJid) return this.sendMessage(m.chat, { text: '❌ Tunjuk orangnya dong senpai!' }, { quoted: m })
     global.sulapSessions.delete(quotedId)
     const botNum = this.user?.jid?.split(':')[0] || this.user?.id?.split(':')[0]
-    if (targetJid.includes(botNum)) return this.sendMessage(m.chat, { text: '🎭 Bot tidak bisa menghilangkan dirinya sendiri!' })
-    if (targetJid === m.sender) return this.sendMessage(m.chat, { text: '🎭 Tidak bisa menghilangkan diri sendiri!' })
+    if (targetJid.includes(botNum)) return this.sendMessage(m.chat, { text: '🎭 Bot ga bisa ngilangin dirinya sendiri!' })
+    if (targetJid === m.sender) return this.sendMessage(m.chat, { text: '🎭 Ga bisa nghilangin diri sendiri senpai!' })
     try {
         const groupMeta = m.groupMetadata
         const target = groupMeta.participants.find(p => (p.jid || p.id) === targetJid)
-        if (!target) return this.sendMessage(m.chat, { text: '👻 Orang itu tidak ada di grup!' })
-        if (['admin', 'superadmin'].includes(target.admin)) return this.sendMessage(m.chat, { text: '🛡️ Admin kebal terhadap sihir!' })
-        await this.sendMessage(m.chat, { text: `🪄 *Bersiaplah @${targetJid.split('@')[0]}...* ✨`, mentions: [targetJid] })
+        if (!target) return this.sendMessage(m.chat, { text: '👻 Orang itu udah ga ada di grup ini!' })
+        if (['admin', 'superadmin'].includes(target.admin)) return this.sendMessage(m.chat, { text: '🛡️ Admin kebal sihir!' })
+        await this.sendMessage(m.chat, { text: `🪄 *Bersiaplah senpai @${targetJid.split('@')[0]}...* ✨`, mentions: [targetJid] })
         await new Promise(r => setTimeout(r, 2000))
         await this.groupParticipantsUpdate(m.chat, [targetJid], 'remove')
         const line = sulapLines[Math.floor(Math.random() * sulapLines.length)]
@@ -111,7 +110,7 @@ export let sulapAll = async function (m) {
             mentions: [targetJid, m.sender]
         })
     } catch (e) {
-        this.sendMessage(m.chat, { text: `😅 Sulapnya gagal...\n\n> ${e.message}` })
+        this.sendMessage(m.chat, { text: `😅 Aduh sulapnya gagal nih senpai...\n\n> ${e.message}` })
     }
 }
 

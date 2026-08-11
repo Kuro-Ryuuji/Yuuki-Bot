@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import axios from 'axios'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
@@ -6,18 +5,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   
   try {
     let [emoji1, emoji2] = text.split('+')
-    if (!emoji1 || !emoji2) throw 'Format salah! Gunakan: emoji1+emoji2'
+    if (!emoji1 || !emoji2) throw 'Salah senpai! Pake: emoji1+emoji2'
     
     m.reply(global.wait)
     
     const url = `https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1.trim())}_${encodeURIComponent(emoji2.trim())}`
     const { data } = await axios.get(url)
     
-    if (!data.results || data.results.length === 0) throw 'Kombinasi emoji tidak ditemukan!'
+    if (!data.results || data.results.length === 0) throw 'Kombinasi emoji ga ketemu senpai!'
     
     await conn.sendImageAsSticker(m.chat, data.results[0].url, m, { packname: global.packname, author: global.author })
   } catch (e) {
-    throw `Error: ${e.message || 'Emoji tidak support!'}`
+    throw `Error: ${e.message || 'Emoji ga support nih!'}`
   }
 }
 

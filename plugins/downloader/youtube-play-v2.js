@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-// Makasih kode nya OURIN
 import yts from 'yt-search'
 import axios from 'axios'
 

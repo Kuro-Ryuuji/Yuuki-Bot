@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { toAudio } from '../../lib/converter.js'
 import fs from 'fs'
 

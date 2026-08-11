@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 let handler = async (m, { args, usedPrefix, command }) => {
@@ -11,10 +10,10 @@ let handler = async (m, { args, usedPrefix, command }) => {
   const res = await fetch(
     `https://api.aladhan.com/v1/timingsByCity/${dateStr}?city=${encodeURIComponent(city)}&country=Indonesia&method=11`
   )
-  if (!res.ok) throw 'Kota tidak ditemukan atau layanan tidak tersedia'
+  if (!res.ok) throw 'Kota ga ketemu atau layanan lagi ada kendala'
 
   const json = await res.json()
-  if (json.code !== 200) throw 'Gagal mengambil jadwal sholat'
+  if (json.code !== 200) throw 'Duh gagal ngambil jadwal sholat nih'
 
   const t = json.data.timings
   const hijri = json.data.date.hijri

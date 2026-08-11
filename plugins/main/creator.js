@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, command, args, usedPrefix }) => {
   let type = (args[0] || '').toLowerCase()
   let nowner = `${nomorown.split`@`[0]}@s.whatsapp.net`

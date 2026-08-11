@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import gplay from 'google-play-scraper'
 
 let handler = async (m, { conn, text }) => {

@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { translate } from '@vitalets/google-translate-api'
 
 const defaultLang = 'en'
@@ -23,7 +22,7 @@ let handler = async (m, { args, usedPrefix, command }) => {
             const result = await translate(text, { to: defaultLang })
             m.reply(result.text)
         } catch {
-            throw 'Gagal menerjemahkan: ' + e.message
+            throw 'Duh gagal nerjemahin nih: ' + e.message
         }
     }
 }
