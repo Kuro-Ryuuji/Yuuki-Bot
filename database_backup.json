@@ -1,6 +1,6 @@
 {
   "chats": {
-    "6285187605007@s.whatsapp.net": {
+    "6285122600323@s.whatsapp.net": {
       "isBanned": false,
       "welcome": true,
       "detect": false,
@@ -19,12 +19,12 @@
     }
   },
   "users": {
-    "6285187605007@s.whatsapp.net": {
+    "6285122600323@s.whatsapp.net": {
       "exp": 18,
-      "limit": 10,
+      "limit": 9999,
       "lastclaim": 0,
       "registered": false,
-      "name": "OmniDevv",
+      "name": "naa-chan",
       "pasangan": "",
       "age": -1,
       "regTime": -1,
@@ -32,8 +32,8 @@
       "afkReason": "",
       "banned": false,
       "warn": 0,
-      "level": 0,
-      "role": "Beginner",
+      "level": 9999,
+      "role": "owner",
       "autolevelup": true,
       "money": 0,
       "bank": 0,
@@ -213,9 +213,9 @@
     }
   },
   "settings": {
-    "6285869074622@s.whatsapp.net": {
-      "self": false,
-      "autoread": true,
+    "6285122600323@s.whatsapp.net": {
+      "self": true,
+      "autoread": false,
       "restrict": true,
       "autorestart": true,
       "restartDB": 0
