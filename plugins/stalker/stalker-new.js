@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import axios from 'axios'
 
 // ─── Discord Stalk ────────────────────────────────────────────
@@ -9,7 +8,7 @@ let handlerDiscordStalk = async (m, { conn, args }) => {
     conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
     const neoxrKey = global.APIKeys?.neoxr || ''
     const res = await axios.get(`https://api.neoxr.eu/api/dcstalk?id=${userId}&apikey=${neoxrKey}`, { timeout: 30000 }).catch(() => null)
-    if (!res?.data?.status || !res?.data?.data) throw `❌ User ID *${userId}* tidak ditemukan`
+    if (!res?.data?.status || !res?.data?.data) throw `❌ User ID *${userId}* ga ketemu nih`
     const d = res.data.data
     const caption = `🎮 *ᴅɪsᴄᴏʀᴅ sᴛᴀʟᴋ*\n\n` +
         `👤 *Username:* ${d.username || '-'}\n` +
@@ -32,7 +31,7 @@ let handlerPinterestStalk = async (m, { conn, args }) => {
     if (!username) throw `📌 *ᴘɪɴᴛᴇʀᴇsᴛ sᴛᴀʟᴋ*\n\n> Masukkan username Pinterest\n\n\`Contoh: ${m.prefix}pintereststalk shiroko\``
     conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
     const res = await axios.get(`https://api.baguss.xyz/api/stalker/pinterest?username=${encodeURIComponent(username)}`, { timeout: 30000 }).catch(() => null)
-    if (!res?.data?.status || !res?.data?.user) throw `❌ Username *${username}* tidak ditemukan`
+    if (!res?.data?.status || !res?.data?.user) throw `❌ Username *${username}* ga ketemu nih`
     const u = res.data.user, s = u.stats
     const caption = `📌 *ᴘɪɴᴛᴇʀᴇsᴛ sᴛᴀʟᴋ*\n\n` +
         `👤 *Username:* ${u.username}\n📛 *Nama:* ${u.full_name}\n\n` +

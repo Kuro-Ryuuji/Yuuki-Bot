@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 import * as cheerio from 'cheerio'
 

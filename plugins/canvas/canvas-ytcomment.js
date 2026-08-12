@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 async function makeYTComment(avatarUrl, username, comment) {
   const { createCanvas, loadImage } = await import('@napi-rs/canvas')
   const W = 600, H = 160

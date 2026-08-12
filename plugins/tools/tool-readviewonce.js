@@ -1,7 +1,6 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn }) => {
     if (!m.quoted) throw 'where\'s message?'
-    if (m.quoted.mtype !== 'viewOnceMessage') throw 'Itu bukan pesan viewOnce'
+    if (m.quoted.mtype !== 'viewOnceMessage') throw 'Itu bukan pesan viewOnce senpai'
     const msg = await conn.loadMessage(m.quoted.id)
     if (!msg) throw 'can\'t open message!'
     await conn.copyNForward(m.chat, msg, true, { readViewOnce: true })

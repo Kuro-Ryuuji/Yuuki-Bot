@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = m => m
 handler.before = async function (m) {
   this.suit = this.suit ? this.suit : {}
@@ -9,7 +8,7 @@ handler.before = async function (m) {
     let tie = false
     if (m.sender == room.p2 && /^(acc(ept)?|terima|gas|oke?|tolak|gamau|nanti|ga(k.)?bisa)/i.test(m.text) && m.isGroup && room.status == 'wait') {
       if (/^(tolak|gamau|nanti|ga(k.)?bisa)/i.test(m.text)) {
-        this.reply(m.chat, `@${room.p2.split`@`[0]} menolak suit, suit dibatalkan`, m)
+        this.reply(m.chat, `@${room.p2.split`@`[0]} nolak suit, suit dibatalin`, m)
         delete this.suit[room.id]
         return !0
       }
@@ -17,11 +16,11 @@ handler.before = async function (m) {
       room.asal = m.chat
       clearTimeout(room.waktu)
       //delete room[room.id].waktu
-      m.reply(`Suit telah dikirimkan ke chat
+      m.reply(`Suit udah dikirim ke chat
 @${room.p.split`@`[0]} dan 
 @${room.p2.split`@`[0]}
 
-Silahkan pilih suit di chat masing"
+Silahkan pilih suit di chat masing-masing ya senpai
 klik wa.me/${conn.user.id.split`@`[0]}`, m.chat, 
          {
           mentions: [room.p, room.p2]
@@ -31,10 +30,10 @@ klik wa.me/${conn.user.id.split`@`[0]}`, m.chat,
       if (!room.pilih) this.sendButton(room.p, `Silahkan pilih Menang +${room.poin}XP\nKalah -${room.poin_lose}XP`, wm, null, [[ 'Batu🗿', 'Batu'], ['Kertas📄', 'Kertas'], ['Gunting✂️', 'Gunting']], m)
       if (!room.pilih2) this.sendButton(room.p2, `Silahkan pilih Menang +${room.poin}XP\nKalah -${room.poin_lose}XP`, wm, null, [['Batu🗿', 'Batu'], ['Kertas📄', 'Kertas'], ['Gunting✂️', 'Gunting']], m)
       room.waktu_milih = setTimeout(() => {
-        if (!room.pilih && !room.pilih2) this.reply(m.chat, `Kedua pemain tidak niat main,\nSuit dibatalkan`)
+        if (!room.pilih && !room.pilih2) this.reply(m.chat, `Kedua pemain ga niat main,\nSuit dibatalin`)
         else if (!room.pilih || !room.pilih2) {
           win = !room.pilih ? room.p2 : room.p
-          this.reply(m.chat, `@${(room.pilih ? room.p2 : room.p).split`@`[0]} tidak memilih suit, game berakhir`, m)
+          this.reply(m.chat, `@${(room.pilih ? room.p2 : room.p).split`@`[0]} ga milih suit, game berakhir`, m)
           db.data.users[win == room.p ? room.p : room.p2].exp += room.poin
           db.data.users[win == room.p ? room.p2 : room.p].exp -= room.poin_lose
         }
@@ -51,14 +50,14 @@ klik wa.me/${conn.user.id.split`@`[0]}`, m.chat,
     if (jwb && reg.test(m.text) && !room.pilih && !m.isGroup) {
       room.pilih = reg.exec(m.text.toLowerCase())[0]
       room.text = m.text
-      m.reply(`Kamu telah memilih ${m.text} ${!room.pilih2 ? `\n\nMenunggu lawan memilih` : ''}`)
-      if (!room.pilih2) this.reply(room.p2, '_Lawan sudah memilih_\nSekarang giliran kamu', 0)
+      m.reply(`Kamu udah milih senpai ${m.text} ${!room.pilih2 ? `\n\nChotto matte ne, lawan kamu lagi milih senpai` : ''}`)
+      if (!room.pilih2) this.reply(room.p2, '_Lawan udah milih nih_\nSekarang giliran kamu senpai', 0)
     }
     if (jwb2 && reg.test(m.text) && !room.pilih2 && !m.isGroup) {
       room.pilih2 = reg.exec(m.text.toLowerCase())[0]
       room.text2 = m.text
-      m.reply(`Kamu telah memilih ${m.text} ${!room.pilih ? `\n\nMenunggu lawan memilih` : ''}`)
-      if (!room.pilih) this.reply(room.p, '_Lawan sudah memilih_\nSekarang giliran kamu', 0)
+      m.reply(`Kamu udah milih ${m.text} ${!room.pilih ? `\n\nChotto matte ne, lawan kamu lagi milih senpai` : ''}`)
+      if (!room.pilih) this.reply(room.p, '_Lawan udah milih nih_\nSekarang giliran kamu senpai', 0)
     }
     let stage = room.pilih
     let stage2 = room.pilih2

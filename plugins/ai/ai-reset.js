@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 const aiSessions = global.aiSessions || (global.aiSessions = new Map())
 
 let handler = async (m, { conn, usedPrefix, command }) => {

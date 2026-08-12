@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, command, text }) => conn.reply(m.chat, `
 *Pertanyaan:* ${command} ${text}
 *Jawaban:* ${(10).getRandom()} ${['detik', 'menit', 'jam', 'hari', 'minggu', 'bulan', 'tahun', 'dekade', 'abad'].getRandom()} lagi ...

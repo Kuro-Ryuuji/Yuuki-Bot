@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 export async function before(m, { match }) {
     // if (match) return !1
     if (!m.chat.endsWith('@s.whatsapp.net'))

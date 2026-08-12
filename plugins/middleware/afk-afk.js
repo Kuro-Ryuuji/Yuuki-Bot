@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fs from 'fs'
 import fetch from 'node-fetch'
 let handler = async (m, { text }) => {
@@ -13,7 +12,7 @@ user.afkReason = text
         mediaUrl: "https://Instagram.com/Xiao_yan_21",
         mediaType: "VIDEO",
         description: "https://Instagram.com/Xiao_yan_21", 
-        title: 'Elaina-MultiDevice',
+        title: 'Yuuki-MultiDevice',
         body: wm,
         thumbnail: thumb,
         sourceUrl: sig

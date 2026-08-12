@@ -1,9 +1,8 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, usedPrefix: _p, args, text, usedPrefix}) => {
 	
-	if (!m.quoted) throw 'Balas Chatnya !'
-	if (text.length > 2) throw 'Cuma Untuk 1 Emoji!'
-	if (!text) throw `📍 Contoh Penggunaan :\n${usedPrefix}react 🗿`
+	if (!m.quoted) throw 'Bales chatnya !'
+	if (text.length > 2) throw 'Cuma untuk 1 emoji aja senpai!'
+	if (!text) throw `📍 Cara pake nya :\n${usedPrefix}react 🗿`
 conn.relayMessage(m.chat, { reactionMessage: {
 key: {
  id: m.quoted.id,

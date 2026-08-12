@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 const BANK_LIST = {
@@ -12,7 +11,7 @@ let handler = async (m, { args, usedPrefix, command }) => {
 
   const [bank, norek] = args
   const bankCode = BANK_LIST[bank.toLowerCase()]
-  if (!bankCode) throw `Bank "${bank}" tidak dikenal. Tersedia: ${Object.keys(BANK_LIST).join(', ')}`
+  if (!bankCode) throw `Bank "${bank}" Ga dikenal nih. Tersedia: ${Object.keys(BANK_LIST).join(', ')}`
 
   m.reply(global.wait)
 
@@ -25,10 +24,10 @@ let handler = async (m, { args, usedPrefix, command }) => {
     },
     body: JSON.stringify({ NomorRekening: norek, KodeBank: bankCode })
   })
-  if (!res.ok) throw 'Layanan cekrekening.id sedang bermasalah'
+  if (!res.ok) throw 'shumimasen, layanan cekrekening.id lagi ada masalah senpai'
 
   const json = await res.json()
-  let statusEmoji = '✅', status = 'AMAN - Tidak ditemukan laporan penipuan'
+  let statusEmoji = '✅', status = 'AMAN - Ga ada laporan penipuan senpai'
   if (json.StatusRekening === 'TERLAPOR' || json.JumlahLaporan > 0) {
     statusEmoji = '⚠️'
     status = `TERLAPOR - ${json.JumlahLaporan || '?'} laporan penipuan`

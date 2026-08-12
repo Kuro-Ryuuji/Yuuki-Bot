@@ -1,7 +1,3 @@
-/**
- * Elaina-MD — https://github.com/OmmniDevv/Elaina-MD
- * Script by OmmniDevv — Jangan Dijual!
- */
 import axios from 'axios'
 
 // ─── WA Stalk ──────────────────────────────────────────────
@@ -9,7 +5,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   let number = args[0] || m.quoted?.sender
   if (!number) throw `📱 *ᴡᴀ sᴛᴀʟᴋ*\n\nContoh: ${usedPrefix}${command} 628xxx\nAtau reply pesan kontak`
   number = number.replace(/[^0-9]/g, '')
-  if (!number) throw '❌ Nomor tidak valid'
+  if (!number) throw '❌ Nomernya ga valid nih senpai' 
   const jid = number + '@s.whatsapp.net'
   conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
   const [pp, status] = await Promise.all([
@@ -18,7 +14,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   ])
   let name = '-'
   try { name = conn.contacts[jid]?.name || conn.contacts[jid]?.notify || '-' } catch {}
-  const caption = `📱 *ᴡʜᴀᴛsᴀᴘᴘ sᴛᴀʟᴋ*\n\n📞 *Nomor:* +${number}\n👤 *Nama:* ${name}\n💬 *Status:* ${status?.status || '-'}\n\n> Powered by Elaina-MD`
+  const caption = `📱 *ᴡʜᴀᴛsᴀᴘᴘ sᴛᴀʟᴋ*\n\n📞 *Nomer:* +${number}\n👤 *Nama:* ${name}\n💬 *Status:* ${status?.status || '-'}\n\n> Powered by Elaina-MD`
   conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   await conn.sendMessage(m.chat, { image: { url: pp }, caption }, { quoted: m })
 }
@@ -39,7 +35,7 @@ export const ffStalkHandler = async (m, { conn, args, usedPrefix, command }) => 
     conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     m.reply(caption)
   } catch {
-    throw 'Gagal mengambil data!'
+    throw 'Duh gagal ngambil data nih!'
   }
 }
 ffStalkHandler.help = ['ffstalk <id>']
@@ -64,7 +60,7 @@ export const robloxStalkHandler = async (m, { conn, args, usedPrefix, command })
     if (thumbUrl) await conn.sendMessage(m.chat, { image: { url: thumbUrl }, caption }, { quoted: m })
     else m.reply(caption)
   } catch {
-    throw 'Gagal mengambil data!'
+    throw 'Duh gagal ngambil data nih!'
   }
 }
 robloxStalkHandler.help = ['robloxstalk <username>']

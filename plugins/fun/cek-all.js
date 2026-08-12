@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min }
 function mentioned(m) { return m.mentionedJid?.[0] || m.sender }
 function tag(jid) { return `@${jid.split('@')[0]}` }

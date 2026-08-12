@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import axios from 'axios'
 import FormData from 'form-data'
 import * as cheerio from 'cheerio'

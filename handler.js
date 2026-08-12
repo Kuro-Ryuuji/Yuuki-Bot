@@ -698,16 +698,43 @@ export async function handler(chatUpdate) {
                     fail('premium', m, this)
                     continue
                 }
-                if (plugin.group && !m.isGroup) { // Group Only
-                    fail('group', m, this)
-                    continue
-                } else if (plugin.botAdmin && !isBotAdmin) { // You Admin
-                    fail('botAdmin', m, this)
-                    continue
-                } else if (plugin.admin && !isAdmin) { // User Admin
-                    fail('admin', m, this)
-                    continue
+                if (plugin.group && !m.isGroup) { 
+if (plugin.group && !m.isGroup) {
+    fail('group', m, this)
+    continue
+}
+
+
+else if (plugin.botAdmin || plugin.admin) {
+
+    try {
+        const meta = await conn.groupMetadata(m.chat)
+        const participants = meta.participants || []
+        
+        const botId = conn.user.id.split(':')[0] + '@s.whatsapp.net'
+        isBotAdmin = participants.some(p => 
+            p.id === botId && (p.admin === 'admin' || p.admin === 'superadmin')
+        )
+        
+        isAdmin = participants.some(p => 
+            p.id === m.sender && (p.admin === 'admin' || p.admin === 'superadmin')
+        )
+    } catch (e) {
+
+        console.log('[!] Gagal cek admin:', e.message)
+    }
+
+              if (plugin.botAdmin && !isBotAdmin) {
+                 fail('botAdmin', m, this)
+                 continue
                 }
+
+               if (plugin.admin && !isAdmin) {
+                  fail('admin', m, this)
+                  continue
+                }
+              }
+
                 if (plugin.private && m.isGroup) { // Private Chat Only
                     fail('private', m, this)
                     continue
@@ -723,11 +750,11 @@ export async function handler(chatUpdate) {
                 else
                     m.exp += xp
                 if (!isPrems && plugin.limit && global.db.data.users && global.db.data.users[m.sender] && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-                    this.reply(m.chat, `[❗] Limit kau abis dek, beli melalui *${usedPrefix}buy limit*`, m)
+                    this.reply(m.chat, `[❗] Limit kamu udah habis senpai, kalo pengen beli pake *${usedPrefix}buy limit*`, m)
                     continue // Limit habis
                 }
                 if (plugin.level > _user.level) {
-                    this.reply(m.chat, `[💬] Diperlukan level ${plugin.level} untuk menggunakan perintah ini\n*Level mu:* ${_user.level} 📊`, m)
+                    this.reply(m.chat, `[💬] Perlu level ${plugin.level} untuk bisa gunain fitur ini\n*Level mu:* ${_user.level} 📊`, m)
                     continue // If the level has not been reached
                 }
                 let extra = {
@@ -871,8 +898,8 @@ export async function participantsUpdate({ id, participants, action }) {
                         pp = await this.profilePictureUrl(user, 'image')
                     } catch (e) {
                     } finally {
-                        text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || 'unknow') :
-                            (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', `${this.getName(user)}`)
+                        text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Swlsmt datang, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || 'unknow') :
+                            (chat.sBye || this.bye || conn.bye || 'Sayonara, @user!')).replace('@user', `${this.getName(user)}`)
                         try {
                             await this.sendMessage(id, {
                                 text,
@@ -886,10 +913,10 @@ export async function participantsUpdate({ id, participants, action }) {
             }
             break
         case 'promote':
-            text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
+            text = (chat.sPromote || this.spromote || conn.spromote || 'Wih selamat senpai @user, kamu sekarang Admin')
         case 'demote':
             if (!text)
-                text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```is no longer Admin```')
+                text = (chat.sDemote || this.sdemote || conn.sdemote || 'Aduh yang sabar ya senpai @user, kamu emang cocoknya jadi member aja')
             text = text.replace('@user', '@' + participants[0].split('@')[0])
             if (chat.detect)
                 this.sendMessage(id, { text, mentions: this.parseMention(text) })
@@ -959,10 +986,17 @@ global.dfail = (type, m, conn) => {
     if (msg) return conn.reply(m.chat, msg, m, { contextInfo: { externalAdReply: {title: global.wm, body: '404 Access denied ✘', sourceUrl: global.snh, thumbnail: (() => { try { return fs.readFileSync('./thumbnail.jpg') } catch { return Buffer.alloc(0) } })() }}})
     
     let msgg = {
-    	unreg: 'ʜᴀʟʟᴏ ᴋᴀᴋ 👋\nᴀɴᴅᴀ ʜᴀʀᴜs ᴍᴇɴᴅᴀғᴛᴀʀ ᴋᴇ ᴅᴀᴛᴀʙᴀsᴇ ʙᴏᴛ ᴅᴜʟᴜ sᴇʙᴇʟᴜᴍ ᴍᴇɴɢɢᴜɴᴀᴋᴀɴ ғɪᴛᴜʀ ɪɴɪ\n\n➞ ᴋʟɪᴄᴋ ᴛᴏᴍʙᴏʟ ᴅɪʙᴀᴡᴀʜ ᴜɴᴛᴜᴋ ᴍᴇɴᴅᴀғᴛᴀʀ ᴋᴇ ᴅᴀᴛᴀʙᴀsᴇ ʙᴏᴛ'
-}[type]
-if (msgg) return conn.sendButton(m.chat, `${global.htki} VERIFY ${global.htka}`, msgg, null, ['- ᴠᴇʀɪғʏ -', '/verify'],m)
+    	unreg: 'ʜᴀʟᴏ sᴇɴᴘᴀɪ 👋\n\nᴋᴀʟᴏ ᴍᴀᴜ ᴘᴀᴋᴇ ғɪᴛᴜʀ ɪɴɪ ʜᴀʀᴜs ᴅᴀғᴛᴀʀ ᴅᴜʟᴜ sᴇɴᴘᴀɪ\n\n➞ ᴋʟɪᴋ ᴛᴏᴍʙᴏʟ ᴅɪ ʙᴀᴡᴀʜ ᴜɴᴛᴜᴋ ᴅᴀғᴛᴀʀ sᴇᴋᴀʀᴀɴɢ'
+    }[type]
+    if (msgg) return conn.sendMessage(m.chat, {
+        text: `${global.htki} ᴠᴇʀɪғʏ ${global.htka}\n\n${msgg}`,
+        templateButtons: [
+            { index: 1, quickReplyButton: { displayText: '- ᴅᴀғᴛᴀʀ sᴇᴋᴀʀᴀɴɢ -', id: '/verify' } }
+        ],
+        footer: 'ʏᴜᴜᴋɪ-ʙᴏᴛ'
+    }, { quoted: m })
 }
+
 
 let file = global.__filename(import.meta.url, true)
 watchFile(file, async () => {

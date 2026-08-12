@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 // DISABLED: API tidak tersedia
 let handler = async (m, { conn, text, usedPrefix, command }) => {
     throw `Fitur wallpaper sedang dalam perbaikan. Coba lagi nanti.`

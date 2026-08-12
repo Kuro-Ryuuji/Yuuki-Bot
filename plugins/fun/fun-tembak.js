@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 if (!global.tembakSessions) global.tembakSessions = {}
 
 const romanticQuotes = [
@@ -26,7 +24,9 @@ let handler = async (m, { conn, args }) => {
         `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n> \`${m.prefix}tembak @tag\`\n> Reply pesan + \`${m.prefix}tembak\``
     )
 
-    if (targetJid === m.sender) return m.reply('Tidak bisa menembak diri sendiri!')
+    const namaTarget = conn.getName(targetJid) || targetJid.split('@')[0]
+    const namaPengirim = conn.getName(m.sender) || m.sender.split('@')[0]
+    if (targetJid === m.sender) return m.reply('ga bisa nembak diri sendiri senpai!')
 
     const db = global.db.data
     if (!db.users[m.sender]) db.users[m.sender] = {}
@@ -35,14 +35,13 @@ let handler = async (m, { conn, args }) => {
     const targetData = db.users[targetJid]
 
     if (senderData.pasangan) return m.reply(
-        `❌ Kamu sudah punya pasangan! Putus dulu dengan \`${m.prefix}putus\``
+        `❌ Yare yare, kamu udah punya pacar lho senpai, putus dulu sana\n \`${m.prefix}putus\``
     )
 
     if (targetData.pasangan && targetData.pasangan !== m.sender) return m.reply(
-        `💔 Dia sudah punya pasangan!`
+        `💔 dia udah punya pacar senpai, cari yang lain aja!`
     )
 
-    // Jika target sudah nembak sender duluan → langsung jadian
     if (targetData.tembakTarget === m.sender) {
         senderData.pasangan = targetJid
         targetData.pasangan = m.sender
@@ -50,7 +49,7 @@ let handler = async (m, { conn, args }) => {
         delete targetData.tembakTarget
         await conn.sendMessage(m.chat, { react: { text: '💕', key: m.key } })
         return m.reply(
-            `💕 *CIE CIEE :3*\n\n@${m.sender.split('@')[0]} dan @${targetJid.split('@')[0]} resmi pacaran!\n\nSemoga langgeng yak! 💍`,
+            `💕 *CIE CIEE :3*\n\n@${m.sender.split('@')[0]} dan @${targetJid.split('@')[0]} resmi pacaran!\n\nSemoga langgeng ya senpai! 💍`,
             null, { mentions: [m.sender, targetJid] }
         )
     }
@@ -78,7 +77,7 @@ export let handlerTerima = async (m) => {
     const allSessions = Object.entries(global.tembakSessions || {}).filter(
         ([, val]) => val.target === m.sender && val.chat === m.chat && Date.now() - val.timestamp < 3600000
     )
-    if (!allSessions.length) return m.reply('❌ Tidak ada yang menembakmu saat ini!')
+    if (!allSessions.length) return m.reply('❌ ga ada yang nembak kamu senpai!')
 
     const [sessKey, sessData] = allSessions[0]
     if (!db.users[m.sender]) db.users[m.sender] = {}
@@ -106,7 +105,7 @@ export let handlerTolak = async (m) => {
     const allSessions = Object.entries(global.tembakSessions || {}).filter(
         ([, val]) => val.target === m.sender && val.chat === m.chat && Date.now() - val.timestamp < 3600000
     )
-    if (!allSessions.length) return m.reply('❌ Tidak ada yang menembakmu saat ini!')
+    if (!allSessions.length) return m.reply('❌ ga ada yang nembak kamu senpai!')
 
     const [sessKey, sessData] = allSessions[0]
     if (db.users[sessData.shooter]) delete db.users[sessData.shooter].tembakTarget
@@ -114,7 +113,7 @@ export let handlerTolak = async (m) => {
 
     await conn.sendMessage(m.chat, { react: { text: '💔', key: m.key } })
     await m.reply(
-        `💔 *WADUHH, YANG SABAR YAK* @${sessData.shooter.split('@')[0]}\n\n@${m.sender.split('@')[0]} menolak @${sessData.shooter.split('@')[0]}\n\nSabar ya, masih banyak yang lain! 😢`,
+        `💔 *WADUHH, YANG SABAR YA SENPAI* @${sessData.shooter.split('@')[0]}\n\n@${m.sender.split('@')[0]} nolak jadi pacar kamu @${sessData.shooter.split('@')[0]}\n\nSabar ya, masih banyak yang lain kok senpai! 😢`,
         null, { mentions: [m.sender, sessData.shooter] }
     )
 }
@@ -128,7 +127,7 @@ export let handlerPutus = async (m) => {
     const db = global.db.data
     if (!db.users[m.sender]) db.users[m.sender] = {}
     const senderData = db.users[m.sender]
-    if (!senderData.pasangan) return m.reply('❌ Kamu belum punya pasangan!')
+    if (!senderData.pasangan) return m.reply('❌ Kamu belum punya pacar senpai!')
 
     const partnerJid = senderData.pasangan
     if (db.users[partnerJid]) delete db.users[partnerJid].pasangan
@@ -136,7 +135,7 @@ export let handlerPutus = async (m) => {
 
     await conn.sendMessage(m.chat, { react: { text: '💔', key: m.key } })
     await m.reply(
-        `💔 *PUTUS*\n\n@${m.sender.split('@')[0]} dan @${partnerJid.split('@')[0]} sudah putus.\n\nSemoga bisa move on ya! 😢`,
+        `💔 *PUTUS*\n\n@${m.sender.split('@')[0]} dan @${partnerJid.split('@')[0]} udah putus.\n\nSemoga bisa move on ya senpai! 😢`,
         null, { mentions: [m.sender, partnerJid] }
     )
 }
@@ -148,7 +147,7 @@ handlerPutus.command = /^(putus|cerai)$/i
 export let handlerCekPacar = async (m) => {
     const db = global.db.data
     const userData = db.users[m.sender]
-    if (!userData?.pasangan) return m.reply('💔 Kamu belum punya pasangan!\n\nGunakan `.tembak @tag` untuk menembak seseorang!')
+    if (!userData?.pasangan) return m.reply('💔 Kamu masih jomblo nih senpai!\n\nPake `.tembak @tag` untuk nembak seseorang biar jadi pacar kamu!')
     await m.reply(
         `💕 *ᴘᴀsᴀɴɢᴀɴᴍᴜ*\n\n> @${userData.pasangan.split('@')[0]}`,
         null, { mentions: [userData.pasangan] }

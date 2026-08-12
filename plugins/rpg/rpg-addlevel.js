@@ -1,6 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-// Makasih kode nya RTXZY
-
 let handler = async (m, { conn, text }) => {
   if (!text) throw 'Masukkan jumlah level yang ingin ditambahkan. Contoh: .addlevel @user 10'
   

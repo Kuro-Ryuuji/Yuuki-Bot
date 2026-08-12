@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { exec as _exec } from 'child_process'
 import { promisify } from 'util'
 import { readFileSync, writeFileSync } from 'fs'

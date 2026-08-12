@@ -1,7 +1,3 @@
-/**
- * Elaina-MD — github.com/OmmniDevv/Elaina-MD
- * Jangan Dijual!
- */
 import axios from 'axios'
 
 let handler = async (m, { conn }) => {

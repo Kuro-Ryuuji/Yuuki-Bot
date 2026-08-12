@@ -1,11 +1,3 @@
-/**
- * ╔══════════════════════════════════════════╗
- * ║         E L A I N A  -  M D             ║
- * ║   Script by OmmniDevv — Jangan Dijual!  ║
- * ║  https://github.com/OmmniDevv/Elaina-MD ║
- * ╚══════════════════════════════════════════╝
- */
-
 let handler = async (m, { conn }) => {
   let pp = 'https://telegra.ph/file/24fa902ead26340f3df2c.png'
   try { pp = await conn.profilePictureUrl(m.sender, 'image') } catch {}

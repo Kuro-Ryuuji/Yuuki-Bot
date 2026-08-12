@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { createHash } from 'crypto'
 import { readFileSync } from 'fs'
 let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i

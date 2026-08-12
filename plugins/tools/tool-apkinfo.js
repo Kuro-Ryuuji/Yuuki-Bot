@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import moment from 'moment-timezone'
 import gplay from 'google-play-scraper'
 

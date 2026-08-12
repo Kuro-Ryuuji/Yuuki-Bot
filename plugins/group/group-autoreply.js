@@ -1,8 +1,3 @@
-/**
- * Auto Reply Management — Elaina-MD
- * https://github.com/OmmniDevv/Elaina-MD
- */
-
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
   const chat = global.db.data.chats[m.chat] || {}
   if (!chat.autoReplies) chat.autoReplies = {}

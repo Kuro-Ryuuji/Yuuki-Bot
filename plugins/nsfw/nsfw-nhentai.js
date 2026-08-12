@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
@@ -8,7 +7,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   const res = await fetch(`https://nhentai.net/api/gallery/${id}`, {
     headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
   })
-  if (!res.ok) throw 'Tidak ditemukan atau ID salah'
+  if (!res.ok) throw 'aduh ga ketemu nih senpai'
 
   const data = await res.json()
   const title = data.title?.english || data.title?.japanese || 'Unknown'

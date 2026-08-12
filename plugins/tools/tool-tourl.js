@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fs from 'fs'
 import fetch from 'node-fetch'
 import FormData from 'form-data'
@@ -10,7 +9,7 @@ let handler = async (m) => {
 		let media = await q.download(true)
 		let data = await uploadFile(media)
 		m.reply(data.files[0].url)
-	} else throw 'No media found'
+	} else throw 'Media ga ketemu nih senpai'
 }
 handler.help = ['tourl']
 // handler.tags = ['tools']

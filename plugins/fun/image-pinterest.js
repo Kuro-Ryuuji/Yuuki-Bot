@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { pinterestSearch } from '../../lib/pinterest-search.js'
 
 let handler = async(m, { conn, text, usedPrefix, command }) => {

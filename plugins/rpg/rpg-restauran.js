@@ -1,6 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-// Makasih kode nya RTXZY
-
 const MENU = {
     ayambakar:    { harga: 20000, emoji: '🍗', nama: 'Ayam Bakar' },
     ayamgoreng:   { harga: 15000, emoji: '🍗', nama: 'Ayam Goreng' },

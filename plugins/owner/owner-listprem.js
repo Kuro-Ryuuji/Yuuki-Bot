@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, args }) => {
   let user = Object.entries(global.db.data.users).filter(user => user[1].premiumTime).map(([key, value]) => {
     return { ...value, jid: key }

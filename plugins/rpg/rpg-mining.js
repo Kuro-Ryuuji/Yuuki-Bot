@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 const cooldown = 300000
 let handler = async (m, { usedPrefix }) => {
     let user = global.db.data.users[m.sender]

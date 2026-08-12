@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = m => m
 handler.before = async function (m) {
     if (!/^-?[0-9]+(\.[0-9]+)?$/.test(m.text)) return !0

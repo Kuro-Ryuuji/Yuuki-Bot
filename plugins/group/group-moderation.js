@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 let handler = async (m, { conn, args, usedPrefix, command }) => {
     try {
         let detik = parseInt(args[0])

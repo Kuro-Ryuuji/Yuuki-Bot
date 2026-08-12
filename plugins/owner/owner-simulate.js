@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, usedPrefix, command, args: [event], text }) => {
     if (!event) return await conn.sendButton(m.chat, `contoh:
 ${usedPrefix + command} welcome @user

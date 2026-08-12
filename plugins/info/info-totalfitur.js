@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn }) => {
     const total = Object.values(global.plugins).filter(v => v.help && v.tags && !v.disabled).length
     const totalCmds = Object.values(global.plugins)

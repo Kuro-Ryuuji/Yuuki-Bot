@@ -1,6 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-// Makasih kode nya RTXZY
-
 let handler = async (m, { conn, args, usedPrefix, command }) => {
   const pilihan = ['atas', 'bawah']
   const input = (args[0] || '').toLowerCase()

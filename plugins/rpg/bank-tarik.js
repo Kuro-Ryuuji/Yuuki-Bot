@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 const xpperlimit = 1
 let handler = async (m, { conn, command, args }) => {
 	let user = global.db.data.users[m.sender]

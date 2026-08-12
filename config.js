@@ -46,24 +46,24 @@ let wibh = moment.tz('Asia/Jakarta').format('HH')
 /*============== SOCIAL ==============*/
 // kalo ga punya ketik "-" atau biarin aja biar ada creditsnya
 global.sig = 'https://instagram.com/' //Link Instagrammu
-global.sgh = 'https://github.com/OmmniDevv' //Link Github OmmniDevv
+global.sgh = 'https://github.com/fulanzz2886-cpu' //Link Github OmmniDevv
 global.sgc = 'https://chat.whatsapp.com/'
 global.sdc = '-' //Isi Pake Link Discordmu Kalo Gada Biarin aja
 global.snh = 'https://nhentai.net/g/HaramTod🗿'
 
 /*============== PAYMENT ==============*/
-global.pdana = '08xxxxxx' //Nomor Danamu
-global.ppulsa = '08xxxxxxxxx' //Nomor SimCard Yang Kamu Pake
+global.pdana = '081952716944' //Nomor Danamu
+global.ppulsa = '081952716944' //Nomor SimCard Yang Kamu Pake
 global.psaweria = '-' //Link Saweriamu Kalo Nggada Ketik - aja
 
 /*============== NOMOR ==============*/
-global.nomorbot = '6281952716944' //Nomor Bot
+global.nomorbot = '6285122600323' //Nomor Bot
 global.nomorown = '6281952716944' //Nomor Owner
 global.namebot = 'Yuuki BOT' //Nama Bot
 global.nameown = 'Dimzz' // Nama Owner
 // ↓ TAMBAHKAN INI ↓
 global.usePairingCode = true             // Aktifkan pairing code
-global.pairingNumber = '6281952716944'   // Nomor WA bot kamu (kosongkan untuk input manual)
+global.pairingNumber = '6285122600323'   // Nomor WA bot kamu (kosongkan untuk input manual)
 
 /*============== STAFF ==============*/
 global.owner = [

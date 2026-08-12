@@ -1,11 +1,10 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 let handler = async(m, { conn, text }) => {
 
-  if (!text) return conn.reply(m.chat, 'Harap Masukan Username', m)
+  if (!text) return conn.reply(m.chat, 'Masukin username nya senpai', m)
 
-  await m.reply('Searching...')
+  await m.reply('Lagi nyari...')
     let res = await fetch(`https://hadi-api.herokuapp.com/api/githubstalk?username=${text}`)
     let json = await res.json()
     if (res.status !== 200) throw await res.text()

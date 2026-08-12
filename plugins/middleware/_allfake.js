@@ -1,6 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-//By Papah-Chan
-
 import fs from 'fs'
 import fetch from 'node-fetch'
 import moment from 'moment-timezone'

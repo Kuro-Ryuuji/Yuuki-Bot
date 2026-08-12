@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let toM = a => '@' + a.split('@')[0]
 function handler(m, { groupMetadata }) {
     let ps = groupMetadata.participants.map(v => v.id)

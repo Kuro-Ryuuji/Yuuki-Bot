@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 // AI Image Style — seaart/nanobanana based
 import { live3d } from '../../lib/scraper/seaart.js'
 import nanoBanana from '../../lib/scraper/nanobanana.js'

@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { getRandomItem, checkAnswerAdvanced, getProgressiveHint, createSession, setSessionTimer, getSession, endSession, hasActiveSession } from '../../lib/game-data.js'
 
 const TIMEOUT = 90000

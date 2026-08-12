@@ -1,7 +1,3 @@
-/**
- * Elaina-MD — github.com/OmmniDevv/Elaina-MD
- * Jangan Dijual!
- */
 import axios from 'axios'
 
 // Map command → waifu.im tag atau nekos.best endpoint (semua gratis, no key)

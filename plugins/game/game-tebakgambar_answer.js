@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import similarity from 'similarity'
 const threshold = 0.72
 export async function before(m) {

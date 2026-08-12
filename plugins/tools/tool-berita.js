@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 import * as cheerio from 'cheerio'
 
@@ -8,7 +7,7 @@ let handler = async (m, { args }) => {
   const res = await fetch('https://www.cnbcindonesia.com/rss', {
     headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
   })
-  if (!res.ok) throw 'Layanan berita tidak tersedia saat ini'
+  if (!res.ok) throw 'Layanan berita ga tersedia buat sekarang'
 
   const $ = cheerio.load(await res.text(), { xmlMode: true })
   const items = []
@@ -22,7 +21,7 @@ let handler = async (m, { args }) => {
     })
   })
 
-  if (!items.length) throw 'Tidak ada berita tersedia'
+  if (!items.length) throw 'Ga ada berita tersedia'
 
   const keyword = args.join(' ').toLowerCase()
   const filtered = keyword

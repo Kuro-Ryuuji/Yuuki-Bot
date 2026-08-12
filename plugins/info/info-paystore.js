@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn }) => {
   const sh = '5', sn = '15', ss = '30', sp = '35', sv = '65'
   const ph = '5', pn = '20', pp = '40', pv = '50', ppm = '70'

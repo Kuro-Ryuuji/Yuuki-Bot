@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, isOwner }) => {
     if (!isOwner) return m.reply('❌ Hanya owner yang bisa melihat daftar grup!')
 

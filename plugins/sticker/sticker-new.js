@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import axios from 'axios'
 
 // ─── Brat Vermeil ────────────────────────────────────────────
@@ -6,7 +5,7 @@ let handlerBratVermeil = async (m, { conn, text }) => {
     if (!text) throw `👿 *ʙʀᴀᴛ ᴠᴇʀᴍᴇɪʟ*\n\n> Contoh: \`${m.prefix}bratvermeil Jangan lupa makan\``
     conn.sendMessage(m.chat, { react: { text: '🎨', key: m.key } })
     const url = `https://api.cuki.biz.id/api/canvas/brat/bratnime-vermeil?text=${encodeURIComponent(text)}&apikey=cuki-x`
-    await conn.sendImageAsSticker(m.chat, url, m, { packname: global.stickpack || 'Elaina-MD', author: global.stickauth || 'OmniDevv' })
+    await conn.sendImageAsSticker(m.chat, url, m, { packname: global.stickpack || 'Yuuki-MD', author: global.stickauth || 'Dimzz' })
     conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 }
 handlerBratVermeil.help = ['bratvermeil <teks>']
@@ -24,12 +23,12 @@ let handlerLineSticker = async (m, { conn, args }) => {
     const neoxrKey = global.APIKeys?.neoxr || ''
     if (!neoxrKey) throw '❌ API Key Neoxr belum diset di config.js'
     const res = await axios.get(`https://api.neoxr.eu/api/linesticker?url=${encodeURIComponent(url)}&apikey=${neoxrKey}`, { timeout: 60000 }).catch(() => null)
-    if (!res?.data?.status || !res?.data?.data) throw '❌ Gagal mengambil sticker dari URL tersebut!'
+    if (!res?.data?.status || !res?.data?.data) throw '❌ Duh gagal mgambil stiker dari URL itu!'
     const data = res.data.data
     const isAnimated = data.animated || false
     const stickerUrls = isAnimated && data.sticker_animation_url?.length ? data.sticker_animation_url : data.sticker_url || []
-    if (!stickerUrls.length) throw '❌ Tidak ada sticker ditemukan!'
-    await m.reply(`🎨 *${data.title || 'LINE Sticker'}*\n\n> 📊 Total: ${stickerUrls.length} sticker\n> 🎬 Animated: ${isAnimated ? 'Ya' : 'Tidak'}\n> 🕕 Mengirim...`)
+    if (!stickerUrls.length) throw '❌ Ga ada stiker yang ketemu nih!'
+    await m.reply(`🎨 *${data.title || 'LINE Stiker'}*\n\n> 📊 Total: ${stickerUrls.length} sticker\n> 🎬 Animated: ${isAnimated ? 'Ya' : 'Tidak'}\n> 🕕 Mengirim...`)
     const max = Math.min(stickerUrls.length, 10)
     let sent = 0
     for (let i = 0; i < max; i++) {
@@ -55,8 +54,8 @@ import { addExifToWebp } from '../../src/lib/exif.js'
 let handlerSWM = async (m, { conn, text }) => {
     if (!m.quoted) throw `🖼️ *sᴛɪᴄᴋᴇʀ ᴡᴀᴛᴇʀᴍᴀʀᴋ*\n\n> Reply sticker dengan:\n> \`${m.prefix}swm packname\`\n> \`${m.prefix}swm packname|author\``
     const isSticker = m.quoted.type === 'stickerMessage' || m.quoted.isSticker
-    if (!isSticker) throw '❌ Reply pesan sticker!'
-    if (!text) throw '❌ Masukkan packname!'
+    if (!isSticker) throw '❌ Reply pesan stiker!'
+    if (!text) throw '❌ Masukkin packname! nya senpai'
     const [packname, author = ''] = text.split('|').map(s => s.trim())
     conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
     const buffer = await m.quoted.download()

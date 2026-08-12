@@ -1,8 +1,7 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-  if (!args[0]) throw `Contoh: ${usedPrefix}${command} torvalds`
+  if (!args[0]) throw `Contoh: ${usedPrefix}${command} fulanzz2886-cpu`
 
   const username = args[0]
   const headers = { 'User-Agent': 'ElainaBot/4.0', 'Accept': 'application/vnd.github.v3+json' }
@@ -12,7 +11,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=5`, { headers })
   ])
 
-  if (!userRes.ok) throw `User GitHub "${username}" tidak ditemukan!`
+  if (!userRes.ok) throw `User GitHub "${username}" ga ketemu nih senpai!`
 
   const user = await userRes.json()
   const repos = repoRes.ok ? await repoRes.json() : []

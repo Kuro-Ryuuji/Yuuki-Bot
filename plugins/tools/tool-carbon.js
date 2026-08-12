@@ -1,8 +1,3 @@
-/**
- * Elaina-MD — https://github.com/OmmniDevv/Elaina-MD
- * Script by OmmniDevv — Jangan Dijual!
- */
-
 let handler = async (m, { conn, usedPrefix, command, text }) => {
   if (!text) throw `💻 *ᴄᴀʀʙᴏɴ*\n\nContoh: ${usedPrefix}${command} console.log('Hello World')`
   conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
@@ -12,7 +7,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
     conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     await conn.sendMessage(m.chat, { image: buf, caption: '💻 *ᴄᴀʀʙᴏɴ*' }, { quoted: m })
   } catch {
-    throw '❌ Gagal generate carbon image!'
+    throw '❌ Aduh gagal generate carbon image! nih senpai'
   }
 }
 

@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, args, command }) => {
 	let group = m.chat
         await m.reply('Sayonara , , ! (≧ω≦)ゞ', m.chat) 

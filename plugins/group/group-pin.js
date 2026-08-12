@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 let handler = async (m, { conn }) => {
     try {
         if (!m.quoted) return m.reply('❌ Reply ke pesan yang ingin di-pin!')

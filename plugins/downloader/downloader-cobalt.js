@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 const COBALT_INSTANCES = [
@@ -32,11 +31,11 @@ async function cobaltDownload(url, audioOnly = false) {
       lastError = e.message 
     }
   }
-  throw lastError || 'Semua instance Cobalt tidak merespon'
+  throw lastError || 'Semua instance Cobalt ga ngerespon'
 }
 
 function detectPlatform(url) {
-  if (url.includes('youtu')) return '🎬 YouTube'
+  if (url.includes('youtube')) return '🎬 YouTube'
   if (url.includes('tiktok')) return '🎵 TikTok'
   if (url.includes('instagram')) return '📸 Instagram'
   if (url.includes('twitter') || url.includes('x.com')) return '🐦 Twitter/X'

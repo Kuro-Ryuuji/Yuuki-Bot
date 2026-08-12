@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 async function makeWasted(avatarUrl) {
   const { createCanvas, loadImage } = await import('@napi-rs/canvas')
   const size = 512

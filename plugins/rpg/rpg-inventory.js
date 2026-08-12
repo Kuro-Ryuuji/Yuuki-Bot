@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import daily from './rpg-daily.js'
 import weekly from './rpg-weekly.js'
 import monthly from './rpg-monthly.js'

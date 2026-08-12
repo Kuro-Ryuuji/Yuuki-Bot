@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { participants }) => {
     // if (participants.map(v=>v.jid).includes(global.conn.user.id)) {
     global.db.data.chats[m.chat].isBanned = true

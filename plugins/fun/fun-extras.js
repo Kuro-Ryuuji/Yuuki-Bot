@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 let handlerRate = async (m, { text }) => {
     try {
         if (!text) return m.reply('Masukkan sesuatu yang ingin di-rate!')

@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { createHash } from 'crypto'
 let handler = async function (m, { args }) {
   if (!args[0]) throw 'Serial Number kosong'

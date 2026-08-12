@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 function makeCekHandler(label, responses) {
     let h = async (m, { usedPrefix }) => {
         const pct = Math.floor(Math.random() * 101)

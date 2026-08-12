@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import axios from 'axios'
 
 // ─── Chord / Kunci Gitar ─────────────────────────────────────
@@ -7,7 +6,7 @@ let handlerChord = async (m, { conn, text }) => {
     conn.sendMessage(m.chat, { react: { text: '🕕', key: m.key } })
     const neoxrKey = global.APIKeys?.neoxr || ''
     const res = await axios.get(`https://api.neoxr.eu/api/chord?q=${encodeURIComponent(text)}&apikey=${neoxrKey}`, { timeout: 30000 }).catch(() => null)
-    if (!res?.data?.status || !res?.data?.data?.chord) throw `❌ Chord tidak ditemukan untuk: \`${text}\``
+    if (!res?.data?.status || !res?.data?.data?.chord) throw `❌ Chord ga ketemu untuk: \`${text}\``
     conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
     await m.reply(res.data.data.chord)
 }
@@ -21,7 +20,7 @@ let handlerAppleMusic = async (m, { conn, text }) => {
     if (!text) throw `🍎 *ᴀᴘᴘʟᴇ ᴍᴜsɪᴄ*\n\n> Contoh: \`${m.prefix}applemusic Best Friend\``
     conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
     const res = await axios.get(`https://api.nexray.web.id/search/applemusic?q=${encodeURIComponent(text)}`, { timeout: 20000 }).catch(() => null)
-    if (!res?.data?.result?.length) throw `❌ Tidak ditemukan hasil untuk: ${text}`
+    if (!res?.data?.result?.length) throw `❌ Ga ketemu hasil untuk: ${text}`
     const tracks = res.data.result.slice(0, 5)
     let txt = `🍎 *ᴀᴘᴘʟᴇ ᴍᴜsɪᴄ sᴇᴀʀᴄʜ*\n\n> Query: *${text}*\n\n`
     tracks.forEach((t, i) => {
@@ -64,7 +63,7 @@ let handlerTTSearch = async (m, { conn, text }) => {
     if (!text) throw `🎵 *ᴛɪᴋᴛᴏᴋ sᴇᴀʀᴄʜ*\n\n> Contoh: \`${m.prefix}ttsearch anime\``
     conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
     const videos = await tiktokSearchVideo(text).catch(() => null)
-    if (!videos?.length) throw `❌ Tidak ditemukan video untuk: ${text}`
+    if (!videos?.length) throw `❌ Ga ketemu video untuk: ${text}`
     let txt = `🎵 *ᴛɪᴋᴛᴏᴋ sᴇᴀʀᴄʜ*\n\n> Query: *${text}*\n\n`
     videos.slice(0, 5).forEach((v, i) => {
         txt += `*${i + 1}.* ${v.title || '-'}\n   👤 ${v.author?.nickname || '-'}\n   👀 ${v.stats?.plays || 0} views\n   🔗 ${v.link}\n\n`

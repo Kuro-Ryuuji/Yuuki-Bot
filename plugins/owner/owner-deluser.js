@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, usedPrefix, command, text }) => {
 	function no(number){
     return number.replace(/\s/g,'').replace(/([@+-])/g,'')

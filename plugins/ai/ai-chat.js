@@ -1,7 +1,3 @@
-/**
- * Elaina-MD — https://github.com/OmmniDevv/Elaina-MD
- * Script by OmmniDevv — Jangan Dijual!
- */
 import axios from 'axios'
 import FormData from 'form-data'
 

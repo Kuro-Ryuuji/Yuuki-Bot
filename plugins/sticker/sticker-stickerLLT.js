@@ -1,7 +1,6 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 // DISABLED: API tidak tersedia
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-    throw `Fitur sticker Line/Telegram sedang dalam perbaikan. Coba lagi nanti.`
+    throw `Fitur sticker Line/Telegram lagi proses perbaikan. Coba lagi nanti.`
 }
 handler.help = ['stikerline <url>']
 handler.tags = ['sticker']

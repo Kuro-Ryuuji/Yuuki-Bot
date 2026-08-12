@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, args, usedPrefix, command }) => {
 	if (db.data.chats[m.chat].expired < 1) throw `Group Ini Tidak DiSet Expired !`
     let who

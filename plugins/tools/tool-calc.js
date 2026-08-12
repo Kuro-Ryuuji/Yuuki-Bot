@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m, { conn, text }) => {
   let id = m.chat
   if (!text) throw 'Masukkan ekspresi matematika'
@@ -10,7 +9,6 @@ let handler = async (m, { conn, text }) => {
     m.reply('Hmmm...ngecheat?')
   }
   
-  // Security: More restrictive input sanitization
   let val = text
     .replace(/[^0-9\-\/+*×÷πEe().]/g, '')
     .replace(/×/g, '*')
@@ -28,21 +26,21 @@ let handler = async (m, { conn, text }) => {
     .replace(/\*/g, '×')
   
   try {
-    // Security: Validate expression before evaluation
+
     if (!val || val.length > 100) throw 'Ekspresi terlalu panjang atau kosong'
-    if (/[a-zA-Z]/.test(val.replace(/Math\.(PI|E)/g, ''))) throw 'Karakter tidak diizinkan'
+    if (/[a-zA-Z]/.test(val.replace(/Math\.(PI|E)/g, ''))) throw 'Kepanjangan nih senpai'
     
     console.log(val)
     let result = (new Function('return ' + val))()
     
     if (typeof result !== 'number' || !isFinite(result)) {
-      throw 'Hasil perhitungan tidak valid'
+      throw 'Hasil perhitungan ga valid nih senpai'
     }
     
     m.reply(`*${format}* = _${result}_`)
   } catch (e) {
     if (e == undefined) throw 'Isinya?'
-    throw 'Format salah, hanya 0-9 dan Simbol -, +, *, /, ×, ÷, π, e, (, ) yang disupport'
+    throw 'Salah senpai, cuma 0-9 dan Simbol -, +, *, /, ×, ÷, π, e, (, ) yang disupport'
   }
 }
 handler.help = ['calc <expression>']

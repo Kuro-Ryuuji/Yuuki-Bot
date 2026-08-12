@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler = async (m) => {
     let niatsolat = JSON.stringify(global.niatsolat)
     let json = JSON.parse(niatsolat)

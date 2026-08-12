@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 const HARI_JAWA = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']
 const PASARAN = ['Legi', 'Pahing', 'Pon', 'Wage', 'Kliwon']
 const NEPTU_HARI = { Minggu: 5, Senin: 4, Selasa: 3, Rabu: 7, Kamis: 8, Jumat: 6, Sabtu: 9 }
@@ -30,10 +29,10 @@ const BULAN_ID = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agus
 
 let handler = async (m, { text, usedPrefix, command }) => {
   if (!text) throw `Contoh: ${usedPrefix}${command} 1999-05-21\nFormat: YYYY-MM-DD`
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(text.trim())) throw `Format salah! Gunakan YYYY-MM-DD\nContoh: ${usedPrefix}${command} 1999-05-21`
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(text.trim())) throw `Salah nih senpai! Pake YYYY-MM-DD\nContoh: ${usedPrefix}${command} 1999-05-21`
 
   const d = new Date(text.trim())
-  if (isNaN(d.getTime())) throw 'Tanggal tidak valid!'
+  if (isNaN(d.getTime())) throw 'Tanggalnya ga bener nih senpai!'
 
   const weton = getWeton(text.trim())
   const watak = WATAK[weton.neptu] || 'Kepribadian unik, penuh misteri'

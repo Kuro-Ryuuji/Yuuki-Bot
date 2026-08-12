@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 let handler = async (m, { args }) => {
@@ -6,7 +5,7 @@ let handler = async (m, { args }) => {
   const url = `https://ip-api.com/json/${ip}?fields=status,message,country,regionName,city,isp,org,as,query,proxy,hosting,mobile`
 
   const res = await fetch(url)
-  if (!res.ok) throw 'Gagal mengambil data IP'
+  if (!res.ok) throw 'Gagal ngambil data IP nih senpai, shumimasen'
 
   const data = await res.json()
   if (data.status === 'fail') throw `Gagal: ${data.message}`

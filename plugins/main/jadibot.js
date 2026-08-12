@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-// Makasih kode nya OURIN
 import { startJadibot, isJadibotActive } from '../../src/lib/jadibot-manager.js'
 
 let handler = async (m, { conn, usedPrefix, command }) => {

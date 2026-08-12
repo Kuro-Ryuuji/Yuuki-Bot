@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 let timeout = 120000
@@ -7,7 +6,7 @@ let handler = async (m, { conn, usedPrefix }) => {
     conn.susunkata = conn.susunkata ? conn.susunkata : {}
     let id = m.chat
     if (id in conn.susunkata) {
-        conn.reply(m.chat, 'Masih ada soal belum terjawab di chat ini', conn.susunkata[id][0])
+        conn.reply(m.chat, 'Masih ada soal yang belum dijawab nih senpai', conn.susunkata[id][0])
         throw false
     }
     let res = await fetch('https://raw.githubusercontent.com/BochilTeam/database/master/games/susunkata.json')

@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import syntaxerror from 'syntax-error'
 import { format } from 'util'
 import { fileURLToPath } from 'url'

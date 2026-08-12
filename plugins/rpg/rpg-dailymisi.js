@@ -1,5 +1,3 @@
-/** !! THIS CODE GENERATE BY RODOTZBOT !! **/
-
 import moment from 'moment-timezone'
 
 let handler = async (m, { conn }) => {

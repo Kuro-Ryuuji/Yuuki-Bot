@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 const bucinQuotes = [
   'Aku bisa melakukan segalanya, tapi tidak bisa melakukan itu tanpamu.',
   'Jarak bukan halangan, tapi merindukanmu itu menyakitkan.',

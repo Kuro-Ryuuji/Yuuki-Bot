@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 let handler  = async (m, { conn }) => {
  await conn.relayMessage(m.chat, { requestPaymentMessage: {
   noteMessage: { extendedTextMessage: { text: wm,

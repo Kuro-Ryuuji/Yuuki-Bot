@@ -73,7 +73,7 @@ let handler = async (m, { conn, command, args, usedPrefix }) => {
 
   const tag = tagMap[type] || 'ecchi'
   const url = await getNsfwImg(tag)
-  if (!url) throw 'Gagal mengambil gambar NSFW'
+  if (!url) throw 'aduh gagal ngambil gambar NSFW'
 
   await conn.sendMessage(m.chat, {
     image: { url },

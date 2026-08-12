@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 async function handler(m, { command }) {
     command = command.toLowerCase()
     this.anonymous = this.anonymous ? this.anonymous : {}

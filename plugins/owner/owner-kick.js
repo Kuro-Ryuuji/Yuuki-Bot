@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import { areJidsSameUser } from 'ourin-baileys'
 let handler = async (m, { conn, participants }) => {
     let users = m.mentionedJid.filter(u => !areJidsSameUser(u, conn.user.id))

@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import fetch from 'node-fetch'
 
 let handler = async (m, { args, usedPrefix, command }) => {
@@ -8,7 +7,7 @@ let handler = async (m, { args, usedPrefix, command }) => {
   const res = await fetch(`https://wttr.in/${encodeURIComponent(kota)}?format=j1`, {
     headers: { 'User-Agent': 'curl/7.68.0' }
   })
-  if (!res.ok) throw 'Kota tidak ditemukan atau layanan cuaca tidak tersedia'
+  if (!res.ok) throw 'Kota ga ketemu atau layanan cuaca lagi ada kendala'
 
   const data = await res.json()
   const current = data.current_condition[0]

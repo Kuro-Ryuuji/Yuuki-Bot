@@ -1,5 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
-
 if (!global.confessData) global.confessData = new Map()
 
 let handler = async (m, { conn, text }) => {

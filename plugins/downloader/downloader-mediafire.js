@@ -1,4 +1,3 @@
-// © Elaina-MD | https://github.com/OmmniDevv/Elaina-MD — Jangan Dijual!
 import mediafire from '../../lib/scraper/mediafire.js'
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
