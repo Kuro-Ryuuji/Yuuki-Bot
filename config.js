@@ -94,7 +94,7 @@ global.APIs = {
 global.APIKeys = {
   // ⚠️ Ganti dengan API key milikmu sendiri!
   'https://melcanz.com': 'ISI_APIKEY_MELCANZ_DISINI',
-  'https://violetics.pw': 'ISI_APIKEY_VIOLETICS_DISINI',
+  'https://violetics.pw': '03871571-a755-4f46-aaf2-e539eef66760',
 
   // Velixs API (1000 req/hari) - https://api.velixs.com
   'https://api.velixs.com': 'c304a8e5ce63abfd13cc004073ba8eaaf146364197da879257',
