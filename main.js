@@ -1,7 +1,7 @@
 import './config.js'
 
 import { createRequire } from "module" // Bring in the ability to create the 'require' method
-import path, { join } from 'path'
+import path, { join, dirname } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { platform } from 'process'
 global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL) }
@@ -43,7 +43,7 @@ global.timestamp = {
   start: new Date
 }
 
-const __dirname = global.__dirname(import.meta.url)
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
 global.prefix = new RegExp('^[' + (opts['prefix'] || '‎‎/!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.\\-').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
