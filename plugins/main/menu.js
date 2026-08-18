@@ -1,4 +1,5 @@
-  import fetch from 'node-fetch'
+import fetch from 'node-fetch'
+import { readFileSync } from 'fs' // ✅ Tambah baca file
 
 const CATEGORY_EMOJIS = {
     owner: '👑', main: '🏠', downloader: '📥', sticker: '🖼️',
@@ -70,10 +71,8 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
     for (const cmds of Object.values(cmdMap)) totalCmds += cmds.length
     const sortedCats = getSortedCats(cmdMap, isOwner)
 
-    // Load thumbnails from local file
     let thumbBuffer = null, thumbSmall = null, thumb2Buffer = null
     try {
-        const { readFileSync } = await import('fs')
         const sharp = (await import('sharp')).default
         const raw1 = readFileSync(global.thumb)
         const raw2 = readFileSync(global.thumb2)
@@ -82,14 +81,12 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
         thumbSmall = await sharp(raw1).resize(300, 300, { fit: 'cover' }).jpeg({ quality: 80 }).toBuffer()
     } catch { }
 
-    // Category rows untuk single_select dropdown (variant 15)
     const catRows = sortedCats.map(cat => ({
         title: `${CATEGORY_EMOJIS[cat] || '📁'} ${cat.toUpperCase()} MENU`,
         description: `${cmdMap[cat].length} commands`,
         id: `${usedPrefix}menucat ${cat}`
     }))
 
-    // Buttons (variant 15 style — tanpa call_permission_request)
     const buttons = [
         {
             name: 'single_select',
@@ -101,7 +98,6 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
         }
     ]
 
-    // ftroliQuoted — orderMessage
     const ftroliQuoted = {
         key: { fromMe: false, participant: '0@s.whatsapp.net', remoteJid: 'status@broadcast' },
         message: {
@@ -112,7 +108,6 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
                 status: 'INQUIRY',
                 surface: 'CATALOG',
                 message: `👋 aloow minna, watashi *Yuuki BOT*\n✦ 📥 Asisten download video/foto tanpa WM\n✦ 🎮 Nyediain game seru buat main bareng\n━━━━━━━━━━━━━━━\n⚠️ Ada error? Lapor Owner\n💡 Request fitur? Bilang ke Owner`,
-
                 orderTitle: `📋 ${totalCmds} Commands`,
                 sellerJid: `${global.nomorbot}@s.whatsapp.net`,
                 token: 'yuuki-menu',
@@ -131,9 +126,10 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
         }
     }
 
-    const footerText = `Hai senpai *${pushName}* 👋
-Selamat datang di *${global.namebot}* ✨
-
+const footerText = `🌸 *Okaerinasai, Senpai~* 🌸
+ Alooooww! *${pushName}* datang nih~
+ Selamat datang di *${global.namebot}* ✨
+ 
 ╭─〔 🤖 \`ʙᴏᴛ ɪɴꜰᴏ\` 〕─⬣
 │ ✦ *ɴᴀᴍᴀ : ${global.namebot}*
 │ ✦ *ᴘʀᴇꜰɪx : [ ${usedPrefix} ]*
@@ -156,7 +152,6 @@ Silahkan tekan tombol di bawah untuk memilih kategori
 _© ${global.namebot} | ${global.wmcredit}_`
 
     try {
-        // variant 15: raw interactiveMessage via sendMessage (bukan generateWAMessageFromContent)
         await conn.sendMessage(m.chat, {
             interactiveMessage: {
                 title: '',
@@ -164,11 +159,7 @@ _© ${global.namebot} | ${global.wmcredit}_`
                 document: Buffer.from(JSON.stringify({ bot: global.namebot })),
                 mimetype: 'image/jpeg',
                 jpegThumbnail: thumbSmall,
-                contextInfo: {
-                    mentionedJid: [],
-                    forwardingScore: 7,
-                    isForwarded: true
-                },
+                contextInfo: { mentionedJid: [], forwardingScore: 7, isForwarded: true },
                 externalAdReply: {
                     title: global.namebot,
                     body: `Owner: ${global.nameown}`,
@@ -192,7 +183,6 @@ _© ${global.namebot} | ${global.wmcredit}_`
         }, { quoted: ftroliQuoted })
     } catch (e) {
         console.error('[Menu]', e.message)
-        // Fallback variant 2
         await conn.sendMessage(m.chat, {
             image: thumbBuffer,
             caption: footerText,
@@ -209,6 +199,16 @@ _© ${global.namebot} | ${global.wmcredit}_`
                 }
             }
         }, { quoted: ftroliQuoted })
+    }
+
+    try {
+        await conn.sendMessage(m.chat, {
+            audio: readFileSync('./assets/audio/yuuki.mp3'),
+            mimetype: 'audio/mpeg',
+            ptt: true // UBAH JADI true KALAU MAU FORMAT DENGAR/VOICE NOTE
+        }, { quoted: m })
+    } catch (audioErr) {
+        console.error('[Audio Menu]', audioErr.message)
     }
 }
 
