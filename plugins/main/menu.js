@@ -125,6 +125,7 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
             }
         }
     }
+}
 
 const footerText = `🌸 *Okaerinasai, Senpai~* 🌸
  Alooooww! *${pushName}* datang nih~
