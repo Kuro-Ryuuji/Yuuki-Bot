@@ -124,10 +124,9 @@ let handler = async (m, { conn, usedPrefix, isOwner, isPrems }) => {
                 }
             }
         }
-    }
-}
+    } // ✅ Kurung tutup ekstra yang salah di sini sudah dihapus!
 
-const footerText = `🌸 *Okaerinasai, Senpai~* 🌸
+    const footerText = `🌸 *Okaerinasai, Senpai~* 🌸
  Alooooww! *${pushName}* datang nih~
  Selamat datang di *${global.namebot}* ✨
  
