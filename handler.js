@@ -815,6 +815,7 @@ else if (plugin.botAdmin || plugin.admin) {
                 break
             }
         }
+    }
     } catch (e) {
         logError('handler', e)
     } finally {

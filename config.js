@@ -57,13 +57,13 @@ global.ppulsa = '081952716944' //Nomor SimCard Yang Kamu Pake
 global.psaweria = '-' //Link Saweriamu Kalo Nggada Ketik - aja
 
 /*============== NOMOR ==============*/
-global.nomorbot = '6289612648071' //Nomor Bot
+global.nomorbot = '6281952716944' //Nomor Bot
 global.nomorown = '6281952716944' //Nomor Owner
 global.namebot = 'Yuuki BOT' //Nama Bot
 global.nameown = 'Dimzz' // Nama Owner
 // ↓ TAMBAHKAN INI ↓
 global.usePairingCode = true             // Aktifkan pairing code
-global.pairingNumber = '6289612648071'   // Nomor WA bot kamu (kosongkan untuk input manual)
+global.pairingNumber = '6281952716944'   // Nomor WA bot kamu (kosongkan untuk input manual)
 
 /*============== STAFF ==============*/
 global.owner = [
@@ -104,7 +104,7 @@ global.APIKeys = {
   gemini: 'ISI_APIKEY_GEMINI_DISINI',
 
   // Groq AI - Daftar gratis: https://console.groq.com
-  groq: 'ISI_APIKEY_GROQ_DISINI',
+  groq: '-',
 
   // Covenant (GPT-4o) - Daftar: https://covenant.sbs
   covenant: 'cov_live_fa5117eb6327a5ee4640e7dc633ee4d5d9fe851cf2e69195',
@@ -113,7 +113,7 @@ global.APIKeys = {
   neoxr: 'ISI_APIKEY_NEOXR_DISINI',
 
   // RajaOngkir (Cek Ongkir) - https://rajaongkir.com/dokumentasi/starter
-  rajaongkir: 'ISI_APIKEY_RAJAONGKIR_DISINI',
+  rajaongkir: '6yxkWJcobc6a0536bb882d8cvmuYQpzG',
 
   // Google (Tenor GIF) - https://developers.google.com/tenor
   google: 'ISI_APIKEY_GOOGLE_DISINI',
@@ -124,7 +124,6 @@ global.APIKeys = {
 global.wm = '                「 ʏᴜᴜᴋɪ 𝙱𝙾𝚃 汉  」' //Main Watermark
 global.wm2 = '꒷︶꒷꒥꒷ ‧₊˚ ꒰ฅ˘ʏᴜᴜᴋɪ - ᴄʜᴀɴ˘ฅ ꒱ ‧₊˚꒷︶꒷꒥꒷'
 global.wm3 = '⫹⫺ ʏᴜᴜᴋɪ 𝙱𝙾𝚃'
-global.wmcredit = '⫹⫺ github.com/OmmniDevv/Elaina-MD' // Credit - JANGAN DIHAPUS
 global.botdate = `⫹⫺ 𝗛𝗮𝗿𝗶: ${week} ${date}`
 global.bottime = `𝗪𝗮𝗸𝘁𝘂 : ${wktuwib}`
 global.titlebot = '🎋 ┊ 𝗥𝗣𝗚 ʙᴏᴛ ᴡʜᴀᴛsᴀᴘᴘ'
