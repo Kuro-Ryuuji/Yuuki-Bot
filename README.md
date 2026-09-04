@@ -45,12 +45,12 @@ Tenang aja adminnya ga gigit kok dan adminnya tuh asik semua lho
 
 ### <span style="font-variant: small-caps;">📢 Saluran Quotes</span>
 <span style="font-variant: small-caps;">
-📢 [Saluran 1] https://whatsapp.com/channel/0029VaYSibd1CYoNWYMV7p0E<br>
-📢 [Saluran 2] https://whatsapp.com/channel/0029VbAov1MJ93wP1BTWXk1N<br>
-📢 [Saluran 3] https://whatsapp.com/channel/0029Vb7sTzQK5cDAJDEydo3Z<br>
-📢 [Saluran 4] https://whatsapp.com/channel/0029Vb7C99z9xVJZ5bLaeS2u<br>
-📢 [Saluran 5] https://whatsapp.com/channel/0029VawnboHGZNCpF6VQXR3z<br>
-📢 [Saluran 6] https://whatsapp.com/channel/0029VbBX8Ji5EjxyA8FsDD2N
+ [Saluran 1] https://whatsapp.com/channel/0029VaYSibd1CYoNWYMV7p0E<br>
+ [Saluran 2] https://whatsapp.com/channel/0029VbAov1MJ93wP1BTWXk1N<br>
+ [Saluran 3] https://whatsapp.com/channel/0029Vb7sTzQK5cDAJDEydo3Z<br>
+ [Saluran 4] https://whatsapp.com/channel/0029Vb7C99z9xVJZ5bLaeS2u<br>
+ [Saluran 5] https://whatsapp.com/channel/0029VawnboHGZNCpF6VQXR3z<br>
+ [Saluran 6] https://whatsapp.com/channel/0029VbBX8Ji5EjxyA8FsDD2N
 </span>
 
 <br>
