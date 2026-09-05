@@ -17,14 +17,16 @@
 
 | <span style="font-variant: small-caps;">Nama Fitur</span> | <span style="font-variant: small-caps;">Penjelasan</span> |
 |---|---|
-| <span style="font-variant: small-caps;">**Anime**</span> | <span style="font-variant: small-caps;">Cari info anime, karakter, rekomendasi, dan update episode terbaru</span> |
-| <span style="font-variant: small-caps;">**Downloader**</span> | <span style="font-variant: small-caps;">Unduh video/audio dari YouTube, TikTok, Instagram, dan platform lainnya</span> |
-| <span style="font-variant: small-caps;">**Stiker**</span> | <span style="font-variant: small-caps;">Buat stiker WA dari gambar/video dengan mudah dan cepat</span> |
-| <span style="font-variant: small-caps;">**Game**</span> | <span style="font-variant: small-caps;">Mainkan berbagai permainan seru langsung di dalam chat</span> |
-| <span style="font-variant: small-caps;">**Group Tools**</span> | <span style="font-variant: small-caps;">Kelola grup: welcome, anti-link, kick, mute, dan lainnya</span> |
-| <span style="font-variant: small-caps;">**Owner Tools**</span> | <span style="font-variant: small-caps;">Fitur khusus owner untuk mengatur bot dari jarak jauh</span> |
-
----
+| <span style="font-variant: small-caps;">**Anime**</span> | <span style="font-variant: small-caps;">Cari info anime, karakter, rekomendasi, jadwal rilis, dan update episode terbaru</span> |
+| <span style="font-variant: small-caps;">**Downloader**</span> | <span style="font-variant: small-caps;">Unduh video/audio dari YouTube, TikTok, Instagram, Facebook, Twitter, dan platform lainnya</span> |
+| <span style="font-variant: small-caps;">**Stiker**</span> | <span style="font-variant: small-caps;">Buat stiker WA dari gambar, video, atau teks dengan berbagai gaya & filter</span> |
+| <span style="font-variant: small-caps;">**Game & Hiburan**</span> | <span style="font-variant: small-caps;">Mainkan tebak-tebakan, math, susun kata, dan permainan seru lainnya langsung di chat</span> |
+| <span style="font-variant: small-caps;">**Group Tools**</span> | <span style="font-variant: small-caps;">Kelola grup: welcome, goodbye, anti-link, kick, mute, promote, dan pengaturan grup</span> |
+| <span style="font-variant: small-caps;">**Owner Tools**</span> | <span style="font-variant: small-caps;">Fitur khusus owner: broadcast, join grup, leave, restart, dan pengaturan bot jarak jauh</span> |
+| <span style="font-variant: small-caps;">**AI & Chat**</span> | <span style="font-variant: small-caps;">Chat dengan AI, tanya jawab, buat gambar AI, dan berbagai fitur kecerdasan buatan</span> |
+| <span style="font-variant: small-caps;">**Search**</span> | <span style="font-variant: small-caps;">Cari lagu, lirik, chord gitar, resep masakan, berita, dan informasi umum lainnya</span> |
+| <span style="font-variant: small-caps;">**Islamic**</span> | <span style="font-variant: small-caps;">Al-Qur'an, jadwal sholat, arah kiblat, doa-doa harian, dan tafsir ayat</span> |
+| <span style="font-variant: small-caps;">**Tools Lainnya**</span> | <span style="font-variant: small-caps;">Kalkulator, terjemahan bahasa, cek cuaca, generate teks, dan berbagai alat berguna lainnya</span> |
 
 ## <span style="font-variant: small-caps;">👥 Gabung Komunitas Yuuki</span>
 
