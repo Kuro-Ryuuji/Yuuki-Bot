@@ -1,10 +1,13 @@
 import './config.js'
 
-import { createRequire } from "module" // Bring in the ability to create the 'require' method
+import { createRequire } from "module"
 import path, { join, dirname } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { platform } from 'process'
-global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL) }
+
+global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { 
+  return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL) 
+}
 
 import * as ws from 'ws';
 import {
@@ -15,8 +18,10 @@ import {
   readFileSync,
   watch,
   writeFileSync,
-  mkdirSync
+  mkdirSync,
+  rmSync
 } from 'fs';
+
 import yargs from 'yargs'
 import { spawn } from 'child_process'
 import lodash from 'lodash'
@@ -38,7 +43,7 @@ protoType()
 serialize()
 
 global.API = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
-// global.Fn = function functionCallBack(fn, ...args) { return fn.call(global.conn, ...args) }
+
 global.timestamp = {
   start: new Date
 }
@@ -53,8 +58,7 @@ global.db = new Low(
   {}
 )
 
-
-global.DATABASE = global.db // Backwards Compatibility
+global.DATABASE = global.db
 global.loadDatabase = async function loadDatabase() {
   if (global.db.READ) return new Promise((resolve) => setInterval(async function () {
     if (!global.db.READ) {
@@ -108,7 +112,6 @@ const connectionOptions = {
 global.conn = makeWASocket(connectionOptions)
 conn.isInit = false
 
-// Function untuk menampilkan menu dan mendapatkan pilihan user
 async function showAuthenticationMenu() {
   const { createInterface } = await import('readline')
   const rl = createInterface({ input: process.stdin, output: process.stdout })
@@ -128,19 +131,16 @@ async function showAuthenticationMenu() {
   })
 }
 
-// Request pairing code atau QR Code
 const pairingFlagFile = join(global.authFile, '.pairing_requested')
-const PAIRING_TIMEOUT = 10000 // 10 detik
+const PAIRING_TIMEOUT = 10000
 
 if (!state.creds.registered && !existsSync(pairingFlagFile)) {
-  let authMethod = usePairingCode ? '2' : '1' // Default ke QR jika tidak ada flag
+  let authMethod = usePairingCode ? '2' : '1'
   
-  // Jika tidak ada usePairingCode flag, tanyakan ke user
   if (!global.usePairingCode && !global.pairingNumber) {
     authMethod = await showAuthenticationMenu()
   }
   
-  // Buat flag file untuk prevent multiple requests
   try {
     mkdirSync(global.authFile, { recursive: true })
     writeFileSync(pairingFlagFile, authMethod)
@@ -148,22 +148,10 @@ if (!state.creds.registered && !existsSync(pairingFlagFile)) {
     console.error(`\x1b[33m[AUTH] Gagal membuat flag file: ${e.message}\x1b[0m`)
   }
   
-  // Method 1: QR Code (Default)
   if (authMethod === '1') {
     console.log(`\x1b[32m[AUTH] Menggunakan metode QR Code\x1b[0m`)
-    
-    // QR Code akan ditampilkan oleh library Baileys secara otomatis
-    // pada event 'connection.update' dengan status 'qr'
-    global.conn.ev.on('connection.update', (update) => {
-      const { qr } = update
-      if (qr) {
-        console.log('\n\x1b[42m\x1b[30m  QR CODE  \x1b[0m')
-        console.log('\x1b[36mScan QR Code di atas dengan WhatsApp Anda\x1b[0m\n')
-      }
-    })
   }
   
-  // Method 2: Pairing Code
   else if (authMethod === '2') {
     console.log(`\x1b[32m[AUTH] Menggunakan metode Pairing Code\x1b[0m`)
     
@@ -184,7 +172,6 @@ if (!state.creds.registered && !existsSync(pairingFlagFile)) {
       process.exit(1)
     }
     
-    // Update flag file dengan nomor
     try {
       mkdirSync(global.authFile, { recursive: true })
       writeFileSync(pairingFlagFile, `2:${phone}`)
@@ -192,7 +179,6 @@ if (!state.creds.registered && !existsSync(pairingFlagFile)) {
       console.error(`\x1b[33m[PAIRING] Gagal menyimpan nomor: ${e.message}\x1b[0m`)
     }
     
-    // Timeout untuk pairing code (10 detik)
     const pairingTimeout = setTimeout(async () => {
       console.error(`\x1b[31m[PAIRING] Timeout! Pairing code tidak diterima dalam 10 detik\x1b[0m`)
       try {
@@ -231,8 +217,6 @@ if (!state.creds.registered && !existsSync(pairingFlagFile)) {
   }
 }
 
-// Patch deprecated button methods → plain sendMessage fallback
-// Buttons API sudah tidak didukung WA, fallback ke text biasa
 ;['sendBut', 'send2Button', 'send3Button'].forEach(fn => {
   try {
     Object.defineProperty(conn, fn, {
@@ -244,6 +228,7 @@ if (!state.creds.registered && !existsSync(pairingFlagFile)) {
     })
   } catch {}
 })
+
 try {
   Object.defineProperty(conn, 'sendButton', {
     value: async (jid, text, footer, buffer, buttons, quoted, options) => {
@@ -254,6 +239,7 @@ try {
     writable: true, configurable: true
   })
 } catch {}
+
 try {
   Object.defineProperty(conn, 'sendButtonDoc', {
     value: async (jid, content, footer, btn1, id1, quoted, options) => {
@@ -268,12 +254,11 @@ if (!opts['test']) {
     if (global.db.data) await global.db.write().catch(console.error)
     if (opts['autocleartmp']) try {
       clearTmp()
-
     } catch (e) { console.error(e) }
   }, 60 * 1000)
 }
-if (opts['server']) (await import('./server.js')).default(global.conn, PORT)
 
+if (opts['server']) (await import('./server.js')).default(global.conn, PORT)
 
 function clearTmp() {
   const tmp = [tmpdir(), join(__dirname, './tmp')]
@@ -281,17 +266,14 @@ function clearTmp() {
   tmp.forEach(dirname => readdirSync(dirname).forEach(file => filename.push(join(dirname, file))))
   return filename.map(file => {
     const stats = statSync(file)
-    if (stats.isFile() && (Date.now() - stats.mtimeMs >= 1000 * 60 * 3)) return unlinkSync(file) // 3 minutes
+    if (stats.isFile() && (Date.now() - stats.mtimeMs >= 1000 * 60 * 3)) return unlinkSync(file)
     return false
   })
 }
 
-// ─────────────────────────────────────────────
-//  Project info dari package.json
-// ─────────────────────────────────────────────
 import { createRequire as _cr } from 'module'
 const _pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'))
-const PROJECT_NAME = _pkg.name.toUpperCase()          // "ELAINA-MD"
+const PROJECT_NAME = _pkg.name.toUpperCase()
 const PROJECT_AUTHOR = _pkg.author?.name || 'OmmniDevv'
 
 function _banner() {
@@ -307,50 +289,115 @@ function _tag(label, color = '\x1b[36m') {
   return `${color}[${label}]\x1b[0m`
 }
 
+function deleteSession() {
+  try {
+    if (existsSync(global.authFile)) {
+      rmSync(global.authFile, { recursive: true, force: true })
+      console.log(`${_tag('SESSION', '\x1b[32m')} Folder session "${global.authFile}" berhasil dihapus`)
+    }
+    const pairingFlagFile = join(global.authFile, '.pairing_requested')
+    if (existsSync(pairingFlagFile)) {
+      unlinkSync(pairingFlagFile)
+    }
+  } catch (e) {
+    console.error(`${_tag('SESSION', '\x1b[31m')} Gagal menghapus session: ${e.message}`)
+  }
+}
+
+function getDisconnectReasonName(code) {
+  const reasons = {
+    [DisconnectReason.loggedOut]: 'Logged Out dari HP',
+    [DisconnectReason.badSession]: 'Session Rusak / Corrupt',
+    [DisconnectReason.connectionReplaced]: 'Koneksi Diganti Perangkat Lain',
+    [DisconnectReason.restartRequired]: 'Perlu Restart Bot',
+    [DisconnectReason.forbidden]: 'Akses Ditolak / Forbidden',
+    [DisconnectReason.timedOut]: 'Koneksi Timeout',
+    [DisconnectReason.connectionClosed]: 'Koneksi Ditutup',
+    [DisconnectReason.multideviceMismatch]: 'Multi Device Mismatch'
+  }
+  return reasons[code] || 'Tidak Diketahui'
+}
+
 async function connectionUpdate(update) {
-  const { connection, lastDisconnect, isNewLogin } = update
+  const { connection, lastDisconnect, isNewLogin, qr } = update
   if (isNewLogin) conn.isInit = true
-  const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
+  
+  const code = lastDisconnect?.error?.output?.statusCode || 
+               lastDisconnect?.error?.output?.payload?.statusCode
   const errMsg = lastDisconnect?.error?.message || ''
   const errStack = lastDisconnect?.error?.stack || ''
 
+  if (qr) {
+    console.log('\n\x1b[42m\x1b[30m  QR CODE  \x1b[0m')
+    console.log('\x1b[36mScan QR Code di atas dengan WhatsApp Anda\x1b[0m\n')
+  }
+
   if (connection === 'close') {
-    // Abaikan disconnect yang disebabkan oleh fetch/undici error (bukan WS baileys)
-    const isFetchError = errStack.includes('undici') || errStack.includes('Fetch.') || errStack.includes('onAborted')
-    if (isFetchError) return
+    const isFetchError =
+      errStack.includes('undici') ||
+      errStack.includes('Fetch.') ||
+      errStack.includes('onAborted')
 
-    const shouldReconnect = code !== DisconnectReason.loggedOut
-
-    if (code === DisconnectReason.loggedOut) {
-      console.log(`${_tag('SESSION', '\x1b[31m')} \x1b[31mLogged out\x1b[0m — hapus folder session lalu restart`)
-      process.exit(0)
-    }
-
-    console.log(`${_tag('CONN', '\x1b[33m')} \x1b[33mDisconnected\x1b[0m — code: ${code} reconnect: ${shouldReconnect}${errMsg ? ` (${errMsg})` : ''}`)
-    if (shouldReconnect) {
+    if (isFetchError) {
+      console.log(`${_tag('CONN', '\x1b[33m')} Fetch error — reconnect tanpa hapus session`)
       setTimeout(() => global.reloadHandler(true).catch(console.error), 3000)
+      return
     }
-  } else if (connection === 'open') {
+
+    const resetSessionCodes = [
+      DisconnectReason.loggedOut,
+      DisconnectReason.badSession,
+      DisconnectReason.connectionReplaced,
+      DisconnectReason.restartRequired,
+      DisconnectReason.forbidden
+    ]
+
+    if (code && resetSessionCodes.includes(code)) {
+      console.log(`\n${_tag('SESSION', '\x1b[31m')} ═══════════════════════════════`)
+      console.log(`${_tag('SESSION', '\x1b[31m')} ERROR KODE: ${code}`)
+      console.log(`${_tag('SESSION', '\x1b[31m')} ALASAN: ${getDisconnectReasonName(code)}`)
+      console.log(`${_tag('SESSION', '\x1b[31m')} PESAN: ${errMsg || 'Tidak ada pesan'}`)
+      console.log(`${_tag('SESSION', '\x1b[31m')} ═══════════════════════════════`)
+      console.log(`${_tag('SESSION', '\x1b[33m')} Session rusak, menghapus folder session...`)
+      
+      deleteSession()
+      
+      console.log(`${_tag('SESSION', '\x1b[32m')} Session dihapus! Silakan restart bot untuk login ulang`)
+      process.exit(1)
+    }
+
+    console.log(`${_tag('CONN', '\x1b[33m')} Disconnected — code: ${code}${errMsg ? ` (${errMsg})` : ''}`)
+    console.log(`${_tag('SYSTEM')} Mencoba reconnect dalam 3 detik...`)
+    setTimeout(() => global.reloadHandler(true).catch(console.error), 3000)
+  }
+
+  else if (connection === 'open') {
     const botName = global.namebot || PROJECT_NAME
-    console.log(`${_tag('CONN', '\x1b[32m')} \x1b[32mConnected\x1b[0m — berjalan sebagai \x1b[1m${botName}\x1b[0m`)
+    console.log(`${_tag('CONN', '\x1b[32m')} ✓ Connected — berjalan sebagai \x1b[1m${botName}\x1b[0m`)
+    
     try {
       if (existsSync(pairingFlagFile)) unlinkSync(pairingFlagFile)
     } catch {}
+    
     global.timestamp.connect = new Date
   }
+
   if (global.db.data == null) loadDatabase()
 }
 
-
 process.on('uncaughtException', (err) => {
-  // Logging ditangani oleh lib/errorLogger.js
-  // Reconnect hanya untuk error WebSocket, bukan fetch/HTTP
-  const isFetchError = err.stack && (err.stack.includes('undici') || err.stack.includes('node-fetch') || err.stack.includes('Fetch.') || err.stack.includes('onAborted'))
+  const isFetchError = err.stack && (
+    err.stack.includes('undici') || 
+    err.stack.includes('node-fetch') || 
+    err.stack.includes('Fetch.') || 
+    err.stack.includes('onAborted')
+  )
+  
   if (!isFetchError && /terminated|connection reset|ECONNRESET|ETIMEDOUT/i.test(err.message)) {
+    console.log(`${_tag('ERROR', '\x1b[31m')} Uncaught exception — reconnecting...`)
     global.reloadHandler(true).catch(console.error)
   }
 })
-// let strQuot = /(["'])(?:(?=(\\?))\2.)*?\1/
 
 let isInit = true;
 let handler = await import('./handler.js')
@@ -365,14 +412,12 @@ global.reloadHandler = async function (restatConn) {
     const oldChats = global.conn.chats
     try { global.conn.ws.close() } catch { }
     conn.ev.removeAllListeners()
-    // Refresh auth state dari disk sebelum buat koneksi baru
     const { state: newState, saveCreds: newSaveCreds } = await useMultiFileAuthState(global.authFile)
     connectionOptions.auth = {
       creds: newState.creds,
       keys: makeCacheableSignalKeyStore(newState.keys, pino({ level: 'silent' }))
     }
     global.conn = makeWASocket(connectionOptions, { chats: oldChats })
-    // Update saveCreds reference ke yang baru
     saveCreds = newSaveCreds
     isInit = true
   }
@@ -384,7 +429,6 @@ global.reloadHandler = async function (restatConn) {
     conn.ev.off('connection.update', conn.connectionUpdate)
     conn.ev.off('creds.update', conn.credsUpdate)
   }
-
   conn.welcome = '❖━━━━━━[ *いらっしゃいませ* ]━━━━━━❖\n\n┏––––––━━━━━━━━•\n│☘︎ @subject\n┣━━━━━━━━┅┅┅━━━━┫\n┃ *Selamat Datang di Group*\n┃━━━━━━━━━━━━━━━━\n┃ Tata tertib:\n┃ ✓ No SARA\n┃ ✓ No Spam\n┃ ✓ No Iklan\n┣━━━━━━━━━━━━━━━━┫\n┃ Jika tidak patuh akan dikeluarkan!\n┗━━━━━━━━━━━━━━━━┛\n\n*Selamat datang @user* 🎉'
   conn.bye = '❖━━━━━━[ *さようなら* ]━━━━━━❖\n𝚂𝚊𝚢𝚘𝚗𝚊𝚛𝚊𝚊 *@user* 👋😃'
   conn.spromote = '@user swlsmt senpai, kamu sekarang admin!'
@@ -399,7 +443,6 @@ global.reloadHandler = async function (restatConn) {
   conn.onDelete = handler.deleteUpdate.bind(global.conn)
   conn.connectionUpdate = connectionUpdate.bind(global.conn)
   conn.credsUpdate = saveCreds.bind(global.conn)
-
   if (!conn.handler) console.error(`${_tag('ERROR', '\x1b[31m')} handler.handler is undefined!`)
   
   conn.ev.on('messages.upsert', conn.handler)
@@ -416,15 +459,12 @@ global.reloadHandler = async function (restatConn) {
 const pluginFolder = join(__dirname, './plugins')
 const pluginFilter = filename => /\.js$/.test(filename) && !filename.endsWith('.disabled')
 
-// Recursively collect all .js files from plugins/ and its subfolders
 function collectPluginFiles(dir) {
   const files = []
-  // Skip node_modules and other non-plugin directories
   if (dir.includes('node_modules') || dir.includes('.git')) return files
   
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name)
-    // Skip node_modules, lib, and test directories
     if (entry.name === 'node_modules' || entry.name === '.git' || entry.name === 'lib' || entry.name === 'test') continue
     
     if (entry.isDirectory()) {
@@ -489,7 +529,7 @@ global.reload = async (_ev, filename) => {
   }
 }
 Object.freeze(global.reload)
-// Watch all subfolders recursively
+
 ;(function watchRecursive(dir) {
   try { watch(dir, global.reload) } catch {}
   try {
@@ -500,14 +540,14 @@ Object.freeze(global.reload)
     }
   } catch {}
 })(pluginFolder)
+
 await global.reloadHandler()
 
-// Quick Test
 async function _quickTest() {
   let test = await Promise.all([
     spawn('ffmpeg'),
     spawn('ffprobe'),
-    spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-filter_complex', 'color', '-frames:v', '1', '-f', 'webp', '-']),
+        spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-filter_complex', 'color', '-frames:v', '1', '-f', 'webp', '-']),
     spawn('convert'),
     spawn('magick'),
     spawn('gm'),
@@ -520,13 +560,14 @@ async function _quickTest() {
         })
       }),
       new Promise(resolve => {
-        p.on('error', _ => resolve(false))
+        p.on('error', () => resolve(false))
       })
     ])
   }))
+  
   let [ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm, find] = test
-  console.log(test)
-  let s = global.support = {
+  console.log(`${_tag('CHECK', '\x1b[36m')} Dependencies check`)
+  let s = {
     ffmpeg,
     ffprobe,
     ffmpegWebp,
@@ -535,14 +576,7 @@ async function _quickTest() {
     gm,
     find
   }
-  // require('./lib/sticker').support = s
-  Object.freeze(global.support)
-
-  if (!s.ffmpeg) conn.logger.warn('Please install ffmpeg for sending videos (pkg install ffmpeg)')
-  if (s.ffmpeg && !s.ffmpegWebp) conn.logger.warn('Stickers may not animated without libwebp on ffmpeg (--enable-ibwebp while compiling ffmpeg)')
-  if (!s.convert && !s.magick && !s.gm) conn.logger.warn('Stickers may not work without imagemagick if libwebp on ffmpeg doesnt isntalled (pkg install imagemagick)')
+  console.log(s)
+  global.support = s
 }
-
-_quickTest()
-  .then(() => console.log(`${_tag('TEST', '\x1b[32m')} \x1b[32mQuick test selesai\x1b[0m`))
-  .catch((e) => console.error(`${_tag('TEST', '\x1b[31m')} \x1b[31m${e.message}\x1b[0m`))
+_quickTest().catch(console.error)
