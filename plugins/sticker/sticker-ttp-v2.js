@@ -1,5 +1,5 @@
 import { Canvas } from 'skia-canvas'
-import { Sticker, StickerTypes } from 'wa-stiker-formatter'
+import { Sticker, StickerTypes } from 'wa-sticker-formatter'
 
 function wrapText(ctx, text, maxWidth) {
   const words = text.split(' ')
