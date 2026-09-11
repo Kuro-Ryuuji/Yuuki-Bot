@@ -1,30 +1,67 @@
-import PhoneNumber from 'awesome-phonenumber'
-import fetch from 'node-fetch'
+import { mentionText, formatDisplayNumber, getPhoneDigits } from '../../lib/mention.js'
+
 let handler = async (m, { conn }) => {
-  let _pp = './src/avatar_contact.png'
-  let user = db.data.users[m.sender]
-  let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.id : m.sender
-    let pp = await conn.profilePictureUrl(who, 'image').catch(_ => './src/avatar_contact.png')
-    let { premium, level, limit, exp, lastclaim, registered, regTime, age } = global.db.data.users[m.sender]
-    let username = conn.getName(who)
-    let name = conn.getName(who)
-    let fkon = { key: { fromMe: false, participant: `${m.sender.split`@`[0]}@s.whatsapp.net`, ...(m.chat ? { remoteJid: '16504228206@s.whatsapp.net' } : {}) }, message: { contactMessage: { displayName: `${name}`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}
-    let str = `
+    const who = m.mentionedJid?.[0]
+        ? m.mentionedJid[0]
+        : m.fromMe
+            ? conn.user.id
+            : m.sender
+
+    const participant = m.isGroup
+        ? (m.participants || []).find(p => (conn.decodeJid?.(p.id) || p.id) === who)
+        : null
+
+    const user = global.db.data.users[m.sender] || {}
+    const { premium, registered, age } = user
+    const username = conn.getName(who)
+    const name = conn.getName(who)
+    const tag = mentionText(participant || who, { name: username })
+    const phone = formatDisplayNumber(participant || who)
+    const waDigits = getPhoneDigits(participant || who)
+    const waLink = waDigits ? `https://wa.me/${waDigits}` : '-'
+
+    const fkon = {
+        key: {
+            fromMe: false,
+            participant: m.sender,
+            ...(m.chat ? { remoteJid: m.chat } : {})
+        },
+        message: {
+            contactMessage: {
+                displayName: `${name}`,
+                vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${waDigits || ''}:${phone || ''}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
+            }
+        }
+    }
+
+    const str = `
 ]──────────❏ *PROFILE* ❏──────────[
-💌 • *Name:* ${username} 
+💌 • *Name:* ${username}
 🎐 • *Username:* ${registered ? name : ''}
-📧 • *Tag:* @${who.replace(/@.+/, '')}
-📞 • *Number:* ${PhoneNumber('+' + who.replace('@s.whatsapp.net', '')).number?.international || who}
-🔗 • *Link:* https://wa.me/${who.split`@`[0]}
+📧 • *Tag:* ${tag}
+📞 • *Number:* ${phone || '-'}
+🔗 • *Link:* ${waLink}
 🎨 • *Age:* ${registered ? age : ''}
 ${readMore}
-🌟 • *Premium:* ${premium ? "✅" :"❌"}
-⏰ • *PremiumTime:* 
+🌟 • *Premium:* ${premium ? '✅' : '❌'}
+⏰ • *PremiumTime:*
 ${clockString(user.premiumTime)}
-📑 • *Registered:* ${registered ? '✅': '❌'}
+📑 • *Registered:* ${registered ? '✅' : '❌'}
 `.trim()
-    conn.sendButton(m.chat, str, botdate, pp, [[`${registered ? 'Menu':'Verify'}`, `${user.registered ? '.menu':'.verify'}`]], fkon, { contextInfo: { mentionedJid: [who], forwardingScore: 999, isForwarded: true}})
+
+    const pp = await conn.profilePictureUrl(who, 'image').catch(() => './src/avatar_contact.png')
+
+    conn.sendButton(
+        m.chat,
+        str,
+        typeof botdate !== 'undefined' ? botdate : '',
+        pp,
+        [[`${registered ? 'Menu' : 'Verify'}`, `${user.registered ? '.menu' : '.verify'}`]],
+        fkon,
+        { contextInfo: { mentionedJid: [who], forwardingScore: 999, isForwarded: true } }
+    )
 }
+
 handler.help = ['profile [@user]']
 handler.tags = ['xp']
 handler.command = /^profile|pp$/i
@@ -34,7 +71,14 @@ const more = String.fromCharCode(8206)
 const readMore = more.repeat(4001)
 
 function clockString(ms) {
-  let d = isNaN(ms) ? '--' : Math.floor(ms / 86400000)
+    const d = isNaN(ms) ? '--' : Math.floor(ms / 86400000)
+    const h = isNaN(ms) ? '--' : Math.floor(ms / 3600000) % 24
+    const m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
+    const s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
+    return [d, ' *Days ☀️*\n ', h, ' *Hours 🕐*\n ', m, ' *Minute ⏰*\n ', s, ' *Second ⏱️* ']
+        .map(v => v.toString().padStart(2, 0))
+        .join('')
+      }  let d = isNaN(ms) ? '--' : Math.floor(ms / 86400000)
   let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000) % 24
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
