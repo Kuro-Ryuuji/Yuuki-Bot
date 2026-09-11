@@ -11,37 +11,41 @@ let handler = async (m, { conn }) => {
         ? (m.participants || []).find(p => (conn.decodeJid?.(p.id) || p.id) === who)
         : null
 
-    const user = global.db.data.users[m.sender] || {}
+    const user = global.db.data.users[who] || global.db.data.users[m.sender] || {}
     const { premium, registered, age } = user
     const username = conn.getName(who)
-    const name = conn.getName(who)
+    const name = registered && user.name ? user.name : username
     const tag = mentionText(participant || who, { name: username })
     const phone = formatDisplayNumber(participant || who)
     const waDigits = getPhoneDigits(participant || who)
     const waLink = waDigits ? `https://wa.me/${waDigits}` : '-'
 
-    const fkon = {
-        key: {
-            fromMe: false,
-            participant: m.sender,
-            ...(m.chat ? { remoteJid: m.chat } : {})
-        },
-        message: {
-            contactMessage: {
-                displayName: `${name}`,
-                vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${waDigits || ''}:${phone || ''}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
-            }
-        }
+    let bio = user.bio || user.about || user.status || ''
+    try {
+        const status = await conn.fetchStatus(who)
+        if (status?.status) bio = status.status
+    } catch {}
+    if (!bio) bio = 'Tidak ada bio'
+
+    let ppUrl = './src/avatar_contact.png'
+    let ppBuffer = null
+    try {
+        ppUrl = await conn.profilePictureUrl(who, 'image')
+        const res = await fetch(ppUrl)
+        ppBuffer = Buffer.from(await res.arrayBuffer())
+    } catch {
+        ppBuffer = null
     }
 
     const str = `
 ]──────────❏ *PROFILE* ❏──────────[
 💌 • *Name:* ${username}
-🎐 • *Username:* ${registered ? name : ''}
+🎐 • *Username:* ${registered ? name : '-'}
 📧 • *Tag:* ${tag}
 📞 • *Number:* ${phone || '-'}
 🔗 • *Link:* ${waLink}
-🎨 • *Age:* ${registered ? age : ''}
+🎨 • *Age:* ${registered ? (age ?? '-') : '-'}
+📝 • *Bio:* ${bio}
 ${readMore}
 🌟 • *Premium:* ${premium ? '✅' : '❌'}
 ⏰ • *PremiumTime:*
@@ -49,22 +53,29 @@ ${clockString(user.premiumTime)}
 📑 • *Registered:* ${registered ? '✅' : '❌'}
 `.trim()
 
-    const pp = await conn.profilePictureUrl(who, 'image').catch(() => './src/avatar_contact.png')
-
-    conn.sendButton(
-        m.chat,
-        str,
-        typeof botdate !== 'undefined' ? botdate : '',
-        pp,
-        [[`${registered ? 'Menu' : 'Verify'}`, `${user.registered ? '.menu' : '.verify'}`]],
-        fkon,
-        { contextInfo: { mentionedJid: [who], forwardingScore: 999, isForwarded: true } }
-    )
+    await conn.sendMessage(m.chat, {
+        text: str,
+        contextInfo: {
+            mentionedJid: [who],
+            forwardingScore: 999,
+            isForwarded: true,
+            externalAdReply: {
+                title: name || username || 'Profile',
+                body: bio,
+                thumbnail: ppBuffer || undefined,
+                thumbnailUrl: ppBuffer ? undefined : (typeof ppUrl === 'string' && ppUrl.startsWith('http') ? ppUrl : undefined),
+                sourceUrl: waLink !== '-' ? waLink : undefined,
+                mediaType: 1,
+                renderLargerThumbnail: true,
+                showAdAttribution: false
+            }
+        }
+    }, { quoted: m })
 }
 
-handler.help = ['profile [@user]']
+handler.help = ['profil [@user]', 'profile [@user]']
 handler.tags = ['xp']
-handler.command = /^profile|pp$/i
+handler.command = /^(profil|profile|pp)$/i
 export default handler
 
 const more = String.fromCharCode(8206)
@@ -78,4 +89,4 @@ function clockString(ms) {
     return [d, ' *Days ☀️*\n ', h, ' *Hours 🕐*\n ', m, ' *Minute ⏰*\n ', s, ' *Second ⏱️* ']
         .map(v => v.toString().padStart(2, '0'))
         .join('')
-}
+        }
