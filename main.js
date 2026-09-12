@@ -26,6 +26,7 @@ import yargs from 'yargs'
 import { spawn } from 'child_process'
 import lodash from 'lodash'
 import syntaxerror from 'syntax-error'
+import qrcode from 'qrcode-terminal'
 import { tmpdir } from 'os'
 import { format } from 'util'
 import { makeWASocket, protoType, serialize } from './lib/simple.js'
@@ -84,11 +85,51 @@ global.loadDatabase = async function loadDatabase() {
 loadDatabase()
 
 global.authFile = `${opts._[0] || 'elaina_session'}`
+const sessionLockFile = `${global.authFile}.lock`
+try {
+  if (existsSync(sessionLockFile)) {
+    const lockPid = Number(readFileSync(sessionLockFile, 'utf8').trim())
+    if (lockPid && lockPid !== process.pid) {
+      try {
+        process.kill(lockPid, 0)
+        console.error(`\x1b[31m[SESSION] Bot sudah berjalan (PID ${lockPid}). Hentikan proses lama sebelum menjalankan bot lagi.\x1b[0m`)
+        process.exit(1)
+      } catch (e) {
+        if (e.code !== 'ESRCH') throw e
+      }
+    }
+    unlinkSync(sessionLockFile)
+  }
+  writeFileSync(sessionLockFile, String(process.pid), { flag: 'wx' })
+  process.once('exit', () => {
+    try {
+      if (existsSync(sessionLockFile)) unlinkSync(sessionLockFile)
+    } catch {}
+  })
+} catch (e) {
+  console.error(`\x1b[31m[SESSION] Gagal membuat lock bot: ${e.message}\x1b[0m`)
+  process.exit(1)
+}
+
+if (existsSync(global.authFile)) {
+  try {
+    rmSync(global.authFile, { recursive: true, force: true })
+    console.log(`\x1b[33m[SESSION] Session lama dihapus saat startup: ${global.authFile}\x1b[0m`)
+  } catch (e) {
+    console.error(`\x1b[31m[SESSION] Gagal menghapus session saat startup: ${e.message}\x1b[0m`)
+  }
+}
 const { state, saveCreds: _saveCreds } = await useMultiFileAuthState(global.authFile)
 let saveCreds = _saveCreds
 
-const usePairingCode = global.usePairingCode === true
-const pairingNumber = (global.pairingNumber || '').replace(/[^0-9]/g, '')
+function normalizePhoneNumber(value) {
+  let phone = String(value || '').replace(/[^0-9]/g, '')
+  if (phone.startsWith('00')) phone = phone.slice(2)
+  if (phone.startsWith('0')) phone = `62${phone.slice(1)}`
+  return phone
+}
+
+const pairingNumber = normalizePhoneNumber(global.pairingNumber)
 
 const { version, isLatest } = await fetchLatestBaileysVersion()
 console.log(`\x1b[36m[VERSION]\x1b[0m WA v${version.join('.')} — isLatest: ${isLatest}`)
@@ -111,6 +152,7 @@ const connectionOptions = {
 
 global.conn = makeWASocket(connectionOptions)
 conn.isInit = false
+let selectedAuthMethod = null
 
 async function showAuthenticationMenu() {
   const { createInterface } = await import('readline')
@@ -132,27 +174,23 @@ async function showAuthenticationMenu() {
 }
 
 const pairingFlagFile = join(global.authFile, '.pairing_requested')
-const PAIRING_TIMEOUT = 10000
+const PAIRING_TIMEOUT = 120000
 
-if (!state.creds.registered && !existsSync(pairingFlagFile)) {
-  let authMethod = usePairingCode ? '2' : '1'
-  
-  if (!global.usePairingCode && !global.pairingNumber) {
-    authMethod = await showAuthenticationMenu()
-  }
+if (!state.creds.registered) {
+  selectedAuthMethod = await showAuthenticationMenu()
   
   try {
     mkdirSync(global.authFile, { recursive: true })
-    writeFileSync(pairingFlagFile, authMethod)
+    writeFileSync(pairingFlagFile, selectedAuthMethod)
   } catch (e) {
     console.error(`\x1b[33m[AUTH] Gagal membuat flag file: ${e.message}\x1b[0m`)
   }
   
-  if (authMethod === '1') {
+  if (selectedAuthMethod === '1') {
     console.log(`\x1b[32m[AUTH] Menggunakan metode QR Code\x1b[0m`)
   }
   
-  else if (authMethod === '2') {
+  else if (selectedAuthMethod === '2') {
     console.log(`\x1b[32m[AUTH] Menggunakan metode Pairing Code\x1b[0m`)
     
     let phone = pairingNumber
@@ -162,7 +200,7 @@ if (!state.creds.registered && !existsSync(pairingFlagFile)) {
       phone = await new Promise(resolve => 
         rl.question('\x1b[36m📱 Masukkan nomor WA (contoh: 6281234567890): \x1b[0m', ans => { 
           rl.close()
-          resolve(ans.replace(/[^0-9]/g, ''))
+          resolve(normalizePhoneNumber(ans))
         })
       )
     }
@@ -180,7 +218,7 @@ if (!state.creds.registered && !existsSync(pairingFlagFile)) {
     }
     
     const pairingTimeout = setTimeout(async () => {
-      console.error(`\x1b[31m[PAIRING] Timeout! Pairing code tidak diterima dalam 10 detik\x1b[0m`)
+      console.error(`\x1b[31m[PAIRING] Timeout! Pairing code tidak diterima dalam 120 detik\x1b[0m`)
       try {
         if (existsSync(pairingFlagFile)) unlinkSync(pairingFlagFile)
       } catch {}
@@ -205,7 +243,7 @@ if (!state.creds.registered && !existsSync(pairingFlagFile)) {
           if (existsSync(pairingFlagFile)) unlinkSync(pairingFlagFile)
         } catch {}
       }
-    }, 1000)
+    }, 3000)
   }
   
   else {
@@ -327,8 +365,9 @@ async function connectionUpdate(update) {
   const errMsg = lastDisconnect?.error?.message || ''
   const errStack = lastDisconnect?.error?.stack || ''
 
-  if (qr) {
+  if (qr && selectedAuthMethod === '1') {
     console.log('\n\x1b[42m\x1b[30m  QR CODE  \x1b[0m')
+    qrcode.generate(qr, { small: true })
     console.log('\x1b[36mScan QR Code di atas dengan WhatsApp Anda\x1b[0m\n')
   }
 

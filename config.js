@@ -62,8 +62,8 @@ global.nomorown = '6281952716944' //Nomor Owner
 global.namebot = 'Yuuki BOT' //Nama Bot
 global.nameown = 'Dimzz' // Nama Owner
 // ↓ TAMBAHKAN INI ↓
-global.usePairingCode = true             // Aktifkan pairing code
-global.pairingNumber = '6281952716944'   // Nomor WA bot kamu (kosongkan untuk input manual)
+global.usePairingCode = false            // Gunakan QR Code untuk login
+global.pairingNumber = ''                // Nomor hanya diperlukan untuk pairing code
 
 /*============== STAFF ==============*/
 global.owner = [
