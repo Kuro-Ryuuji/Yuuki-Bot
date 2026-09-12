@@ -7,6 +7,7 @@ import { unwatchFile, watchFile } from 'fs'
 import chalk from 'chalk'
 import fs from 'fs'
 import fetch from 'node-fetch'
+import { sendSambutan } from './plugins/group/group-sambutan.js'
 
 /**
  * @type {import('ourin-baileys')}
@@ -892,23 +893,11 @@ export async function participantsUpdate({ id, participants, action }) {
         case 'add':
         case 'remove':
             if (chat.welcome) {
-                let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata
                 for (let user of participants) {
-                    let pp = 'https://telegra.ph/file/2d06f0936842064f6b3bb.png'
                     try {
-                        pp = await this.profilePictureUrl(user, 'image')
+                        await sendSambutan(this, { id, user, action })
                     } catch (e) {
-                    } finally {
-                        text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Swlsmt datang, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || 'unknow') :
-                            (chat.sBye || this.bye || conn.bye || 'Sayonara, @user!')).replace('@user', `${this.getName(user)}`)
-                        try {
-                            await this.sendMessage(id, {
-                                text,
-                                mentions: [user]
-                            })
-                        } catch (e) {
-                            console.error('Welcome/bye error:', e.message)
-                        }
+                        console.error('Welcome/bye error:', e.message)
                     }
                 }
             }
